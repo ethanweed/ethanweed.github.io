@@ -1,6 +1,6 @@
----
-layout: default
-title: Ethan Weed
+---  
+layout: default  
+title: Ethan Weed  
 ---
 
 # Curriculum Vitae
@@ -61,50 +61,52 @@ Articles and dissemination: 9
 Citations: 328 (google scholar April 26, 2018)  
 H-index: 7 (google scholar April 26, 2018)
 
-### Supervision
+### Supervision  
+## PhD  
+Co-supervisor on two PhD projects 
 
-  * Currently co-supervisor on two PhD projects 
-  * Supervisor on 22 master theses
+## MA  
+Supervisor on 22 master theses
 
 ### Teaching
 
 #### MA level
 
-Cognitive Neurolinguistics, 2009  
-Language of the Brain, 2011  
-Psycholinguistics of Second Language Acquisition, 2012  
-Language Challenges in the Classroom, 2012  
-Statistics for Linguists, 2013  
-Development of Language: Language Acquisition, 2013, 2015  
-Auditory Neuroscience and Speech Processing, 2014  
-Research Workshop: Dyslexia, 2016  
-Research Workshop: Auditory Processing, 2017  
-Child Language Acquisition, 2016 - present
+Cognitive Neurolinguistics: 2009  
+Language of the Brain: 2011  
+Psycholinguistics of Second Language Acquisition: 2012  
+Language Challenges in the Classroom: 2012  
+Statistics for Linguists: 2013  
+Development of Language: Language Acquisition: 2013, 2015  
+Auditory Neuroscience and Speech Processing: 2014  
+Research Workshop: Dyslexia: 2016  
+Research Workshop: Auditory Processing: 2017  
+Child Language Acquisition: 2016 - present
 
 #### BA level
 
-Psycholinguistics, 2009 - 2010  
-Humanities Elective Language and Cognition, 2010 - 2014  
-Language, Cognition, and the Brain, 2011 - present  
-Phonetics and Phonology, 2012, 2015  
-Studium Generale, (Intro to Philosophy of Science), 2015  
-Text Analysis, 2018
+Psycholinguistics: 2009 - 2010  
+Humanities Elective Language and Cognition: 2010 - 2014  
+Language, Cognition, and the Brain: 2011 - present  
+Phonetics and Phonology: 2012, 2015  
+Studium Generale, (Intro to Philosophy of Science): 2015  
+Text Analysis: 2018
 
 ### Dissemination
 
 Over 20 invited talks include appearances at DuPont Nutrition and Health, Novozymes A/S, the Danish Organization of Speech Language Pathologists (FTHF), and Chinese Academy of Sciences
 
-Management and Administration  
+### Management and Administration  
 2018: Center Leader, Language as a Tool for Learning Center, AU  
 2018: Study Board Representative, Department of Language, Cognitive Science and Semitics, AU  
 2018: Study Coordinator, Linguistics  
 2018: Internship Coordinator, Linguistics
 
-Research Grants  
+### Research Grants  
 2013-2018: Interacting Minds small grants for projects: “Music, Voice, and Auditory Brainstem Response” “Hearing What You’re Thinking” “Clinical Voices” “How well do cloze tests really test reading comprehension in Danish higher-education students?”  
 2018: AU Funding for Language as a Tool for Learning Center
 
-Reviewing  
+### Reviewing  
 Grant reviewing  
 2012: Israel Science Foundation (ISF)  
 PhD thesis evaluation  
@@ -121,7 +123,7 @@ Proc. Nat. Acad. Sci (PNAS)
 Psychology of Language and Communication  
   5.1.1. Publication list: Ethan Weed
 
-Peer-reviewed articles  
+### Peer-reviewed articles  
 Fusaroli, R., Weed, E., Naigles, L. & Fein, D. (in review) Hearing me hearing you: Reciprocal effects between child and parent language in autism and typical development  
 Kizach, J., Christensen, K. R., & Weed, E. (2016). A verbal illusion: Now in three languages. Journal of psycholinguistic research, 45(3), 753-768.  
 Petersen, B., Weed, E., Sandmann, P., Brattico, E., Hansen, M., Sørensen, S. D., & Vuust, P. (2015). Brain responses to musical feature changes in adolescent cochlear implant users. Frontiers in Human Neuroscience, 9, 7.  
@@ -132,13 +134,14 @@ Tylén, K., Weed, E., Wallentin, M., Roepstorff, A., & Frith, C. D. (2010). Lang
 Tylén, K., Bjørndahl, J. S., & Weed, E. (2009). Taking the language stance in a material world: a comprehension study. Pragmatics & Cognition, 17(3), 573-595.  
 Weed, E. (2008). Theory of mind impairment in right hemisphere damage: A review of the evidence. International Journal of Speech-Language Pathology, 10(6), 414-424.  
 Wallentin, M., Weed, E., Østergaard, L., Mouridsen, K., & Roepstorff, A. (2008). Accessing the mental space—spatial working memory processes for language and vision overlap in precuneus. Human Brain Mapping, 29(5), 524-532.  
-Weed, E. (2008). Looking for Beauty in the Brain. Estetika: The Central European Journal of Aesthetics, 45(1), 5-23.  
-Book chapters  
+Weed, E. (2008). Looking for Beauty in the Brain. Estetika: The Central European Journal of Aesthetics, 45(1), 5-23.
+ 
+### Book chapters  
 Weed, E. (2013). Is there an irony center in the brain?. In Ironistik (pp. 79-83). Publizon.
 
 Tylén, K., Bjørndahl, J. S., & Weed, E. (2011). Actualizing semiotic affordances in a material world. Benjamins Current Topics, 81.
 
-Publications without peer-review
+### Publications without peer-review
 
 Sørensen, L. L., Claumarch, I. E. R., & Weed, E. (2017). Testning af alment ordforråd hos danske universitetsstuderende: et normeringsstudie. Dansk Audiologopaedi, 53(1), 10-15.  
 Weed, E., & Fusaroli, R. (2015). Modeling parent-child dyads in the linguistic development of children with and without ASD. In Autism@Aarhus 2015 Symposium: 4Th Anniversary Meeting.
@@ -157,10 +160,10 @@ Weed, E. (2004). Aspectos De La Citación En “Tlön, Uqbar, Orbis Tertius”. 
 
 Weed, E. (2007). Bits and pieces: perception, cognition, and language in patients with damage to the right cerebral hemisphere. In Language in cognition, cognition in language, Aarhus University
 
-Monographs  
+### Monographs  
 Weed, E. (2011). Getting the Message Right: Social Cognition, Pragmatic Impairment, and Right Hemisphere Damage (Doctoral dissertation, Aarhus Universitet).
 
-Refereed posters and abstracts
+### Refereed posters and abstracts
 
 Fusaroli, R., Lambrechts, A., Weed, E., Maras, K., Yarrow, K., Bowler, D., & Gaigg, S. (2017). Social impairment in conversation: disfluency and compensatory mechanisms. In International Meeting for Autism Research.
 
