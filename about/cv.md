@@ -1,3 +1,8 @@
+---
+layout: default
+title: Ethan Weed
+---
+
 # Curriculum Vitae
 
 ## Ethan Weed
