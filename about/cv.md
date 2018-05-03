@@ -15,7 +15,7 @@ Jens Chr. Skous Vej 2, building. 1485
 
 ## Contact
 
-Email:ethan@cc.au.dk  
+Email: ethan@cc.au.dk  
 Homepages  
 http://pure.au.dk/portal/en/linew@hum.au.dk  
 http://www.ethanweed.com/  
@@ -62,10 +62,10 @@ Citations: 328 (google scholar April 26, 2018)
 H-index: 7 (google scholar April 26, 2018)
 
 ### Supervision  
-## PhD  
+#### PhD  
 Co-supervisor on two PhD projects 
 
-## MA  
+#### MA  
 Supervisor on 22 master theses
 
 ### Teaching
