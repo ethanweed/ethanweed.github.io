@@ -132,7 +132,7 @@ Weed, E., McGregor, W., Nielsen, J. F., Roepstorff, A., & Frith, U. (2010). Theo
 Tylén, K., Weed, E., Wallentin, M., Roepstorff, A., & Frith, C. D. (2010). Language as a tool for interacting minds. Mind & Language, 25(1), 3-29.  
 Tylén, K., Bjørndahl, J. S., & Weed, E. (2009). Taking the language stance in a material world: a comprehension study. Pragmatics & Cognition, 17(3), 573-595.  
 Weed, E. (2008). Theory of mind impairment in right hemisphere damage: A review of the evidence. International Journal of Speech-Language Pathology, 10(6), 414-424.  
-Wallentin, M., Weed, E., Østergaard, L., Mouridsen, K., & Roepstorff, A. (2008). Accessing the mental space—spatial working memory processes for language and vision overlap in precuneus. Human Brain Mapping, 29(5), 524-532.  
+Wallentin, M., Weed, E., Østergaard, L., Mouridsen, K., & Roepstorff, A. (2008). Accessing the mental space — spatial working memory processes for language and vision overlap in precuneus. Human Brain Mapping, 29(5), 524-532.  
 Weed, E. (2008). Looking for Beauty in the Brain. Estetika: The Central European Journal of Aesthetics, 45(1), 5-23.
  
 ### Book chapters  
