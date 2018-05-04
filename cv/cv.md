@@ -89,12 +89,12 @@ Psycholinguistics: 2009 - 2010
 Humanities Elective Language and Cognition: 2010 - 2014  
 Language, Cognition, and the Brain: 2011 - present  
 Phonetics and Phonology: 2012, 2015  
-Studium Generale, (Intro to Philosophy of Science): 2015  
+Studium Generale (Introduction to Philosophy of Science): 2015  
 Text Analysis: 2018
 
 ### Dissemination
 
-Over 20 invited talks include appearances at DuPont Nutrition and Health, Novozymes A/S, the Danish Organization of Speech Language Pathologists (FTHF), and Chinese Academy of Sciences
+Over 20 invited talks at e.g. DuPont Nutrition and Health, Novozymes A/S, the Danish Organization of Speech Language Pathologists (FTHF), and Chinese Academy of Sciences
 
 ### Management and Administration  
 2018: Center Leader, Language as a Tool for Learning Center, AU  
@@ -121,7 +121,6 @@ Journal of Child Language
 Journal of Neuroscience  
 Proc. Nat. Acad. Sci (PNAS)  
 Psychology of Language and Communication  
-  5.1.1. Publication list: Ethan Weed
 
 ### Peer-reviewed articles  
 Fusaroli, R., Weed, E., Naigles, L. & Fein, D. (in review) Hearing me hearing you: Reciprocal effects between child and parent language in autism and typical development  
