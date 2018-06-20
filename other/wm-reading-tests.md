@@ -5,10 +5,12 @@
 Forsøget består af fire forskellige mindre forsøg, der hver tager cirka 10 minutter. 
 Det er meget vigtigt at du gennemfører ALLE forsøg så godt som du kan!
 De fire forsøg er:
-1.	Læseforståelse: en test af din grundlæggende læseforståelse
-2.	Læsespænd: tester din arbejdshukommelse med læsning af komplicerede sætninger
-3.	Operationsspænd: tester din arbejdshukommelse med regnestykker
-4.	Tællespænd: tester din arbejdshukommelse ved at tælle en bestemt type figur mellem andre figurer
+1.	[Læseforståelse] (https://www.psytoolkit.org/cgi-bin/psy2.4.3/survey?s=UqJJg): en test af din grundlæggende læseforståelse 
+2.	[Læsespænd] (https://www.psytoolkit.org/cgi-bin/psy2.5.1/survey?s=ZVSdY): tester din arbejdshukommelse med læsning af komplicerede sætninger
+3.	[Operationsspænd] (https://www.psytoolkit.org/cgi-bin/psy2.5.1/survey?s=JdhC8): tester din arbejdshukommelse med regnestykker
+4.	[Tællespænd] (https://www.psytoolkit.org/cgi-bin/psy2.5.1/survey?s=EEg8T) : tester din arbejdshukommelse ved at tælle en bestemt type figur mellem andre figurer
+
+**Du skal starte med det forsøg der hedder Læseforståelse, her får du til sidst i forsøget en kode, som du skal bruge i starten af de andre forsøg.** 
 
 Du behøver ikke tage dem lige efter hinanden, men forsøg venligst at have gennemført dem alle sammen i løbet af så få dage som muligt. 
 
