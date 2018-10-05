@@ -43,7 +43,8 @@ Clinical Linguistics, Acoustic Phonetics, Clinical Pragmatics, Language Acquisit
 PhD Dissertation (2011): Getting the Message Right: Social Cognition, Pragmatic Impairment, and Right Hemisphere Damage
 
 ### Other courses
-
+2018: State of Danish Natural Language Processing, Aarhus University
+2018: Advanced Bayesian Statistical Modeling, Interacting Minds Center, Aarhus University 
 2013: Graduate Certificate in Tertiary Teaching, Aarhus University  
 2012: ERP Bootcamp, Department of Psychology, Copenhagen University  
 2007: Wellcome Trust Centre for Neuroimaging SPM course  
@@ -103,19 +104,24 @@ Over 20 invited talks at e.g. DuPont Nutrition and Health, Novozymes A/S, the Da
 2018: Internship Coordinator, Linguistics
 
 ### Research Grants  
-2013-2018: Interacting Minds small grants for projects: “Music, Voice, and Auditory Brainstem Response” “Hearing What You’re Thinking” “Clinical Voices” “How well do cloze tests really test reading comprehension in Danish higher-education students?”  
 2018: AU Funding for Language as a Tool for Learning Center
+2013-2018: Interacting Minds small grants for projects: “Music, Voice, and Auditory Brainstem Response” “Hearing What You’re Thinking” “Clinical Voices” “How well do cloze tests really test reading comprehension in Danish higher-education students?”  
+
 
 ### Reviewing  
 Grant reviewing  
 2012: Israel Science Foundation (ISF)  
-PhD thesis evaluation  
+
+
+#### PhD thesis evaluation  
 2018: Aymeric Duval-Markussen, Aarhus University (committee chairman)  
 2017: Magnus Hamnn, Aarhus University (committee chairman)  
 2016: Jens Sand Østergaard, Aarhus University (committee chairman)  
-Positions  
+
+#### Positions  
 2015: PhD application committee, Graduate program for Language, Linguistics and Cognition, AU  
-Reviews for international journals  
+
+#### Reviews for international journals  
 Aphasiology  
 Journal of Child Language  
 Journal of Neuroscience  
