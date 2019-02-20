@@ -11,5 +11,6 @@ output: html_document
 1. Added a new section to the analysis to compare RHD participants with LHD participants
 1. Took out and re-wrote sections of RHD paper draft
 1. Played with using R-markdown as a means of generating html files for my website
-1. Started this work log
 1. Began reading manuscript for review
+1. Started this work log
+ 
