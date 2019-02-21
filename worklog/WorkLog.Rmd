@@ -5,6 +5,14 @@ output: html_document
 
 ### Today I...
 
+#### 2019.02.21
+1. Wrote emails
+1. Read and commented on an MA thesis draft
+1. Read more of the manuscript I am reviewing
+1. Edited meta-analysis script to output data in a different format
+1. Made a table with meta-analysis data
+
+
 #### 2019.02.20 
 1. Answered emails
 1. Re-worked sections of meta-analysis
