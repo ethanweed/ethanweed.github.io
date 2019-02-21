@@ -14,5 +14,5 @@ output: html_document
 1. Played with using R-markdown as a means of generating html files for my website
 1. Began reading a manuscript for review
 1. Started this work log
-1. Learned how to make a html table from csv in R with kabelExtra
+1. Learned how to make an html table from csv in R with kabelExtra
  
