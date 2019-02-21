@@ -7,10 +7,11 @@ output: html_document
 
 #### 2019.02.20 
 1. Answered emails
-1. Re-worked potions of meta-analysis project for clarity
-1. Added a new section to the analysis to compare RHD participants with LHD participants
+1. Re-worked sections of meta-analysis
+1. Added a new script to compare RHD participants with LHD participants
+1. Re-arranged folder structure for meta-analysis git repo
 1. Took out and re-wrote sections of RHD paper draft
 1. Played with using R-markdown as a means of generating html files for my website
-1. Began reading manuscript for review
+1. Began reading a manuscript for review
 1. Started this work log
  
