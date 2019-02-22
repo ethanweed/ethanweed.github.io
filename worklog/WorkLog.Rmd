@@ -5,6 +5,10 @@ output: html_document
 
 ### Today I...
 
+#### 2019.02.22
+1. Wrote a Praat script to batch low-pass filter speech stimuli
+1. Wrote a shell script to batch boost the volume of sound files with ffmpeg
+
 #### 2019.02.21
 1. Wrote emails
 1. Read and commented on an MA thesis draft
