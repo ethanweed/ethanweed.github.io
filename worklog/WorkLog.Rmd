@@ -8,6 +8,9 @@ output: html_document
 #### 2019.02.22
 1. Wrote a Praat script to batch low-pass filter speech stimuli
 1. Wrote a shell script to batch boost the volume of sound files with ffmpeg
+1. Revised results table to include p-values as well as Bayesian stats
+1. Added seeds to model definitions for stable results on multiple runs
+1. Wrote first draft of discussion section for meta-analysis
 
 #### 2019.02.21
 1. Wrote emails
