@@ -5,12 +5,29 @@ output: html_document
 
 ### Today I...
 
+#### 2019.02.22
+1. Wrote a Praat script to batch low-pass filter speech stimuli
+1. Wrote a shell script to batch boost the volume of sound files with ffmpeg
+1. Revised results table to include p-values as well as Bayesian stats
+1. Added seeds to model definitions for stable results on multiple runs
+1. Wrote first draft of discussion section for meta-analysis
+
+#### 2019.02.21
+1. Wrote emails
+1. Read and commented on an MA thesis draft
+1. Read more of the manuscript I am reviewing
+1. Edited meta-analysis script to output data in a different format
+1. Made a table with meta-analysis data
+
+
 #### 2019.02.20 
 1. Answered emails
-1. Re-worked potions of meta-analysis project for clarity
-1. Added a new section to the analysis to compare RHD participants with LHD participants
+1. Re-worked sections of meta-analysis
+1. Added a new script to compare RHD participants with LHD participants
+1. Re-arranged folder structure for meta-analysis git repo
 1. Took out and re-wrote sections of RHD paper draft
 1. Played with using R-markdown as a means of generating html files for my website
-1. Began reading manuscript for review
+1. Began reading a manuscript for review
 1. Started this work log
+1. Learned how to make an html table from csv in R with kabelExtra
  
