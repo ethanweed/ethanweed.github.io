@@ -5,6 +5,9 @@ output: html_document
 
 ### Today I...
 
+#### 2019.02.24
+1. Wrote a bash and python combo to batch normalize the volume on a directory of sound files
+
 #### 2019.02.22
 1. Wrote a Praat script to batch low-pass filter speech stimuli
 1. Wrote a shell script to batch boost the volume of sound files with ffmpeg
