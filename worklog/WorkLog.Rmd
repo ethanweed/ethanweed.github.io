@@ -5,6 +5,15 @@ output: html_document
 
 ### Today I...
 
+#### 2019.02.25
+1. Did MA thesis advising
+1. Answered emails
+1. Arranged conference practicalities
+1. Went to a student talk
+1. Worked on discussion section for an article
+1. Updated Stroop dataset on GitHub
+1. Found a small but important error and re-ran meta-analysis
+
 #### 2019.02.24
 1. Wrote a bash and python combo to batch normalize the volume on a directory of sound files
 
