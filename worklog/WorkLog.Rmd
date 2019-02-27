@@ -5,6 +5,16 @@ output: html_document
 
 ### Today I...
 
+#### 2019.02.27
+1. Answered emails
+1. Went to journal club presentation
+1. Gave feedback on MA thesis draft
+1. Researched LASSO and elasticnet feature selection
+1. Oriented myself in data and code for upcoming article
+
+#### 2019.02.26
+1. Finished article draft and sent to co-author
+
 #### 2019.02.25
 1. Did MA thesis advising
 1. Answered emails
