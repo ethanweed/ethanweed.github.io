@@ -5,12 +5,18 @@ output: html_document
 
 ### Today I...
 
+#### 2019.02.28
+1. Had a Skype meeting with research collaborators
+1. More data sifting and orienting
+1. Meeting with collaborators on task selection / modification for upcoming study
+
 #### 2019.02.27
 1. Answered emails
 1. Went to journal club presentation
 1. Gave feedback on MA thesis draft
 1. Researched LASSO and elasticnet feature selection
 1. Oriented myself in data and code for upcoming article
+1. Some exam grading
 
 #### 2019.02.26
 1. Finished article draft and sent to co-author
