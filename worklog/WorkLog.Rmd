@@ -5,6 +5,34 @@ output: html_document
 
 ### Today I...
 
+#### 2019.02.28
+1. Had a Skype meeting with research collaborators
+1. More data sifting and orienting
+1. Meeting with collaborators on task selection / modification for upcoming study
+
+#### 2019.02.27
+1. Answered emails
+1. Went to journal club presentation
+1. Gave feedback on MA thesis draft
+1. Researched LASSO and elasticnet feature selection
+1. Oriented myself in data and code for upcoming article
+1. Some exam grading
+
+#### 2019.02.26
+1. Finished article draft and sent to co-author
+
+#### 2019.02.25
+1. Did MA thesis advising
+1. Answered emails
+1. Arranged conference practicalities
+1. Went to a student talk
+1. Worked on discussion section for an article
+1. Updated Stroop dataset on GitHub
+1. Found a small but important error and re-ran meta-analysis
+
+#### 2019.02.24
+1. Wrote a bash and python combo to batch normalize the volume on a directory of sound files
+
 #### 2019.02.22
 1. Wrote a Praat script to batch low-pass filter speech stimuli
 1. Wrote a shell script to batch boost the volume of sound files with ffmpeg
