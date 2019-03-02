@@ -1,65 +1,65 @@
 ---
-	output: html_document
-	---
-	# Work Log
-	
-	### Today I...
-	
-	1. Started a new repo for cross-linguistic ASD project
-	1. Started writing data-wrangling script to organize data for analysis
-	1. Experimented with mixing R and Python within a single .Rmd file
-	
-	#### 2019.02.28
-	1. Had a Skype meeting with research collaborators
-	1. More data sifting and orienting
-	1. Meeting with collaborators on task selection / modification for upcoming study
-	
-	#### 2019.02.27
-	1. Answered emails
-	1. Went to journal club presentation
-	1. Gave feedback on MA thesis draft
-	1. Researched LASSO and elasticnet feature selection
-	1. Oriented myself in data and code for upcoming article
-	1. Some exam grading
-	
-	#### 2019.02.26
-	1. Finished article draft and sent to co-author
-	
-	#### 2019.02.25
-	1. Did MA thesis advising
-	1. Answered emails
-	1. Arranged conference practicalities
-	1. Went to a student talk
-	1. Worked on discussion section for an article
-	1. Updated Stroop dataset on GitHub
-	1. Found a small but important error and re-ran meta-analysis
-	
-	#### 2019.02.24
-	1. Wrote a bash and python combo to batch normalize the volume on a directory of sound files
-	
-	#### 2019.02.22
-	1. Wrote a Praat script to batch low-pass filter speech stimuli
-	1. Wrote a shell script to batch boost the volume of sound files with ffmpeg
-	1. Revised results table to include p-values as well as Bayesian stats
-	1. Added seeds to model definitions for stable results on multiple runs
-	1. Wrote first draft of discussion section for meta-analysis
-	
-	#### 2019.02.21
-	1. Wrote emails
-	1. Read and commented on an MA thesis draft
-	1. Read more of the manuscript I am reviewing
-	1. Edited meta-analysis script to output data in a different format
-	1. Made a table with meta-analysis data
-	
-	
-	#### 2019.02.20 
-	1. Answered emails
-	1. Re-worked sections of meta-analysis
-	1. Added a new script to compare RHD participants with LHD participants
-	1. Re-arranged folder structure for meta-analysis git repo
-	1. Took out and re-wrote sections of RHD paper draft
-	1. Played with using R-markdown as a means of generating html files for my website
-	1. Began reading a manuscript for review
-	1. Started this work log
-	1. Learned how to make an html table from csv in R with kabelExtra
-	
+output: html_document
+---
+
+# Work Log
+
+### Today I...
+
+1. Started a new repo for cross-linguistic ASD project
+1. Started writing data-wrangling script to organize data for analysis
+1. Experimented with mixing R and Python within a single .Rmd file
+
+#### 2019.02.28
+1. Had a Skype meeting with research collaborators
+1. More data sifting and orienting
+1. Meeting with collaborators on task selection / modification for upcoming study
+
+#### 2019.02.27
+1. Answered emails
+1. Went to journal club presentation
+1. Gave feedback on MA thesis draft
+1. Researched LASSO and elasticnet feature selection
+1. Oriented myself in data and code for upcoming article
+1. Some exam grading
+
+#### 2019.02.26
+1. Finished article draft and sent to co-author
+
+#### 2019.02.25
+1. Did MA thesis advising
+1. Answered emails
+1. Arranged conference practicalities
+1. Went to a student talk
+1. Worked on discussion section for an article
+1. Updated Stroop dataset on GitHub
+1. Found a small but important error and re-ran meta-analysis
+
+#### 2019.02.24
+1. Wrote a bash and python combo to batch normalize the volume on a directory of sound files
+
+#### 2019.02.22
+1. Wrote a Praat script to batch low-pass filter speech stimuli
+1. Wrote a shell script to batch boost the volume of sound files with ffmpeg
+1. Revised results table to include p-values as well as Bayesian stats
+1. Added seeds to model definitions for stable results on multiple runs
+1. Wrote first draft of discussion section for meta-analysis
+
+#### 2019.02.21
+1. Wrote emails
+1. Read and commented on an MA thesis draft
+1. Read more of the manuscript I am reviewing
+1. Edited meta-analysis script to output data in a different format
+1. Made a table with meta-analysis data
+
+
+#### 2019.02.20 
+1. Answered emails
+1. Re-worked sections of meta-analysis
+1. Added a new script to compare RHD participants with LHD participants
+1. Re-arranged folder structure for meta-analysis git repo
+1. Took out and re-wrote sections of RHD paper draft
+1. Played with using R-markdown as a means of generating html files for my website
+1. Began reading a manuscript for review
+1. Started this work log
+1. Learned how to make an html table from csv in R with kabelExtra
