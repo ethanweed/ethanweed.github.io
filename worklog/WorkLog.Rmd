@@ -5,6 +5,10 @@ output: html_document
 
 ### Today I...
 
+1. Started a new repo for cross-linguistic ASD project
+1. Started writing data-wrangling script to organize data for analysis
+1. Experimented with mixing R and Python within a single .Rmd file
+
 #### 2019.02.28
 1. Had a Skype meeting with research collaborators
 1. More data sifting and orienting
