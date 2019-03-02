@@ -1,65 +1,98 @@
----
-output: html_document
----
-# Work Log
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="output" content="html_document"/>
+</head>
+<body>
 
-### Today I...
+<h1>Work Log</h1>
 
-1. Started a new repo for cross-linguistic ASD project
-1. Started writing data-wrangling script to organize data for analysis
-1. Experimented with mixing R and Python within a single .Rmd file
+<h3>Today I&#8230;</h3>
 
-#### 2019.02.28
-1. Had a Skype meeting with research collaborators
-1. More data sifting and orienting
-1. Meeting with collaborators on task selection / modification for upcoming study
+<ol>
+<li>Started a new repo for cross-linguistic ASD project</li>
+<li>Started writing data-wrangling script to organize data for analysis</li>
+<li>Experimented with mixing R and Python within a single .Rmd file</li>
+</ol>
 
-#### 2019.02.27
-1. Answered emails
-1. Went to journal club presentation
-1. Gave feedback on MA thesis draft
-1. Researched LASSO and elasticnet feature selection
-1. Oriented myself in data and code for upcoming article
-1. Some exam grading
+<h4>2019.02.28</h4>
 
-#### 2019.02.26
-1. Finished article draft and sent to co-author
+<ol>
+<li>Had a Skype meeting with research collaborators</li>
+<li>More data sifting and orienting</li>
+<li>Meeting with collaborators on task selection / modification for upcoming study</li>
+</ol>
 
-#### 2019.02.25
-1. Did MA thesis advising
-1. Answered emails
-1. Arranged conference practicalities
-1. Went to a student talk
-1. Worked on discussion section for an article
-1. Updated Stroop dataset on GitHub
-1. Found a small but important error and re-ran meta-analysis
+<h4>2019.02.27</h4>
 
-#### 2019.02.24
-1. Wrote a bash and python combo to batch normalize the volume on a directory of sound files
+<ol>
+<li>Answered emails</li>
+<li>Went to journal club presentation</li>
+<li>Gave feedback on MA thesis draft</li>
+<li>Researched LASSO and elasticnet feature selection</li>
+<li>Oriented myself in data and code for upcoming article</li>
+<li>Some exam grading</li>
+</ol>
 
-#### 2019.02.22
-1. Wrote a Praat script to batch low-pass filter speech stimuli
-1. Wrote a shell script to batch boost the volume of sound files with ffmpeg
-1. Revised results table to include p-values as well as Bayesian stats
-1. Added seeds to model definitions for stable results on multiple runs
-1. Wrote first draft of discussion section for meta-analysis
+<h4>2019.02.26</h4>
 
-#### 2019.02.21
-1. Wrote emails
-1. Read and commented on an MA thesis draft
-1. Read more of the manuscript I am reviewing
-1. Edited meta-analysis script to output data in a different format
-1. Made a table with meta-analysis data
+<ol>
+<li>Finished article draft and sent to co-author</li>
+</ol>
 
+<h4>2019.02.25</h4>
 
-#### 2019.02.20 
-1. Answered emails
-1. Re-worked sections of meta-analysis
-1. Added a new script to compare RHD participants with LHD participants
-1. Re-arranged folder structure for meta-analysis git repo
-1. Took out and re-wrote sections of RHD paper draft
-1. Played with using R-markdown as a means of generating html files for my website
-1. Began reading a manuscript for review
-1. Started this work log
-1. Learned how to make an html table from csv in R with kabelExtra
- 
+<ol>
+<li>Did MA thesis advising</li>
+<li>Answered emails</li>
+<li>Arranged conference practicalities</li>
+<li>Went to a student talk</li>
+<li>Worked on discussion section for an article</li>
+<li>Updated Stroop dataset on GitHub</li>
+<li>Found a small but important error and re-ran meta-analysis</li>
+</ol>
+
+<h4>2019.02.24</h4>
+
+<ol>
+<li>Wrote a bash and python combo to batch normalize the volume on a directory of sound files</li>
+</ol>
+
+<h4>2019.02.22</h4>
+
+<ol>
+<li>Wrote a Praat script to batch low-pass filter speech stimuli</li>
+<li>Wrote a shell script to batch boost the volume of sound files with ffmpeg</li>
+<li>Revised results table to include p-values as well as Bayesian stats</li>
+<li>Added seeds to model definitions for stable results on multiple runs</li>
+<li>Wrote first draft of discussion section for meta-analysis</li>
+</ol>
+
+<h4>2019.02.21</h4>
+
+<ol>
+<li>Wrote emails</li>
+<li>Read and commented on an MA thesis draft</li>
+<li>Read more of the manuscript I am reviewing</li>
+<li>Edited meta-analysis script to output data in a different format</li>
+<li>Made a table with meta-analysis data</li>
+</ol>
+
+<h4>2019.02.20</h4>
+
+<ol>
+<li>Answered emails</li>
+<li>Re-worked sections of meta-analysis</li>
+<li>Added a new script to compare RHD participants with LHD participants</li>
+<li>Re-arranged folder structure for meta-analysis git repo</li>
+<li>Took out and re-wrote sections of RHD paper draft</li>
+<li>Played with using R-markdown as a means of generating html files for my website</li>
+<li>Began reading a manuscript for review</li>
+<li>Started this work log</li>
+<li>Learned how to make an html table from csv in R with kabelExtra</li>
+</ol>
+
+</body>
+</html>
+
