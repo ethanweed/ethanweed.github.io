@@ -6,6 +6,12 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.05
+1. Met with a collaborator to plan analyses for an article
+1. Worked on wrangling data: matching ID numbers up with diagnostic info
+1. Gave exam feedback
+1. Set up conda environment for editing psychopy code in jupyter notebooks
+
 #### 2019.03.03
 1. Reviewed progress during first month of sabbatical
 1. Thought a bit about changes to next semesters stats teaching
