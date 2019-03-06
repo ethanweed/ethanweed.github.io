@@ -6,6 +6,12 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.06
+1. Caught up on email
+1. Gave feedback on a conference abstract and a PhD proposal
+1. Updated conda env to allow gui's from PsychoPy
+1. Worked on editing PsychoPy script for upcoming data collection
+
 #### 2019.03.05
 1. Met with a collaborator to plan analyses for an article
 1. Worked on wrangling data: matching ID numbers up with diagnostic info
