@@ -6,6 +6,11 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.07
+1. Wrote a Praat script to extrace jitter and shimmer
+1. Added jitter and shimmer to ASD voice analysis
+
+
 #### 2019.03.06
 1. Caught up on email
 1. Gave feedback on a conference abstract and a PhD proposal
