@@ -6,6 +6,13 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.11
+1. Caught up on email
+1. Arranged travel to upcoming conference
+1. Reviewed status on all projects
+1. Began final edits on meta-analysis prior to submission
+
+
 #### 2019.03.07
 1. Wrote a Praat script to extrace jitter and shimmer
 1. Added jitter and shimmer to ASD voice analysis
