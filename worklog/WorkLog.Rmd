@@ -6,9 +6,22 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.14
+1. Gave comments on PhD application
+1. Gave comments on a grant application
+1. Researched multivariate mixed-effects Bayesian modelling
+1. Completed and sent article review
+
+#### 2019.03.13
+1. Reviewed tutorial on lme4
+1. Researched methods for conducting power analysis on mixed-effects models
+1. Went through tutorial for the simr package
+1. Discovered that the read.csv function in R can read from a URL, but semmingly not if the file is stored on GitHub
+
 #### 2019.03.12
 1. Gave feedback on PhD application
 1. Continued editing meta-analysis paper
+1. Researched options for anonymously linking to code and data during peer review and settled on OSF, which can generate a view-only link
 
 #### 2019.03.11
 1. Caught up on email
