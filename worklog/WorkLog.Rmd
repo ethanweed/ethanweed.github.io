@@ -6,6 +6,13 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.15
+1. Met with collaborators to discuss design for upcoming pilot EEG project
+1. Started a shared draft with collaborators on ASD voice project
+1. Cleaned up analysis code from meta-analysis for posting on OSF
+1. Formatted references for meta-analysis paper
+1. Produced high-res images for meta-analysis paper
+
 #### 2019.03.14
 1. Gave comments on PhD application
 1. Gave comments on a grant application
