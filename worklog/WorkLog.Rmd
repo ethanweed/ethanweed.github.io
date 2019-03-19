@@ -8,9 +8,10 @@ output: html_document
 
 #### 2019.03.19
 1. Answered emails
-1. Submitted meta-analysis manuscript
+1. Submitted meta-analysis manuscript (!)
 1. Moved online CV to an Rmd file for easier updating of markdown -> html
 1. Updated CV
+1. Began modelling dyslexia / history of reading disability data for RSC
 
 ####  2019.03.18
 1. Looked into the idea of livestreaming journal article reading as a teaching tool
