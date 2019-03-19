@@ -1,10 +1,9 @@
 ---
 layout: default 
-title: Curriculum Vitae
 output: html_document
 ---
 
-# Ethan Weed
+# Curriculum Vitae
 
 
 Associate Professor, PhD  
