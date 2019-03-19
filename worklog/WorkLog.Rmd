@@ -6,6 +6,17 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.19
+1. Answered emails
+1. Submitted meta-analysis manuscript
+
+####  2019.03.18
+1. Looked into the idea of livestreaming journal article reading as a teaching tool
+1. Did final preparation for article submission: figure captions, abstract, author info, ORCID profile updating, publisher profile updating, etc. etc.
+1. Attempted to send receipts to accounting office (only partially successful, website started timing out)
+1. Reviewed current projects and culled old and completed projects
+1. Treated myself to a bagel to celebrate acceptance of first Dyslexia article
+
 #### 2019.03.15
 1. Met with collaborators to discuss design for upcoming pilot EEG project
 1. Started a shared draft with collaborators on ASD voice project
@@ -36,11 +47,9 @@ output: html_document
 1. Reviewed status on all projects
 1. Began final edits on meta-analysis prior to submission
 
-
 #### 2019.03.07
 1. Wrote a Praat script to extract jitter and shimmer
 1. Added jitter and shimmer to ASD voice analysis
-
 
 #### 2019.03.06
 1. Caught up on email
@@ -57,7 +66,6 @@ output: html_document
 #### 2019.03.03
 1. Reviewed progress during first month of sabbatical
 1. Thought a bit about changes to next semesters stats teaching
-
 
 #### 2019.02.29
 1. Started a new repo for cross-linguistic ASD project
@@ -105,7 +113,6 @@ output: html_document
 1. Read more of the manuscript I am reviewing
 1. Edited meta-analysis script to output data in a different format
 1. Made a table with meta-analysis data
-
 
 #### 2019.02.20 
 1. Answered emails
