@@ -1,12 +1,11 @@
 ---
 layout: default 
-title: Ethan Weed
+title: Curriculum Vitae
 output: html_document
 ---
 
-# Curriculum Vitae
+# Ethan Weed
 
-## Ethan Weed
 
 Associate Professor, PhD  
 Linguistics  
