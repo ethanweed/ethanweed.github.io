@@ -9,6 +9,8 @@ output: html_document
 #### 2019.03.19
 1. Answered emails
 1. Submitted meta-analysis manuscript
+1. Moved online CV to an Rmd file for easier updating of markdown -> html
+1. Updated CV
 
 ####  2019.03.18
 1. Looked into the idea of livestreaming journal article reading as a teaching tool
@@ -16,6 +18,7 @@ output: html_document
 1. Attempted to send receipts to accounting office (only partially successful, website started timing out)
 1. Reviewed current projects and culled old and completed projects
 1. Treated myself to a bagel to celebrate acceptance of first Dyslexia article
+1. Finally got around to adding python scripts to OSF for Hearing You Hearing Me article
 
 #### 2019.03.15
 1. Met with collaborators to discuss design for upcoming pilot EEG project
