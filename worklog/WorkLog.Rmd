@@ -10,6 +10,7 @@ output: html_document
 1. Met with collaborators on PhD project application
 1. Dug through documents looking for DX information for cross-linguistic ASD voice project
 1. MA thesis advising
+1. Worked more on matching up DX with US story data. Finally gave up (for now) on matching all files, will just work with the 86 I have DX info on
 
 #### 2019.03.20
 1. Answered emails
