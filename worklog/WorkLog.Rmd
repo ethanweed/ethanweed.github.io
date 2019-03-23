@@ -6,6 +6,16 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.22
+1. Met with collaborators on PhD project application
+1. Dug through documents looking for DX information for cross-linguistic ASD voice project
+1. MA thesis advising
+
+#### 2019.03.20
+1. Answered emails
+1. Did MA thesis advising on how to wrangle data into an R dataframe
+1. Wrote a long email expalining why I didn't publish any articles in 2017 or 2018
+
 #### 2019.03.19
 1. Answered emails
 1. Submitted meta-analysis manuscript (!)
