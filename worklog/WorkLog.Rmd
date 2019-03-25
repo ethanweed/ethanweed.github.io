@@ -6,6 +6,7 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.25
 1. Cleared out email from the weekend.
 1. Installed posterdown and began working on INSAR voice poster
 1. Learned about exporting and editing bibtex files from Bookends for import to posterdown template
