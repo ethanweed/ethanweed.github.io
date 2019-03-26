@@ -69,9 +69,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -90,25 +88,98 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -126,6 +197,39 @@ $(document).ready(function () {
 <div id="today-i" class="section level3">
 <h3>Today I…</h3>
 <div id="section" class="section level4">
+<h4>2019.03.26</h4>
+<ol style="list-style-type: decimal">
+<li>Answered emails</li>
+<li>Struggled with LaTeX to get posterdown template to generate a bibliography (finaly succeeded!)</li>
+<li>Added figures to the poster and began adding methods section</li>
+</ol>
+</div>
+<div id="section-1" class="section level4">
+<h4>2019.03.25</h4>
+<ol style="list-style-type: decimal">
+<li>Cleared out email from the weekend.</li>
+<li>Installed posterdown and began working on INSAR voice poster</li>
+<li>Learned about exporting and editing bibtex files from Bookends for import to posterdown template</li>
+</ol>
+</div>
+<div id="section-2" class="section level4">
+<h4>2019.03.22</h4>
+<ol style="list-style-type: decimal">
+<li>Met with collaborators on PhD project application</li>
+<li>Dug through documents looking for DX information for cross-linguistic ASD voice project</li>
+<li>MA thesis advising</li>
+<li>Worked more on matching up DX with US story data. Finally gave up (for now) on matching all files, will just work with the 86 I have DX info on</li>
+</ol>
+</div>
+<div id="section-3" class="section level4">
+<h4>2019.03.20</h4>
+<ol style="list-style-type: decimal">
+<li>Answered emails</li>
+<li>Did MA thesis advising on how to wrangle data into an R dataframe</li>
+<li>Wrote a long email expalining why I didn’t publish any articles in 2017 or 2018</li>
+</ol>
+</div>
+<div id="section-4" class="section level4">
 <h4>2019.03.19</h4>
 <ol style="list-style-type: decimal">
 <li>Answered emails</li>
@@ -135,7 +239,7 @@ $(document).ready(function () {
 <li>Began modelling dyslexia / history of reading disability data for RSC</li>
 </ol>
 </div>
-<div id="section-1" class="section level4">
+<div id="section-5" class="section level4">
 <h4>2019.03.18</h4>
 <ol style="list-style-type: decimal">
 <li>Looked into the idea of livestreaming journal article reading as a teaching tool</li>
@@ -146,7 +250,7 @@ $(document).ready(function () {
 <li>Finally got around to adding python scripts to OSF for Hearing You Hearing Me article</li>
 </ol>
 </div>
-<div id="section-2" class="section level4">
+<div id="section-6" class="section level4">
 <h4>2019.03.15</h4>
 <ol style="list-style-type: decimal">
 <li>Met with collaborators to discuss design for upcoming pilot EEG project</li>
@@ -156,7 +260,7 @@ $(document).ready(function () {
 <li>Produced high-res images for meta-analysis paper</li>
 </ol>
 </div>
-<div id="section-3" class="section level4">
+<div id="section-7" class="section level4">
 <h4>2019.03.14</h4>
 <ol style="list-style-type: decimal">
 <li>Gave comments on PhD application</li>
@@ -165,7 +269,7 @@ $(document).ready(function () {
 <li>Completed and sent article review</li>
 </ol>
 </div>
-<div id="section-4" class="section level4">
+<div id="section-8" class="section level4">
 <h4>2019.03.13</h4>
 <ol style="list-style-type: decimal">
 <li>Reviewed tutorial on lme4</li>
@@ -174,7 +278,7 @@ $(document).ready(function () {
 <li>Discovered that the read.csv function in R can read from a URL, but semmingly not if the file is stored on GitHub</li>
 </ol>
 </div>
-<div id="section-5" class="section level4">
+<div id="section-9" class="section level4">
 <h4>2019.03.12</h4>
 <ol style="list-style-type: decimal">
 <li>Gave feedback on PhD application</li>
@@ -182,7 +286,7 @@ $(document).ready(function () {
 <li>Researched options for anonymously linking to code and data during peer review and settled on OSF, which can generate a view-only link</li>
 </ol>
 </div>
-<div id="section-6" class="section level4">
+<div id="section-10" class="section level4">
 <h4>2019.03.11</h4>
 <ol style="list-style-type: decimal">
 <li>Caught up on email</li>
@@ -191,14 +295,14 @@ $(document).ready(function () {
 <li>Began final edits on meta-analysis prior to submission</li>
 </ol>
 </div>
-<div id="section-7" class="section level4">
+<div id="section-11" class="section level4">
 <h4>2019.03.07</h4>
 <ol style="list-style-type: decimal">
 <li>Wrote a Praat script to extract jitter and shimmer</li>
 <li>Added jitter and shimmer to ASD voice analysis</li>
 </ol>
 </div>
-<div id="section-8" class="section level4">
+<div id="section-12" class="section level4">
 <h4>2019.03.06</h4>
 <ol style="list-style-type: decimal">
 <li>Caught up on email</li>
@@ -207,7 +311,7 @@ $(document).ready(function () {
 <li>Worked on editing PsychoPy script for upcoming data collection</li>
 </ol>
 </div>
-<div id="section-9" class="section level4">
+<div id="section-13" class="section level4">
 <h4>2019.03.05</h4>
 <ol style="list-style-type: decimal">
 <li>Met with a collaborator to plan analyses for an article</li>
@@ -216,14 +320,14 @@ $(document).ready(function () {
 <li>Set up conda environment for editing psychopy code in jupyter notebooks</li>
 </ol>
 </div>
-<div id="section-10" class="section level4">
+<div id="section-14" class="section level4">
 <h4>2019.03.03</h4>
 <ol style="list-style-type: decimal">
 <li>Reviewed progress during first month of sabbatical</li>
 <li>Thought a bit about changes to next semesters stats teaching</li>
 </ol>
 </div>
-<div id="section-11" class="section level4">
+<div id="section-15" class="section level4">
 <h4>2019.02.29</h4>
 <ol style="list-style-type: decimal">
 <li>Started a new repo for cross-linguistic ASD project</li>
@@ -231,7 +335,7 @@ $(document).ready(function () {
 <li>Experimented with mixing R and Python within a single .Rmd file</li>
 </ol>
 </div>
-<div id="section-12" class="section level4">
+<div id="section-16" class="section level4">
 <h4>2019.02.28</h4>
 <ol style="list-style-type: decimal">
 <li>Had a Skype meeting with research collaborators</li>
@@ -239,7 +343,7 @@ $(document).ready(function () {
 <li>Meeting with collaborators on task selection / modification for upcoming study</li>
 </ol>
 </div>
-<div id="section-13" class="section level4">
+<div id="section-17" class="section level4">
 <h4>2019.02.27</h4>
 <ol style="list-style-type: decimal">
 <li>Answered emails</li>
@@ -250,13 +354,13 @@ $(document).ready(function () {
 <li>Some exam grading</li>
 </ol>
 </div>
-<div id="section-14" class="section level4">
+<div id="section-18" class="section level4">
 <h4>2019.02.26</h4>
 <ol style="list-style-type: decimal">
 <li>Finished article draft and sent to co-author</li>
 </ol>
 </div>
-<div id="section-15" class="section level4">
+<div id="section-19" class="section level4">
 <h4>2019.02.25</h4>
 <ol style="list-style-type: decimal">
 <li>Did MA thesis advising</li>
@@ -268,13 +372,13 @@ $(document).ready(function () {
 <li>Found a small but important error and re-ran meta-analysis</li>
 </ol>
 </div>
-<div id="section-16" class="section level4">
+<div id="section-20" class="section level4">
 <h4>2019.02.24</h4>
 <ol style="list-style-type: decimal">
 <li>Wrote a bash and python combo to batch normalize the volume on a directory of sound files</li>
 </ol>
 </div>
-<div id="section-17" class="section level4">
+<div id="section-21" class="section level4">
 <h4>2019.02.22</h4>
 <ol style="list-style-type: decimal">
 <li>Wrote a Praat script to batch low-pass filter speech stimuli</li>
@@ -284,7 +388,7 @@ $(document).ready(function () {
 <li>Wrote first draft of discussion section for meta-analysis</li>
 </ol>
 </div>
-<div id="section-18" class="section level4">
+<div id="section-22" class="section level4">
 <h4>2019.02.21</h4>
 <ol style="list-style-type: decimal">
 <li>Wrote emails</li>
@@ -294,7 +398,7 @@ $(document).ready(function () {
 <li>Made a table with meta-analysis data</li>
 </ol>
 </div>
-<div id="section-19" class="section level4">
+<div id="section-23" class="section level4">
 <h4>2019.02.20</h4>
 <ol style="list-style-type: decimal">
 <li>Answered emails</li>

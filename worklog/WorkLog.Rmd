@@ -6,6 +6,11 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.26
+1. Answered emails
+1. Struggled with LaTeX to get posterdown template to generate a bibliography (finaly succeeded!)
+1. Added figures to the poster and began adding methods section
+
 #### 2019.03.25
 1. Cleared out email from the weekend.
 1. Installed posterdown and began working on INSAR voice poster
