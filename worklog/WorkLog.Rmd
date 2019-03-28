@@ -6,6 +6,17 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.28
+1. answered emails
+1. edited script to separate lemmas from lemmas+modifiers for clarity
+1. wrestled (mostly unsuccessfully) with writing scripts to fix errors and typos in CHAT transcripts
+1. Researched project-management on github (to-do lists, etc.)
+1. Did trouble-shooting with MA thesis student on acoustic feature extraction data wrangling
+
+#### 2019.03.28
+1. answered emails
+1. wrote Python script to extract POS from CHAT format transcripts for alignment analysis
+
 #### 2019.03.26
 1. Answered emails
 1. Struggled with LaTeX to get posterdown template to generate a bibliography (finaly succeeded!)
