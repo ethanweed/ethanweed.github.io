@@ -6,6 +6,12 @@ output: html_document
 
 ### Today I...
 
+#### 2019.03.29
+1. met with collaborators about analyses, posters and talks
+1. listened to audio files to assess background noise issues, etc.
+1. worked on the INSAR voice poster. I added more tables, formatted figures, and added labels to Figure 1
+1. began March review
+
 #### 2019.03.28
 1. answered emails
 1. edited script to separate lemmas from lemmas+modifiers for clarity
