@@ -4,7 +4,19 @@ output: html_document
 
 # Work Log
 
+
 ### Today I...
+
+#### 2019.04.02
+1. answered emails
+1. wrote python script to separate out information on recordings from file name for ASD cross-linguistics voice project
+1. started Rmd script to assemble data from different files into one csv file for ASD cross-linguistics voice project
+
+#### 2019.03.02
+1. began preparing for talk next week
+1. attended a talk on relating ABR and prestin levels to noise-exposure
+1. extracted duration and shimmer and jitter features for ASD cross-linguistic voice paper
+1. visited Auditory Brain Research Lab, met lab members, and heard about their projects
 
 #### 2019.03.29
 1. met with collaborators about analyses, posters and talks
