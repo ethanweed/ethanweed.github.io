@@ -11,6 +11,7 @@ output: html_document
 1. answered emails
 1. wrote python script to separate out information on recordings from file name for ASD cross-linguistics voice project
 1. started Rmd script to assemble data from different files into one csv file for ASD cross-linguistics voice project
+1. learned how to add images to bookdown documents and added an image of Arytenoid cartilage to creaky voice poster
 
 #### 2019.03.02
 1. began preparing for talk next week
