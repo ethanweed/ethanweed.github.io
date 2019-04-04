@@ -11,6 +11,7 @@ output: html_document
 1. worked on INSAR poster
 1. learned how to make Rmd presentations
 1. wrestled a bunch with kableExtra to make nice tables in the presentation, and eventually succeeded.
+1. got a rough draft of Autism Journal Club talk done
 
 #### 2019.04.02
 1. answered emails
