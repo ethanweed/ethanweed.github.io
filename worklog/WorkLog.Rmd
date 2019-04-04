@@ -7,6 +7,11 @@ output: html_document
 
 ### Today I...
 
+#### 2019.04.04
+1. learned a bit about css while trying to format slides
+1. finished making slides for talk at Autism Journal Club
+1. added unlisted page to website for indexing html versions of talks
+
 #### 2019.04.03
 1. worked on INSAR poster
 1. learned how to make Rmd presentations
