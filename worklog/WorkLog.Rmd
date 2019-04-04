@@ -7,6 +7,11 @@ output: html_document
 
 ### Today I...
 
+#### 2019.04.03
+1. worked on INSAR poster
+1. learned how to make Rmd presentations
+1. wrestled a bunch with kableExtra to make nice tables in the presentation, and eventually succeeded.
+
 #### 2019.04.02
 1. answered emails
 1. wrote python script to separate out information on recordings from file name for ASD cross-linguistics voice project
