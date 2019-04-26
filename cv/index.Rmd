@@ -44,6 +44,7 @@ Clinical Linguistics, Acoustic Phonetics, Clinical Pragmatics, Language Acquisit
 PhD Dissertation (2011): Getting the Message Right: Social Cognition, Pragmatic Impairment, and Right Hemisphere Damage
 
 ## Other courses
+2019: Workshop on Artificial Intelligence: Deep Learning and TensorFlow for Computer Vision and Natural Language Processing, University of Connecticut  
 2018: State of Danish Natural Language Processing, Aarhus University
 2018: Advanced Bayesian Statistical Modeling, Interacting Minds Center, Aarhus University 
 2013: Graduate Certificate in Tertiary Teaching, Aarhus University  

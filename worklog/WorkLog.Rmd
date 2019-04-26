@@ -7,6 +7,33 @@ output: html_document
 
 ### Today I...
 
+#### 2019.04.12
+1. Had a skype meeting with collaborators
+1. Edited images for data-collection paradigm
+1. Came up with new framing story for data-collection paradigm
+1. Edited poster
+
+#### 2019.04.12
+1. Had an advising meeting with an MA student
+1. Worked on poster graphs
+
+#### 2019.04.10
+1. Had an advising meeting with an MA thesis student
+1. Gave a presentation on Cognition paper at Autism JC
+1. Worked on poster graphs
+
+#### 2019.04.09
+1. Answered and wrote emails
+1. Read about physiology of vocal cords
+1. Learned about patchwork package for R plots
+1. added a plot with all predictors to INSAR voice poster
+
+#### 2019.04.08
+1. finished wrangling 6-second segment praat data into shape for cross-linguistic voice project
+
+#### 2019.04.05
+1. extracted 6-second segment praat data for cross-linguistic voice project
+
 #### 2019.04.04
 1. learned a bit about css while trying to format slides
 1. finished making slides for talk at Autism Journal Club
