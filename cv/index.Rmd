@@ -45,8 +45,8 @@ PhD Dissertation (2011): Getting the Message Right: Social Cognition, Pragmatic 
 
 ## Other courses
 2019: Workshop on Artificial Intelligence: Deep Learning and TensorFlow for Computer Vision and Natural Language Processing, University of Connecticut  
-2018: State of Danish Natural Language Processing, Aarhus University
-2018: Advanced Bayesian Statistical Modeling, Interacting Minds Center, Aarhus University 
+2018: State of Danish Natural Language Processing, Aarhus University    
+2018: Advanced Bayesian Statistical Modeling, Interacting Minds Center, Aarhus University  
 2013: Graduate Certificate in Tertiary Teaching, Aarhus University  
 2012: ERP Bootcamp, Department of Psychology, Copenhagen University  
 2007: Wellcome Trust Centre for Neuroimaging SPM course  
@@ -55,15 +55,15 @@ PhD Dissertation (2011): Getting the Message Right: Social Cognition, Pragmatic 
 ## Publication Metrics
 
 Peer-reviewed:  
-Articles: 11 (first/sole author: 4; last author: 2)  
-Refereed posters and abstracts: 22  
+Articles: 12 (first/sole author: 4; last author: 2)  
+Refereed posters and abstracts: 23  
 Book chapters: 2 (first/sole author: 1; last author: 1)  
 
 Without peer-review:  
 Articles and dissemination: 9
 
-Citations: 328 (google scholar April 26, 2018)  
-H-index: 7 (google scholar April 26, 2018)
+Citations: 398 (google Scholar May 14, 2019)  
+H-index: 8 (Google Scholar May 14, 2019)
 
 ## Supervision  
 ### PhD  
@@ -107,6 +107,7 @@ Over 20 invited talks at e.g. DuPont Nutrition and Health, Novozymes A/S, the Da
 2018: Internship Coordinator, Linguistics
 
 ## Research Grants  
+2019-2024: Co-Investigator, National Institute on Deafness and Other Communication Disorders: "Early Predictors to School Age Language: Individual and Interactional Child and Parent Factors", Letitia Naigles (PI)  
 2018: AU Funding for Language as a Tool for Learning Center
 2013-2018: Interacting Minds small grants for projects: “Music, Voice, and Auditory Brainstem Response” “Hearing What You’re Thinking” “Clinical Voices” “How well do cloze tests really test reading comprehension in Danish higher-education students?”  
 
@@ -125,7 +126,8 @@ Grant reviewing
 2015: PhD application committee, Graduate program for Language, Linguistics and Cognition, AU  
 
 ### Reviews for international journals  
-Aphasiology  
+Aphasiology 
+Dyslexia  
 Journal of Child Language  
 Journal of Neuroscience  
 Proc. Nat. Acad. Sci (PNAS)  
@@ -133,7 +135,7 @@ Psychology of Language and Communication
 Journal of Neurolinguistics
 
 ### Peer-reviewed articles 
-Bønnerup, K., Pedersen, A.L., **Weed, E.**, & Parrila, R. (accepted). Differences in the literacy skills of Danish dyslexic students in two types of higher education programs. Dyslexia
+Bønnerup, K., Pedersen, A.L., **Weed, E.**, & Parrila, R. (epub ahead of pring). Differences in the literacy skills of Danish dyslexic students in two types of higher education programs. Dyslexia. doi:10.1002/dys.1617  
 
 Fusaroli, R., **Weed, E.**, Fein, D., & Naigles, L. (2018). Hearing me hearing you: Reciprocal effects between child and parent language in autism and typical development. Cognition, 183, 1-18.
 
@@ -186,6 +188,8 @@ Zareini, B., Nielsen, J. F., Kock-Jensen, C., Vuust, P., **Weed, E.**, Pedersen,
 **Weed, E.** (2011). Getting the Message Right: Social Cognition, Pragmatic Impairment, and Right Hemisphere Damage (Doctoral dissertation, Aarhus Universitet).
 
 ### Refereed posters and abstracts
+
+Ottosen, H., Bønnerup, K.H., **Weed, E.**, Parrila, R. (2019) Word level problems in Danish students assessed for dyslexia in higher education. CPH 2019 Conference on Literacy.  
 
 Fusaroli, R.; **Weed, E.**; Fein, D.; Naigles, L. (2019) Parental linguistic alignment in conversations with children with ASD and TD children.
 Abstract from INSAR 2019, Montreal, Canada.
