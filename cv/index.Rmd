@@ -3,14 +3,17 @@ layout: default
 output: html_document
 ---
 
-# Curriculum Vitae
 
+
+# Ethan Weed
 
 Associate Professor, PhD  
 Linguistics  
 Aarhus University  
 Jens Chr. Skous Vej 2, building. 1485  
 8000 Aarhus C, Denmark
+
+
 
 ## Contact
 
@@ -66,15 +69,15 @@ Citations: 398 (google Scholar May 14, 2019)
 H-index: 8 (Google Scholar May 14, 2019)
 
 ## Supervision  
-### PhD  
+##### PhD  
 Co-supervisor on two PhD projects 
 
-### MA  
+##### MA  
 Supervisor on 22 master theses
 
 ## Teaching
 
-### MA level
+#### MA level
 
 Cognitive Neurolinguistics: 2009  
 Language of the Brain: 2011  
@@ -87,7 +90,7 @@ Research Workshop: Dyslexia: 2016
 Research Workshop: Auditory Processing: 2017  
 Child Language Acquisition: 2016 - present
 
-### BA level
+#### BA level
 
 Psycholinguistics: 2009 - 2010  
 Humanities Elective Language and Cognition: 2010 - 2014  
@@ -117,15 +120,15 @@ Grant reviewing
 2012: Israel Science Foundation (ISF)  
 
 
-### PhD thesis evaluation  
+#### PhD thesis evaluation  
 2018: Aymeric Duval-Markussen, Aarhus University (committee chairman)  
 2018: Magnus Hamnn, Aarhus University (committee chairman)  
 2016: Jens Sand Østergaard, Aarhus University (committee chairman)  
 
-### Positions  
+#### Positions  
 2015: PhD application committee, Graduate program for Language, Linguistics and Cognition, AU  
 
-### Reviews for international journals  
+#### Reviews for international journals  
 Aphasiology 
 Dyslexia  
 Journal of Child Language  
@@ -134,7 +137,7 @@ Proc. Nat. Acad. Sci (PNAS)
 Psychology of Language and Communication  
 Journal of Neurolinguistics
 
-### Peer-reviewed articles 
+## Peer-reviewed articles 
 Bønnerup, K., Pedersen, A.L., **Weed, E.**, & Parrila, R. (2019). Differences in the literacy skills of Danish dyslexic students in two types of higher education programs. Dyslexia, 25, 173–189. doi:10.1002/dys.1617  
 
 Fusaroli, R., **Weed, E.**, Fein, D., & Naigles, L. (2018). Hearing me hearing you: Reciprocal effects between child and parent language in autism and typical development. Cognition, 183, 1-18.
@@ -158,36 +161,8 @@ Tylén, K., Bjørndahl, J. S., & **Weed, E.** (2009). Taking the language stance
 Wallentin, M., **Weed, E.**, Østergaard, L., Mouridsen, K., & Roepstorff, A. (2008). Accessing the mental space — spatial working memory processes for language and vision overlap in precuneus. Human Brain Mapping, 29(5), 524-532.  
 
 **Weed, E.** (2008). Looking for Beauty in the Brain. Estetika: The Central European Journal of Aesthetics, 45(1), 5-23.
- 
-### Book chapters  
-**Weed, E.** (2013). Is there an irony center in the brain?. In Ironistik (pp. 79-83). Publizon.
 
-Tylén, K., Bjørndahl, J. S., & **Weed, E.** (2011). Actualizing semiotic affordances in a material world. Benjamins Current Topics, 81.
-
-### Publications without peer-review
-
-Sørensen, L. L., Claumarch, I. E. R., & **Weed, E.** (2017). Testning af alment ordforråd hos danske universitetsstuderende: et normeringsstudie. Dansk Audiologopaedi, 53(1), 10-15.
-
-**Weed, E.**, & Fusaroli, R. (2015). Modeling parent-child dyads in the linguistic development of children with and without ASD. In Autism@Aarhus 2015 Symposium: 4Th Anniversary Meeting.
-
-**Weed, E.**, Kratschmer, A. R., Lieberoth, A., & Pedersen, M. N. (2014). Wireless EEG for field study: Checking the data quality.
-
-Zareini, B., Nielsen, J. F., Kock-Jensen, C., Vuust, P., **Weed, E.**, Pedersen, M. N., & Overgaard, M. (2013). Cognitive Complexity and Disorders of Consciousness.
-
-**Weed, E.** (2013). A Review of Palmer, SE and Shimamura, AP eds., Aesthetic Science. Estetika, 6(1), 128-133.
-
-**Weed, E.** (2009). Når ”Godt gået” betyder ”dumt gjort”. Logos: Audiologopædisk Tidsskrift, (57), 12-13.
-
-**Weed, E.** (2004). A Labyrinth Of Symbols Exploring ‘The Garden Of Forking Paths’. Variaciones Borges, 18, 161-189.
-
-**Weed, E.** (2004). Aspectos De La Citación En “Tlön, Uqbar, Orbis Tertius”. Variaciones Borges, 17, 21-42.
-
-**Weed, E.** (2007). Bits and pieces: perception, cognition, and language in patients with damage to the right cerebral hemisphere. In Language in cognition, cognition in language, Aarhus University
-
-### Monographs  
-**Weed, E.** (2011). Getting the Message Right: Social Cognition, Pragmatic Impairment, and Right Hemisphere Damage (Doctoral dissertation, Aarhus Universitet).
-
-### Refereed posters and abstracts
+## Refereed posters and abstracts
 
 Ottosen, H., Bønnerup, K.H., **Weed, E.**, Parrila, R. (2019) Word level problems in Danish students assessed for dyslexia in higher education. CPH 2019 Conference on Literacy.  
 
@@ -237,3 +212,31 @@ Petersen, B., **Weed, E.**, Hansen, M., Derdau, S., Sandmann, P., & Vuust, P. (2
 **Weed, E.**, & Christensen, P. (2011). Cross-modal integration of affective facial expression and vocal prosody: an EEG study. In The 3rd Conference of the Scandinavian Association for Language and Cognition.
 
 **Weed, E.**, McGregor, W., Feldbaek, J., & Roepstroff, A. (2009). Moving pictures: Using descriptions of animations to assess Theory of Mind in people with right-hemisphere damage. In La lingüística ante el reto de la aplicación clínica: actas del II Congreso Internacional de Lingüística Clínica (pp. 247-249). Universidad Nacional de Educación a Distancia, UNED.
+
+## Book chapters  
+**Weed, E.** (2013). Is there an irony center in the brain?. In Ironistik (pp. 79-83). Publizon.
+
+Tylén, K., Bjørndahl, J. S., & **Weed, E.** (2011). Actualizing semiotic affordances in a material world. Benjamins Current Topics, 81.
+
+## Publications without peer-review
+
+Sørensen, L. L., Claumarch, I. E. R., & **Weed, E.** (2017). Testning af alment ordforråd hos danske universitetsstuderende: et normeringsstudie. Dansk Audiologopaedi, 53(1), 10-15.
+
+**Weed, E.**, & Fusaroli, R. (2015). Modeling parent-child dyads in the linguistic development of children with and without ASD. In Autism@Aarhus 2015 Symposium: 4Th Anniversary Meeting.
+
+**Weed, E.**, Kratschmer, A. R., Lieberoth, A., & Pedersen, M. N. (2014). Wireless EEG for field study: Checking the data quality.
+
+Zareini, B., Nielsen, J. F., Kock-Jensen, C., Vuust, P., **Weed, E.**, Pedersen, M. N., & Overgaard, M. (2013). Cognitive Complexity and Disorders of Consciousness.
+
+**Weed, E.** (2013). A Review of Palmer, SE and Shimamura, AP eds., Aesthetic Science. Estetika, 6(1), 128-133.
+
+**Weed, E.** (2009). Når ”Godt gået” betyder ”dumt gjort”. Logos: Audiologopædisk Tidsskrift, (57), 12-13.
+
+**Weed, E.** (2004). A Labyrinth Of Symbols Exploring ‘The Garden Of Forking Paths’. Variaciones Borges, 18, 161-189.
+
+**Weed, E.** (2004). Aspectos De La Citación En “Tlön, Uqbar, Orbis Tertius”. Variaciones Borges, 17, 21-42.
+
+**Weed, E.** (2007). Bits and pieces: perception, cognition, and language in patients with damage to the right cerebral hemisphere. In Language in cognition, cognition in language, Aarhus University
+
+## Monographs  
+**Weed, E.** (2011). Getting the Message Right: Social Cognition, Pragmatic Impairment, and Right Hemisphere Damage (Doctoral dissertation, Aarhus Universitet).
