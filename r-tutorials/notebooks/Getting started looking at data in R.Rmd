@@ -1,0 +1,41 @@
+---
+title: "Getting started with looking at data in R"
+author: "Ethan Weed"
+date: "8/8/2019"
+output: 
+  html_document:
+    code_folding: hide
+
+
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# Getting the data ready
+
+```{r, message=FALSE, warning=FALSE, results='hide'}
+# Load packages for data handling and plotting
+library(tidyverse)
+
+rm(list = ls())
+
+df <- read.csv("/Users/ethan/Documents/GitHub/LaCoBra/data/Stroop-raw-over-the-years.csv")
+df_long <- gather(df, key = "Condition", value = "Time", -Year)
+```
+
+
+```{r}
+# Set up plot structure
+p <- ggplot(df_long, aes(x = Condition, y = Time))
+#p <- ggplot(df_long, aes(x = Condition, y = Time, color = Condition))
+p
+
+# Basic barplot
+p + geom_bar(stat = "identity")
+```
+
