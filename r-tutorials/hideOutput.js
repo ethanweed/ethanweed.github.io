@@ -1,3 +1,6 @@
+$(document).ready(function() {
+
+  $chunks = $('.fold');
 
   $chunks.each(function () {
 
@@ -9,7 +12,7 @@
 
     // add button to output chunks
     if ( $(this).hasClass('o') ) {
-      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show Output</div><br style=\"line-height:22px;\"/>");
+      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show R output</div><br style=\"line-height:22px;\"/>");
       $('pre:not(.r)', this).children('code:not(r)').addClass('folded');
 
       // add button to plots

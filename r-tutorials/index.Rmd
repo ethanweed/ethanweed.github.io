@@ -12,13 +12,19 @@ output:
       collapsed: no
 ---
 
-
 <!-- From https://stackoverflow.com/a/37839683/1297830 -->
-<link rel="stylesheet" type="text/css" href="include/hideOutput.css">
-<script src="include/hideOutput.js"></script>
+<link rel="stylesheet" type="text/css" href="hideOutput.css">
+<script src="hideOutput.js"></script>
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r echo=FALSE}
+# Options for building this document
+knitr::opts_chunk$set(
+  fig.height = 4,
+  fig.width = 6,
+  fig.align = 'center',
+  message = FALSE,
+  warning = FALSE
+)
 ```
 
 # RStudio
