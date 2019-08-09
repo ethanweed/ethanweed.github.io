@@ -11,7 +11,7 @@ output:
     toc_float:
       collapsed: no
 ---
-<link rel="stylesheet" type="text/css" href="include/style.css">
+
 
 <!-- From https://stackoverflow.com/a/37839683/1297830 -->
 <link rel="stylesheet" type="text/css" href="include/hideOutput.css">
