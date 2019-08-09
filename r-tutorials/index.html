@@ -338,7 +338,7 @@ class(a)</code></pre>
 <div id="dataframes" class="section level3">
 <h3>Dataframes</h3>
 <p>One of the most useful variable types for data analysis in R is the dataframe. A dataframe is a little bit like a spreadsheet, in that it has rows and columns, but we interact with is a ittle differently than we do with a spreadsheet like Excel. In Excel, you can just go in and click on a cell and change whatever you want. You can add plots on top of your data, and mess around however you please. this can be great for taking a quick look at data, but it is no good for actual analysis, becasue there is too much room for human error. It is too easy to accidently change something and mess up all your data. Dataframes in R are a little more structured than a spreadsheet, and because we interact with them <em>programatically</em>, by writing code, even if we mess something up, we can always trace back our steps, and figure out what went wrong.</p>
-<p>The easiest way to get your data into R is by importing it from a .csv file:</p>
+<p>The easiest way to get your data into R is by importing it from a .csv file. Click the button to show the entire dataframe.</p>
 <div class="fold o">
 <pre class="r"><code>df &lt;- read.csv(&quot;/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv&quot;)
 df</code></pre>
@@ -448,7 +448,8 @@ df</code></pre>
 ## 103          3.17       7.51         3.69        3.26 2015
 ## 104          3.85       9.92         6.12        4.28 2015</code></pre>
 </div>
-<p>There are 104 rows of data, and maybe we only want to work with the data from 2015. We can easily make a new dataframe, with only the 2015 data:</p>
+There are 104 rows of data, and maybe we only want to work with the data from 2015. We can easily make a new dataframe, with only the 2015 data:
+<div class="fold o">
 <pre class="r"><code>df_2015 &lt;- subset(df, Year == 2015)
 df_2015</code></pre>
 <pre><code>##     Reading_NoInt Naming_Int Naming_NoInt Reading_Int Year
@@ -466,11 +467,27 @@ df_2015</code></pre>
 ## 102          4.11       9.17         5.22        3.97 2015
 ## 103          3.17       7.51         3.69        3.26 2015
 ## 104          3.85       9.92         6.12        4.28 2015</code></pre>
+</div>
 <p>You can use the <code>$</code> symbol to select a single column from the dataframe, using the column header:</p>
 <pre class="r"><code>Reading_no_interference &lt;- df_2015$Reading_NoInt
 Reading_no_interference</code></pre>
 <pre><code>##  [1] 4.16 4.35 3.60 3.90 4.22 4.31 4.58 3.93 4.48 3.56 3.10 4.11 3.17 3.85</code></pre>
 </div>
+</div>
+</div>
+<div id="exploring-data-with-ggplot" class="section level1">
+<h1>Exploring data with ggplot</h1>
+<p>One of the best ways to understand our data is to plot it. R has lots of tools for plotting data, and the package <em>ggplot</em> is one of the best. ggplot can be installed as a separate package, but it is also part of a package called <em>tidyverse</em> which has lots of great tools for wrangling data. Tidyverse (and other packages) can be installed through RStudio’s package manager (“packages” tab in the lower right frame of the RStudio window) or by typing <code>install.packages(&quot;tidyverse&quot;)</code></p>
+<div class="fold s">
+<pre class="r"><code># Load packages for data handling and plotting
+library(tidyverse)
+
+rm(list = ls())
+
+df &lt;- read.csv(&quot;/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv&quot;)
+
+# make a new dataframe with the same data in the &quot;long&quot; format.
+df_long &lt;- gather(df, key = &quot;Condition&quot;, value = &quot;Time&quot;, -Year)</code></pre>
 </div>
 </div>
 

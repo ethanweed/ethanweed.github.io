@@ -69,7 +69,7 @@ In this case, ```a``` is a **character**, while ```b``` is a **number**. We coul
 
 One of the most useful variable types for data analysis in R is the dataframe. A dataframe is a little bit like a spreadsheet, in that it has rows and columns, but we interact with is a ittle differently than we do with a spreadsheet like Excel. In Excel, you can just go in and click on a cell and change whatever you want. You can add plots on top of your data, and mess around however you please. this can be great for taking a quick look at data, but it is no good for actual analysis, becasue there is too much room for human error. It is too easy to accidently change something and mess up all your data. Dataframes in R are a little more structured than a spreadsheet, and because we interact with them *programatically*, by writing code, even if we mess something up, we can always trace back our steps, and figure out what went wrong.
 
-The easiest way to get your data into R is by importing it from a .csv file:
+The easiest way to get your data into R is by importing it from a .csv file. Click the button to show the entire dataframe.
 
 <div class="fold o">
 ```{r}
@@ -80,16 +80,38 @@ df
 
 
 There are 104 rows of data, and maybe we only want to work with the data from 2015. We can easily make a new dataframe, with only the 2015 data:
+<div class="fold o">
 ```{r}
 df_2015 <- subset(df, Year == 2015)
 df_2015
 ```
+</div>
 
 You can use the ```$``` symbol to select a single column from the dataframe, using the column header:
+
 
 ```{r}
 Reading_no_interference <- df_2015$Reading_NoInt
 Reading_no_interference
 ```
+
+
+# Exploring data with ggplot
+
+One of the best ways to understand our data is to plot it. R has lots of tools for plotting data, and the package *ggplot* is one of the best. ggplot can be installed as a separate package, but it is also part of a package called *tidyverse* which has lots of great tools for wrangling data. Tidyverse (and other packages) can be installed through RStudio's package manager ("packages" tab in the lower right frame of the RStudio window) or by typing ```install.packages("tidyverse")``` 
+
+<div class="fold s">
+```{r}
+# Load packages for data handling and plotting
+library(tidyverse)
+
+rm(list = ls())
+
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv")
+
+# make a new dataframe with the same data in the "long" format.
+df_long <- gather(df, key = "Condition", value = "Time", -Year)
+```
+</div>
 
 
