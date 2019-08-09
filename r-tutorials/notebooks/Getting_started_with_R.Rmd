@@ -1,0 +1,72 @@
+---
+title: "Getting started with R"
+author: "Ethan Weed"
+output: 
+  html_document:
+    df_print: default
+    number_sections: no
+    self_contained: no
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: no
+---
+<link rel="stylesheet" type="text/css" href="include/style.css">
+
+<!-- From https://stackoverflow.com/a/37839683/1297830 -->
+<link rel="stylesheet" type="text/css" href="include/hideOutput.css">
+<script src="include/hideOutput.js"></script>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# RStudio
+The R programming language is an important tool for exploring, visualizing, and analyzing data. It is much more powerful and flexible than point-and-click statistical analysis programs or spreadsheets, but it does take some getting used to, especially if you are unfamiliar with programming. I reccomend RSstudio for working with R. RStudio is a so-called IDE (integrated development environment) for the R language. An IDE is a program that makes it easier to write code and get your work done. RStudio has many many features that make life easier for us when working with R. You can even use RStudio to make slides and webpages. The words you are reading now were typed into RStudio.
+
+# Variables
+Variables are fundamental to programming in any language. A variable can be thought of as a container, or as a label. Here is an example:
+
+```{r}
+a <- "Hello world!"
+```
+
+R uses the syntax ``` <- ``` to show that we are putting something into a variable. Here we are putting the words "Hello world!" into the variable ```a```. Once a variable has been defined, we can do different things with it:
+
+```{r}
+a <- "Hello world!"
+b <- 3
+c <- 2
+
+print(a)
+b + c
+b * c
+b / c
+```
+
+## Variable types
+
+There are different kinds of variables, and they can do different things:
+
+```{r}
+a <- "3.14159"
+b <- 3.14159
+
+class(a)
+class(b)
+
+```
+
+In this case, ```a``` is a **character**, while ```b``` is a **number**. We could use ```b``` to do math, but we couldn't do math with ``à```. 
+
+### Dataframes
+
+One of the most useful variable types for data analysis in R is the dataframe. A dataframe is a little bit like a spreadsheet, in that it has rows and columns, but we interact with is a ittle differently than we do with a spreadsheet like Excel. In Excel, you can just go in and click on a cell and change whatever you want. You can add plots on top of your data, and mess around however you please. this can be great for taking a quick look at data, but it is no good for actual analysis, becasue there is too much room for human error. It is too easy to accidently change something and mess up all your data. Dataframes in R are a little more structured than a spreadsheet, and because we interact with them *programatically*, by writing code, even if we mess something up, we can always trace back our steps, and figure out what went wrong.
+
+The easiest way to get your data into R is by importing it from a .csv file:
+
+```{r}
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv")
+class(df)
+```
+
+

@@ -24,7 +24,7 @@ library(tidyverse)
 
 rm(list = ls())
 
-df <- read.csv("/Users/ethan/Documents/GitHub/LaCoBra/data/Stroop-raw-over-the-years.csv")
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv")
 df_long <- gather(df, key = "Condition", value = "Time", -Year)
 ```
 

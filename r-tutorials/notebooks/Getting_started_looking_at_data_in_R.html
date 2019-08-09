@@ -220,7 +220,7 @@ library(tidyverse)
 
 rm(list = ls())
 
-df &lt;- read.csv(&quot;/Users/ethan/Documents/GitHub/LaCoBra/data/Stroop-raw-over-the-years.csv&quot;)
+df &lt;- read.csv(&quot;/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv&quot;)
 df_long &lt;- gather(df, key = &quot;Condition&quot;, value = &quot;Time&quot;, -Year)</code></pre>
 <pre class="r"><code># Set up plot structure
 p &lt;- ggplot(df_long, aes(x = Condition, y = Time))
