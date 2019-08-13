@@ -69,7 +69,7 @@ In this case, ```a``` is a **character**, while ```b``` is a **number**. We coul
 
 One of the most useful variable types for data analysis in R is the dataframe. A dataframe is a little bit like a spreadsheet, in that it has rows and columns, but we interact with is a ittle differently than we do with a spreadsheet like Excel. In Excel, you can just go in and click on a cell and change whatever you want. You can add plots on top of your data, and mess around however you please. this can be great for taking a quick look at data, but it is no good for actual analysis, becasue there is too much room for human error. It is too easy to accidently change something and mess up all your data. Dataframes in R are a little more structured than a spreadsheet, and because we interact with them *programatically*, by writing code, even if we mess something up, we can always trace back our steps, and figure out what went wrong.
 
-The easiest way to get your data into R is by importing it from a .csv file. Click the button to show the entire dataframe.
+The easiest way to get your data into R is by importing it from a .csv file. Click the button to show the entire dataframe. Here we look at data from students carrying out a version of the Stroop color-naming task.
 
 <div class="fold o">
 ```{r}
@@ -98,20 +98,154 @@ Reading_no_interference
 
 # Exploring data with ggplot
 
-One of the best ways to understand our data is to plot it. R has lots of tools for plotting data, and the package *ggplot* is one of the best. ggplot can be installed as a separate package, but it is also part of a package called *tidyverse* which has lots of great tools for wrangling data. Tidyverse (and other packages) can be installed through RStudio's package manager ("packages" tab in the lower right frame of the RStudio window) or by typing ```install.packages("tidyverse")``` 
+One of the best ways to understand our data is to plot it. R has lots of tools for plotting data, and the package *ggplot* is one of the best. ""GG" stands for "Grammar of Graphics". This way of building plots makes it easy to mix and match elements, so you and make just the plot you want to show your data. Ggplot can be installed as a separate package, but it is also part of a package called *tidyverse* which has lots of great tools for wrangling data. Tidyverse (and other packages) can be installed through RStudio's package manager ("packages" tab in the lower right frame of the RStudio window) or by typing ```install.packages("tidyverse")``` 
 
-<div class="fold s">
+
 ```{r}
 # Load packages for data handling and plotting
 library(tidyverse)
 
+# clear global environment
 rm(list = ls())
 
 df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv")
+```
 
+
+The function ``head`` lets us see just the top of the dataframe. This is handy for just getting a quick peek at the structure of the data, without having to display all of it:
+
+
+```{r}
+head(df)
+```
+
+
+These particular data are stored in the so-called "wide" format, in which each row represents a single participant, and each column shows a different kind of information or measurement about the participant. To explore these data, it will be useful to transform them to the "long" format. We can easily do this using the function ``gather`` from the "tidyverse" package:
+
+```{r}
 # make a new dataframe with the same data in the "long" format.
 df_long <- gather(df, key = "Condition", value = "Time", -Year)
+head(df_long)
+```
+
+If you want, you can check that these are the same data, just arranged in a different way:
+
+<div class="fold o">
+```{r}
+# display all the data in the original wide format
+df
+
+# display all the data in long format
+df_long
 ```
 </div>
 
+## Bar plots
+There are many different ways these data could be represented graphically. A common way to look at data from different experimental conditions is to make a bar plot.
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time)) +
+  geom_bar(stat = "identity")
+```
+
+Maybe we would like to see the columns as horizontal bars (with coordinates flipped):
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time)) +
+  geom_bar(stat = "identity") +
+  coord_flip()
+```
+
+## Scatter plots
+One problem with bar plots is that they usually only represent the mean value, and give little feeling for what the underlying data look like. With a scatter plot, we can see each of our individual data points. While we're at it, let's add some color just to make it pretty:
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point()
+```
+
+## Box plots
+Box plots are nice for adding some descriptive statistics to the plot. Here, the horizontal line shows the median value, and the top and bottom parts of the box (the hinges) show the 2nd and 3rd quartiles. The vertical lines (whiskers) give an indication of outliers (for more details, type ``? geom_boxplot`` in the console): 
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot()
+```
+
+We can also layer different types of plots on top of each other, e.g. we can plot all the poins on top of our boxplots:
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_point()
+```
+
+## Jitter
+There are a lot of points lying on top of each other, so it is hard to see them all. One way to see them is to add "jitter" to spread them out a bit:
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_jitter()
+```
+
+## Violin plots
+Another method is to show probability density using violin plots:
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_violin()
+```
+
+If we flip them on their sides, they kinda look like X-wing fighters, or maybe geese. Did we just invent the goose plot?
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_violin() +
+  coord_flip() +
+  theme_classic()
+```
+
+## Combined plots
+We could also combine several of our plots into one plot, e.g. to make it easier to compare them. Click the button to see the code. Although it looks like a lot, you will see it is mostly just copy/paste.
+<div class="fold s">
+```{r}
+# load the library "patchwork". We will use this to combine the plots. Another option is the function "ggarrange" from the package "ggpubr". Both are good.
+library(patchwork)
+
+# theme_classic takes away the background grid for a cleaner look. There are many other themes. Try them, and find one you like. There are also many different color options.
+
+# theme(legend.position="none") takes away the legends, which in this case provided redundant information, and cluttered up the plot. There are many other theme options to make your plot look just the way you want.
+
+# make a barplot and call it "bar". Notice we have to write "fill" instead of "color", otherwise it will look bad. Try and see.
+bar <- ggplot(df_long, aes(x = Condition, y = Time, fill = Condition)) +
+  geom_bar(stat = "identity") +
+  theme_classic() +
+  coord_flip() +
+  theme(legend.position="none")
+
+# make a boxplot and call it "box"  
+box <- ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  coord_flip() +
+  theme_classic() +
+  theme(legend.position="none")
+
+# make a scatterplot and call it "scatter"
+scatter <- ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  coord_flip() +
+  theme_classic() +
+  theme(legend.position="none")
+
+# make a "gooseplot" and call it "goose". Just to be clear, there is no such thing as a gooseplot. I just made that up.
+
+goose <- ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_violin() +
+  coord_flip() +
+  theme_classic() +
+  theme(legend.position="none")
+
+# Because we have "patchwork" loaded, we can just "add" the plots together.
+bar + box + scatter + goose
+
+
+
+```
+</div>
 
