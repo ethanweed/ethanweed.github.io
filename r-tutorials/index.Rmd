@@ -202,6 +202,7 @@ ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
 
 ## Combined plots
 We could also combine several of our plots into one plot, e.g. to make it easier to compare them. Click the button to see the code. Although it looks like a lot, you will see it is mostly just copy/paste.
+
 <div class="fold s">
 ```{r}
 # load the library "patchwork". We will use this to combine the plots. Another option is the function "ggarrange" from the package "ggpubr". Both are good.
@@ -248,4 +249,38 @@ bar + box + scatter + goose
 
 ```
 </div>
+
+# Correlations
+<div class="fold s">
+```{r}
+rm(list = ls())
+
+library(tidyverse)
+library(patchwork)
+
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1999_climate.csv")
+df <- rename(df, "Number_of_Languages" = "Langs")
+```
+</div>
+
+
+```{r}
+p1 <- ggplot(df, aes(Area, Population)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic()
+
+p2 <- ggplot(df, aes(Number_of_Languages, Population)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic()
+
+p1 + p2
+
+
+```
+
+```{r}
+
+```
 

@@ -1090,7 +1090,7 @@ df_long</code></pre>
 </div>
 <div id="combined-plots" class="section level2">
 <h2>Combined plots</h2>
-We could also combine several of our plots into one plot, e.g. to make it easier to compare them. Click the button to see the code. Although it looks like a lot, you will see it is mostly just copy/paste.
+<p>We could also combine several of our plots into one plot, e.g. to make it easier to compare them. Click the button to see the code. Although it looks like a lot, you will see it is mostly just copy/paste.</p>
 <div class="fold s">
 <pre class="r"><code># load the library &quot;patchwork&quot;. We will use this to combine the plots. Another option is the function &quot;ggarrange&quot; from the package &quot;ggpubr&quot;. Both are good.
 library(patchwork)
@@ -1134,6 +1134,30 @@ bar + box + scatter + goose</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
+</div>
+<div id="correlations" class="section level1">
+<h1>Correlations</h1>
+<div class="fold s">
+<pre class="r"><code>rm(list = ls())
+
+library(tidyverse)
+library(patchwork)
+
+df &lt;- read.csv(&quot;/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1999_climate.csv&quot;)
+df &lt;- rename(df, &quot;Number_of_Languages&quot; = &quot;Langs&quot;)</code></pre>
+</div>
+<pre class="r"><code>p1 &lt;- ggplot(df, aes(Area, Population)) + 
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;) +
+  theme_classic()
+
+p2 &lt;- ggplot(df, aes(Number_of_Languages, Population)) + 
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;) +
+  theme_classic()
+
+p1 + p2</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 
 
