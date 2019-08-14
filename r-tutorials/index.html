@@ -1144,9 +1144,9 @@ library(tidyverse)
 library(patchwork)
 
 df &lt;- read.csv(&quot;/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1999_climate.csv&quot;)
-df &lt;- rename(df, &quot;Number_of_Languages&quot; = &quot;Langs&quot;)</code></pre>
-</div>
-<pre class="r"><code>p1 &lt;- ggplot(df, aes(Area, Population)) + 
+df &lt;- rename(df, &quot;Number_of_Languages&quot; = &quot;Langs&quot;)
+
+p1 &lt;- ggplot(df, aes(Area, Population)) + 
   geom_point() +
   geom_smooth(method = &quot;lm&quot;) +
   theme_classic()
@@ -1157,7 +1157,8 @@ p2 &lt;- ggplot(df, aes(Number_of_Languages, Population)) +
   theme_classic()
 
 p1 + p2</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 
 

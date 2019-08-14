@@ -251,6 +251,9 @@ bar + box + scatter + goose
 </div>
 
 # Correlations
+
+One of the most basic things a researcher is interested in is seeing whether there is any relationship between variables. 
+
 <div class="fold s">
 ```{r}
 rm(list = ls())
@@ -258,16 +261,13 @@ rm(list = ls())
 library(tidyverse)
 library(patchwork)
 
-df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1999_climate.csv")
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1998.csv")
 df <- rename(df, "Number_of_Languages" = "Langs")
-```
-</div>
 
-
-```{r}
 p1 <- ggplot(df, aes(Area, Population)) + 
   geom_point() +
   geom_smooth(method = "lm") +
+  geom_text(aes(label = Country)) +
   theme_classic()
 
 p2 <- ggplot(df, aes(Number_of_Languages, Population)) + 
@@ -275,12 +275,13 @@ p2 <- ggplot(df, aes(Number_of_Languages, Population)) +
   geom_smooth(method = "lm") +
   theme_classic()
 
-p1 + p2
-
-
-```
-
-```{r}
+p1
 
 ```
+</div>
+
+
+
+
+
 
