@@ -205,7 +205,12 @@ We could also combine several of our plots into one plot, e.g. to make it easier
 
 <div class="fold s">
 ```{r}
-# load the library "patchwork". We will use this to combine the plots. Another option is the function "ggarrange" from the package "ggpubr". Both are good.
+# load the library "patchwork". We will use this to combine the plots. Another option is the function "ggarrange" from the package "ggpubr". Both are good. Patchwork is a teeny bit harder to install than e.g. tidyverse, but not much. You just need to type:
+
+# install.packages("devtools")
+# devtools::install_github("thomasp85/patchwork")
+
+
 library(patchwork)
 
 # theme_classic takes away the background grid for a cleaner look. There are many other themes. Try them, and find one you like. There are also many different color options.
@@ -252,33 +257,110 @@ bar + box + scatter + goose
 
 # Correlations
 
-One of the most basic things a researcher is interested in is seeing whether there is any relationship between variables. 
+One of the most basic things a researcher is interested in is seeing whether there is any relationship between variables. Here, we will look at data from Nettle (1998).
+
+<img src="images/nettle_1998_abstract.png" alt="Nettle_1998_abstract">
+
+Nettle recorded the *number of languages*, the *area* (in km<sup>2</sup>), the *population*, the *mean growing season* (MGS, in months), the number of weather stations measuring MGS, and the standard deviation of the measurements of MGS from the different weather stations in each country.
+
+## Plotting Correlations
+We can use ggplot to see if there is any clear relationship between these variables. We might expect that there would be a relationship between the area of a country and the population of that country. We can use the ``geom_smooth`` and the ``geom_point`` functions to take a quick look.
 
 <div class="fold s">
 ```{r}
 rm(list = ls())
 
 library(tidyverse)
-library(patchwork)
 
-df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1998.csv")
-df <- rename(df, "Number_of_Languages" = "Langs")
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1998.csv", sep = ";")
+
+# Nettle reports the population data in 1000's, probably to save room in the data table, but that is an unusual number to think about population in, so let's convert to millions. While we're at it, let's convert km2 to millions, so that the number doesn't appear in scientific notation on the x-axis
+df$Population <- df$Population*1000/1000000
+df$Area <- df$Area/1000000
 
 p1 <- ggplot(df, aes(Area, Population)) + 
   geom_point() +
   geom_smooth(method = "lm") +
   geom_text(aes(label = Country)) +
-  theme_classic()
+  theme_classic() +
+  labs(y = "Population (millions)",
+       x = (bquote('Area (million km'^2*')')))
 
-p2 <- ggplot(df, aes(Number_of_Languages, Population)) + 
-  geom_point() +
-  geom_smooth(method = "lm") +
-  theme_classic()
 
 p1
 
 ```
 </div>
+
+## Log Scale for Plotting
+There seems to be some sort of relationship between Area and Population, but it is hard to see what is going on, because the size of India's population relative to its area squishes all the other data down into the bottom left corner. One way to deal with this is by converting the population to a logarithmic scale.
+
+<div class="fold s">
+```{r}
+library(tidyverse)
+library(ggpubr)
+
+df$Population_log <- log(df$Population)
+df$Area_log <- log(df$Area)
+df$Languages_log <- log(df$Languages)
+
+p1 <- ggplot(df, aes(Area_log, Population_log)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  geom_text(aes(label = Country)) +
+  theme_classic() +
+  labs(y = "Population ((log) millions)",
+       x = (bquote('Area ((log) million km'^2*')')),
+       title = "With data labels")
+
+p2 <- ggplot(df, aes(Area_log, Population_log)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic() +
+  labs(y = NULL,
+       x = (bquote('Area ((log) million km'^2*')')),
+       title = "Without data labels")
+
+p <- ggarrange(p1, p2, ncol = 2)
+p
+```
+</div>
+Converting to a log scale makes things easier to see, and if we take the data labels away, it is even easier to see the relationship. The line through the points represents a *linear model*, and the shading around the line represents a *95% confidence interval*. The closer this shaded area is to the line, the more confidence we can have in the predictions of the model.
+
+Nettle was mainly interested in the relationship between language diversity and climate. The Mean Growing Season (MGS) is a measurement for quantifying the more fluffy concept "climate". The number of languages in a country could be expected to increase with the size of the country and the size of the population (and we have already seen that these area and population appear to be correlated with each other), but might language diversity be related to climate as well? We can plot these three combinations next to each other to get an idea:
+
+<div class="fold s">
+```{r}
+
+p1 <- ggplot(df, aes(Area_log, Languages_log)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic() +
+  labs(y = "Number of Languages",
+       x = (bquote('Area ((log) million km'^2*')')),
+       title = "Area")
+
+p2 <- ggplot(df, aes(Population_log, Languages_log)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic() +
+  labs(y = NULL,
+       x = "Population ((log) millions)",
+       title = "Population")
+
+p3 <- ggplot(df, aes(MGS, Languages_log)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic() +
+  labs(y = NULL,
+       x = "Mean Growing Season",
+       title = "Climate")
+
+p <- ggarrange(p1, p2, p3, ncol = 3)
+p
+```
+</div>
+
 
 
 
