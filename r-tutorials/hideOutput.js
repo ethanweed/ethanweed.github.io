@@ -6,13 +6,13 @@ $(document).ready(function() {
 
     // add button to source code chunks
     if ( $(this).hasClass('s') ) {
-      $('pre.r', this).prepend("<div class=\"showopt\">Show Source</div><br style=\"line-height:22px;\"/>");
+      $('pre.r', this).prepend("<div class=\"showopt\">Show R Code</div><br style=\"line-height:22px;\"/>");
       $('pre.r', this).children('code').attr('class', 'folded');
     }
 
     // add button to output chunks
     if ( $(this).hasClass('o') ) {
-      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show R output</div><br style=\"line-height:22px;\"/>");
+      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show R Output</div><br style=\"line-height:22px;\"/>");
       $('pre:not(.r)', this).children('code:not(r)').addClass('folded');
 
       // add button to plots
