@@ -1236,6 +1236,22 @@ p</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
+<div id="plotting-multiple-lines" class="section level2">
+<h2>Plotting multiple lines</h2>
+<p>It does appear that there is a relationship between climate and language diversity. But Nettle also mentions that some of the countries he records in his data have a variable growing season, and so may not follow the same pattern as those with a consistent growing season. By using the <code>color</code> argument to ggplot, we can easily check to see if countries with a variable growing season follow a different pattern than those with a consistent growing season:</p>
+<div class="fold s">
+<pre class="r"><code>df$GS_Variation &lt;- ifelse(df$Variable_GS == &quot;Y&quot;, &quot;Variable&quot;, &quot;Consistent&quot;)
+p1 &lt;- ggplot(df, aes(MGS, Languages_log, color = GS_Variation)) + 
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;) +
+  theme_classic() +
+  labs(y = NULL,
+       x = &quot;Mean Growing Season&quot;,
+       title = &quot;Relationship Between Climate and Language Diversity&quot;)
+p1</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
 </div>
 
 
