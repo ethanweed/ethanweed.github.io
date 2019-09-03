@@ -63,7 +63,7 @@ class(b)
 
 ```
 
-In this case, ``a`` is a **character**, while ``b`` is a **number**. We could use ``b`` to do math, but we couldn't do math with `à``. 
+In this case, ``a`` is a **character**, while ``b`` is a **number**. We could use ``b`` to do math, but we couldn't do math with ``a``. 
 
 ### Dataframes
 
