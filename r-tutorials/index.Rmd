@@ -67,19 +67,19 @@ In this case, ``a`` is a **character**, while ``b`` is a **number**. We could us
 
 ### Dataframes
 
-One of the most useful variable types for data analysis in R is the dataframe. A dataframe is a little bit like a spreadsheet, in that it has rows and columns, but we interact with is a ittle differently than we do with a spreadsheet like Excel. In Excel, you can just go in and click on a cell and change whatever you want. You can add plots on top of your data, and mess around however you please. this can be great for taking a quick look at data, but it is no good for actual analysis, becasue there is too much room for human error. It is too easy to accidently change something and mess up all your data. Dataframes in R are a little more structured than a spreadsheet, and because we interact with them *programatically*, by writing code, even if we mess something up, we can always trace back our steps, and figure out what went wrong.
+One of the most useful variable types for data analysis in R is the dataframe. A dataframe is a little bit like a spreadsheet, in that it has rows and columns, but we interact with it a little differently than we do with a spreadsheet like Excel. In Excel, you can just go in and click on a cell and change whatever you want. You can add plots on top of your data, and mess around however you please. This can be great for taking a quick look at data, but it is no good for actual analysis, becasue there is too much room for human error. It is too easy to accidently change something and mess up all your data. Dataframes in R are a little more structured than a spreadsheet, and because we interact with them *programatically*, by writing code, even if we mess something up, we can always trace back our steps, and figure out what went wrong.
 
-The easiest way to get your data into R is by importing it from a .csv file. Click the button to show the entire dataframe. Here we look at data from students carrying out a version of the Stroop color-naming task.
+The easiest way to get your data into R is by importing it from a .csv file. Click the button to show the entire dataframe. Here we look at data from students carrying out a version of the Stroop color-naming task. The command ``sep = ","`` tells R that the data uses commas to separate the columns. You could use other charaters to separate the columns. As an example, Excel sometimes uses semicolons instead of commas. In this case, we can just write ``sep = ";"``. If you don't use the ``sep =`` command, R will just assume it is a comma, so if your data is comma-separated you can just leave this command off.
 
 <div class="fold o">
 ```{r}
-df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv")
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv", sep = ",")
 df
 ```
 </div>
 
 
-There are 104 rows of data, and maybe we only want to work with the data from 2015. We can easily make a new dataframe, with only the 2015 data:
+There are many rows of data, and maybe we only want to work with the data from 2015. We can easily make a new dataframe, with only the 2015 data:
 <div class="fold o">
 ```{r}
 df_2015 <- subset(df, Year == 2015)
@@ -98,16 +98,17 @@ Reading_no_interference
 
 # Exploring data with ggplot
 
-One of the best ways to understand our data is to plot it. R has lots of tools for plotting data, and the package *ggplot* is one of the best. ""GG" stands for "Grammar of Graphics". This way of building plots makes it easy to mix and match elements, so you and make just the plot you want to show your data. Ggplot can be installed as a separate package, but it is also part of a package called *tidyverse* which has lots of great tools for wrangling data. Tidyverse (and other packages) can be installed through RStudio's package manager ("packages" tab in the lower right frame of the RStudio window) or by typing ```install.packages("tidyverse")``` 
+One of the best ways to understand our data is to plot it. R has lots of tools for plotting data, and the package *ggplot* is one of the best. ""GG" stands for "Grammar of Graphics". This way of building plots makes it easy to mix and match elements, so you can make just the plot you want to show your data. Ggplot can be installed as a separate package, but it is also part of a package called *tidyverse* which has lots of great tools for wrangling data. Tidyverse (and other packages) can be installed through RStudio's package manager ("packages" tab in the lower right frame of the RStudio window) or by typing ```install.packages("tidyverse")``` 
 
 
 ```{r}
 # Load packages for data handling and plotting
 library(tidyverse)
 
-# clear global environment
+# clear global environment (get rid of any old variables that might be hangning around)
 rm(list = ls())
 
+# read in the data
 df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv")
 ```
 
@@ -141,7 +142,7 @@ df_long
 </div>
 
 ## Bar plots
-There are many different ways these data could be represented graphically. A common way to look at data from different experimental conditions is to make a bar plot.
+There are many different ways these data could be represented graphically. A common way to look at data from different experimental conditions is to make a bar plot. This is the format that all ggplot commands will take. First, write ``ggplot`` followed by ``()``. Inside the parentheses, write the name of the dataframe (if you want, you can also write e.g. ``data = df_long``), but you don't have to. Then define "aesthetics" by writing ``aes`` followed by ``()``. Inside the parentheses, define the x and y axes. You don't have to write ``x =`` or ``y =``, but I think it makes it clearer. If you don't, R will assume that the first axis you write is x. As you will see later, there are other things you can add to the aesthetics. Next, write ``+`` and the kind of graph you want. These are called "geometries". To make a barplot, write ``geom_bar()``. The command ``stat = "identity"`` is needed for barplots, but ususally you won't need this. 
 ```{r}
 ggplot(df_long, aes(x = Condition, y = Time)) +
   geom_bar(stat = "identity")
