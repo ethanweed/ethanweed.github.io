@@ -1060,7 +1060,7 @@ df_long</code></pre>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot()</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>We can also layer different types of plots on top of each other, e.g. we can plot all the poins on top of our boxplots:</p>
+<p>We can also layer different types of plots on top of each other, e.g. we can plot all the points on top of our boxplots:</p>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot() +
   geom_point()</code></pre>
@@ -1206,7 +1206,7 @@ p</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <p>Converting to a log scale makes things easier to see, and if we take the data labels away, it is even easier to see the relationship. The line through the points represents a <em>linear model</em>, and the shading around the line represents a <em>95% confidence interval</em>. The closer this shaded area is to the line, the more confidence we can have in the predictions of the model.</p>
-<p>Nettle was mainly interested in the relationship between language diversity and climate. The Mean Growing Season (MGS) is a measurement for quantifying the more fluffy concept “climate”. The number of languages in a country could be expected to increase with the size of the country and the size of the population (and we have already seen that these area and population appear to be correlated with each other), but might language diversity be related to climate as well? We can plot these three combinations next to each other to get an idea:</p>
+<p>Nettle was mainly interested in the relationship between language diversity and climate. The Mean Growing Season (MGS) is a measurement for quantifying the more fluffy concept “climate”. The number of languages in a country could be expected to increase with the size of the country and the size of the population (and we have already seen that area and population appear to be correlated with each other), but might language diversity be related to climate as well? We can plot these three combinations next to each other to get an idea:</p>
 <div class="fold s">
 <pre class="r"><code>p1 &lt;- ggplot(df, aes(Area_log, Languages_log)) + 
   geom_point() +

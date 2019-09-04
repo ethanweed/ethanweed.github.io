@@ -169,7 +169,7 @@ ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot()
 ```
 
-We can also layer different types of plots on top of each other, e.g. we can plot all the poins on top of our boxplots:
+We can also layer different types of plots on top of each other, e.g. we can plot all the points on top of our boxplots:
 ```{r}
 ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot() +
@@ -328,7 +328,7 @@ p
 </div>
 Converting to a log scale makes things easier to see, and if we take the data labels away, it is even easier to see the relationship. The line through the points represents a *linear model*, and the shading around the line represents a *95% confidence interval*. The closer this shaded area is to the line, the more confidence we can have in the predictions of the model.
 
-Nettle was mainly interested in the relationship between language diversity and climate. The Mean Growing Season (MGS) is a measurement for quantifying the more fluffy concept "climate". The number of languages in a country could be expected to increase with the size of the country and the size of the population (and we have already seen that these area and population appear to be correlated with each other), but might language diversity be related to climate as well? We can plot these three combinations next to each other to get an idea:
+Nettle was mainly interested in the relationship between language diversity and climate. The Mean Growing Season (MGS) is a measurement for quantifying the more fluffy concept "climate". The number of languages in a country could be expected to increase with the size of the country and the size of the population (and we have already seen that area and population appear to be correlated with each other), but might language diversity be related to climate as well? We can plot these three combinations next to each other to get an idea:
 
 <div class="fold s">
 ```{r}
