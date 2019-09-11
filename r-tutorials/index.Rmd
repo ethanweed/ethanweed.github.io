@@ -142,7 +142,7 @@ df_long
 </div>
 
 ## Bar plots
-There are many different ways these data could be represented graphically. A common way to look at data from different experimental conditions is to make a bar plot. First, write ``ggplot`` followed by ``()``. Inside the parentheses, write the name of the dataframe that contains the data your graph will be built from (if you want, you can also write e.g. ``data = df_long``), but you don't have to. Then define "aesthetics" by writing ``aes`` followed by ``()``. Inside the parentheses, define the x and y axes. You don't have to write ``x =`` or ``y =``, but I think it makes it clearer. If you don't, R will assume that the first axis you write is x. As you will see later, there are other things you can add to the aesthetics. Next, write ``+`` and the kind of graph you want. These are called "geometries". To make a barplot, write ``geom_bar()``. The command ``stat = "identity"`` is needed for barplots, but usually you won't need this. 
+There are many different ways these data could be represented graphically. A common way to look at data from different experimental conditions is to make a bar plot. First, write ``ggplot`` followed by ``()``. Inside the parentheses, write the name of the dataframe that contains the data your graph will be built from (if you want, you can also write e.g. ``data = df_long``), but you don't have to. Then define "aesthetics" by writing ``aes`` followed by ``()``. Inside the parentheses, define the x and y axes. You don't have to write ``x =`` or ``y =``, but I think it makes it clearer. If you don't, R will assume that the first axis you write is x. As you will see later, there are other things you can add to the aesthetics. Next, write ``+`` and the kind of graph you want. These are called "geometries". To make a barplot, write ``geom_bar()``. By default, barplots show frequency counts, so the command ``stat = "identity"`` is needed if we want barplots to show us the mean value, but usually you won't need this. 
 ```{r}
 ggplot(df_long, aes(x = Condition, y = Time)) +
   geom_bar(stat = "identity")
@@ -154,6 +154,29 @@ ggplot(df_long, aes(x = Condition, y = Time)) +
   geom_bar(stat = "identity") +
   coord_flip()
 ```
+
+For reasons that are unknown to me, ``geom_bar`` displays our data here multiplied by 100. An easy fix is to divide the data by 100. If we don't want the y-axis label to read "Time/100", we then need to use ``labs`` to specifiy the y-axis label.
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time/100)) +
+  geom_bar(stat = "identity") +
+  labs(
+    y = "Time (sec)"
+  )
+```
+
+
+## Extracting summary statistics
+If we want to see e.g. what the mean of a column of data in a dataframe is, there are a few options. One is to use ``summary``:
+```{r}
+summary(df)
+```
+But maybe this gives us more than we would like. A simpler way to just get the means would be to use ``colMeans()``
+
+```{r}
+colMeans(df)
+```
+
+
 
 ## Scatter plots
 One problem with bar plots is that they usually only represent the mean value, and give little feeling for what the underlying data look like. With a scatter plot, we can see each of our individual data points. While we're at it, let's add some color just to make it pretty:
@@ -251,7 +274,10 @@ goose <- ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
 # Because we have "patchwork" loaded, we can just "add" the plots together.
 bar + box + scatter + goose
 
+# Alternatively, with ggpubr:
+#library(ggpubr)
 
+#ggarrange(bar, box, scatter, goose, ncol = 2, nrow = 2)
 
 ```
 </div>

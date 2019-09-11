@@ -1037,7 +1037,7 @@ df_long</code></pre>
 </div>
 <div id="bar-plots" class="section level2">
 <h2>Bar plots</h2>
-<p>There are many different ways these data could be represented graphically. A common way to look at data from different experimental conditions is to make a bar plot. First, write <code>ggplot</code> followed by <code>()</code>. Inside the parentheses, write the name of the dataframe that contains the data your graph will be built from (if you want, you can also write e.g. <code>data = df_long</code>), but you don’t have to. Then define “aesthetics” by writing <code>aes</code> followed by <code>()</code>. Inside the parentheses, define the x and y axes. You don’t have to write <code>x =</code> or <code>y =</code>, but I think it makes it clearer. If you don’t, R will assume that the first axis you write is x. As you will see later, there are other things you can add to the aesthetics. Next, write <code>+</code> and the kind of graph you want. These are called “geometries”. To make a barplot, write <code>geom_bar()</code>. The command <code>stat = &quot;identity&quot;</code> is needed for barplots, but usually you won’t need this.</p>
+<p>There are many different ways these data could be represented graphically. A common way to look at data from different experimental conditions is to make a bar plot. First, write <code>ggplot</code> followed by <code>()</code>. Inside the parentheses, write the name of the dataframe that contains the data your graph will be built from (if you want, you can also write e.g. <code>data = df_long</code>), but you don’t have to. Then define “aesthetics” by writing <code>aes</code> followed by <code>()</code>. Inside the parentheses, define the x and y axes. You don’t have to write <code>x =</code> or <code>y =</code>, but I think it makes it clearer. If you don’t, R will assume that the first axis you write is x. As you will see later, there are other things you can add to the aesthetics. Next, write <code>+</code> and the kind of graph you want. These are called “geometries”. To make a barplot, write <code>geom_bar()</code>. By default, barplots show frequency counts, so the command <code>stat = &quot;identity&quot;</code> is needed if we want barplots to show us the mean value, but usually you won’t need this.</p>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time)) +
   geom_bar(stat = &quot;identity&quot;)</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
@@ -1046,25 +1046,55 @@ df_long</code></pre>
   geom_bar(stat = &quot;identity&quot;) +
   coord_flip()</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>For reasons that are unknown to me, <code>geom_bar</code> displays our data here multiplied by 100. An easy fix is to divide the data by 100. If we don’t want the y-axis label to read “Time/100”, we then need to use <code>labs</code> to specifiy the y-axis label.</p>
+<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time/100)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  labs(
+    y = &quot;Time (sec)&quot;
+  )</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="extracting-summary-statistics" class="section level2">
+<h2>Extracting summary statistics</h2>
+<p>If we want to see e.g. what the mean of a column of data in a dataframe is, there are a few options. One is to use <code>summary</code>:</p>
+<pre class="r"><code>summary(df)</code></pre>
+<pre><code>##  Reading_NoInt     Naming_Int      Naming_NoInt    Reading_Int    
+##  Min.   :2.830   Min.   : 5.530   Min.   :3.630   Min.   : 3.000  
+##  1st Qu.:3.770   1st Qu.: 7.707   1st Qu.:4.808   1st Qu.: 4.258  
+##  Median :4.150   Median : 8.565   Median :5.405   Median : 4.800  
+##  Mean   :4.143   Mean   : 9.049   Mean   :5.472   Mean   : 5.212  
+##  3rd Qu.:4.370   3rd Qu.:10.035   3rd Qu.:5.963   3rd Qu.: 6.010  
+##  Max.   :6.200   Max.   :17.000   Max.   :8.200   Max.   :14.560  
+##       Year     
+##  Min.   :2015  
+##  1st Qu.:2016  
+##  Median :2016  
+##  Mean   :2016  
+##  3rd Qu.:2017  
+##  Max.   :2018</code></pre>
+<p>But maybe this gives us more than we would like. A simpler way to just get the means would be to use <code>colMeans()</code></p>
+<pre class="r"><code>colMeans(df)</code></pre>
+<pre><code>## Reading_NoInt    Naming_Int  Naming_NoInt   Reading_Int          Year 
+##      4.142500      9.048654      5.471635      5.211635   2016.480769</code></pre>
 </div>
 <div id="scatter-plots" class="section level2">
 <h2>Scatter plots</h2>
 <p>One problem with bar plots is that they usually only represent the mean value, and give little feeling for what the underlying data look like. With a scatter plot, we can see each of our individual data points. While we’re at it, let’s add some color just to make it pretty:</p>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_point()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="box-plots" class="section level2">
 <h2>Box plots</h2>
 <p>Box plots are nice for adding some descriptive statistics to the plot. Here, the horizontal line shows the median value, and the top and bottom parts of the box (the hinges) show the 2nd and 3rd quartiles. The vertical lines (whiskers) give an indication of outliers (for more details, type <code>? geom_boxplot</code> in the console):</p>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>We can also layer different types of plots on top of each other, e.g. we can plot all the points on top of our boxplots:</p>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot() +
   geom_point()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="jitter" class="section level2">
 <h2>Jitter</h2>
@@ -1072,7 +1102,7 @@ df_long</code></pre>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot() +
   geom_jitter()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="violin-plots" class="section level2">
 <h2>Violin plots</h2>
@@ -1080,14 +1110,14 @@ df_long</code></pre>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot() +
   geom_violin()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>If we flip them on their sides, they kinda look like X-wing fighters, or maybe geese. Did we just invent the goose plot?</p>
 <pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot() +
   geom_violin() +
   coord_flip() +
   theme_classic()</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="combined-plots" class="section level2">
 <h2>Combined plots</h2>
@@ -1137,7 +1167,11 @@ goose &lt;- ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
 
 # Because we have &quot;patchwork&quot; loaded, we can just &quot;add&quot; the plots together.
 bar + box + scatter + goose</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Alternatively, with ggpubr:
+#library(ggpubr)
+
+#ggarrange(bar, box, scatter, goose, ncol = 2, nrow = 2)</code></pre>
 </div>
 </div>
 </div>
@@ -1170,7 +1204,7 @@ p1 &lt;- ggplot(df, aes(Area, Population)) +
 
 
 p1</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="log-scale-for-plotting" class="section level2">
@@ -1203,7 +1237,7 @@ p2 &lt;- ggplot(df, aes(Area_log, Population_log)) +
 
 p &lt;- ggarrange(p1, p2, ncol = 2)
 p</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <p>Converting to a log scale makes things easier to see, and if we take the data labels away, it is even easier to see the relationship. The line through the points represents a <em>linear model</em>, and the shading around the line represents a <em>95% confidence interval</em>. The closer this shaded area is to the line, the more confidence we can have in the predictions of the model.</p>
 <p>Nettle was mainly interested in the relationship between language diversity and climate. The Mean Growing Season (MGS) is a measurement for quantifying the more fluffy concept “climate”. The number of languages in a country could be expected to increase with the size of the country and the size of the population (and we have already seen that area and population appear to be correlated with each other), but might language diversity be related to climate as well? We can plot these three combinations next to each other to get an idea:</p>
@@ -1234,7 +1268,7 @@ p3 &lt;- ggplot(df, aes(MGS, Languages_log)) +
 
 p &lt;- ggarrange(p1, p2, p3, ncol = 3)
 p</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="plotting-multiple-lines" class="section level2">
@@ -1250,7 +1284,7 @@ p1 &lt;- ggplot(df, aes(MGS, Languages_log, color = GS_Variation)) +
        x = &quot;Mean Growing Season&quot;,
        title = &quot;Relationship Between Climate and Language Diversity&quot;)
 p1</code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
