@@ -1167,13 +1167,14 @@ goose &lt;- ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   theme_classic() +
   theme(legend.position=&quot;none&quot;)
 
+# Alternatively, with ggpubr:
+#library(ggpubr)
+
+#ggarrange(bar, box, scatter, goose, ncol = 2, nrow = 2)
+
 # Because we have &quot;patchwork&quot; loaded, we can just &quot;add&quot; the plots together.
 bar + box + scatter + goose</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
-<pre class="r"><code># Alternatively, with ggpubr:
-#library(ggpubr)
-
-#ggarrange(bar, box, scatter, goose, ncol = 2, nrow = 2)</code></pre>
 </div>
 </div>
 </div>

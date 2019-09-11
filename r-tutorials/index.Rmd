@@ -274,13 +274,15 @@ goose <- ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   theme_classic() +
   theme(legend.position="none")
 
-# Because we have "patchwork" loaded, we can just "add" the plots together.
-bar + box + scatter + goose
-
 # Alternatively, with ggpubr:
 #library(ggpubr)
 
 #ggarrange(bar, box, scatter, goose, ncol = 2, nrow = 2)
+
+# Because we have "patchwork" loaded, we can just "add" the plots together.
+bar + box + scatter + goose
+
+
 
 ```
 </div>
