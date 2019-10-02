@@ -1,0 +1,52 @@
+---
+layout: default
+output:
+  latex_document: default
+---
+
+ <img style="float: right;" src="Ethan_Nepal.jpg" width="30%" height="30%">
+
+# Ethan Weed
+
+Associate Professor of Linguistics, Aarhus University, Aarhus, Denmark  
+Email: ethan@cc.au.dk
+
+
+## Education and positions
+
+
+2015- present: Associate Professor, Linguistics, Aarhus University  
+2019: Visiting Researcher, Department of Psychology, University of Connecticut, USA  
+2014: Visiting Researcher, Department of Psychology, University of Connecticut, USA  
+2011-2014: Assistant Professor, Linguistics, Aarhus University  
+2011: Research Assistant at MindLab, Center for Functionally Integrative Neuroscience (CFIN), Aarhus University Hospital  
+2011 (June 8): PhD in Linguistics from Aarhus University  
+2009-2011: PhD fellow Dept. Linguistics, Aarhus University,  
+2008: Research assistant at CFIN  
+2007: MA in Cognitive Semiotics, Aarhus University  
+2003: BA in Spanish from Aarhus University  
+1996: BA in Ecology from Hampshire College, USA
+
+## Primary research interests
+
+Clinical Linguistics, Acoustic Phonetics, Clinical Pragmatics, Language Acquisition in Special Populations, Electrophysiological Methods, Natural Language Processing
+
+
+
+## Teaching: Courses Taught
+
+Child Language Acquisition: Corpus-Based Approaches; Cognitive Neurolinguistics; Language of the Brain; Psycholinguistics of Second Language Acquisition; Language Challenges in the Classroom; Statistics for Linguists; Development of Language: Language Acquisition; Auditory Neuroscience and Speech Processing; Research Workshop: Dyslexia; Research Workshop: Auditory Processing; Child Language Acquisition; Psycholinguistics; Humanities Elective Language and Cognition; Language, Cognition, and the Brain; Phonetics and Phonology; Studium Generale (Introduction to Philosophy of Science); Text Analysis
+
+## Dissemination
+
+Over 20 invited talks at e.g. DuPont Nutrition and Health, Novozymes A/S, the Danish Organization of Speech Language Pathologists (FTHF), and Chinese Academy of Sciences
+
+## Research Grants  
+2019-2024: Co-Investigator, National Institute on Deafness and Other Communication Disorders: "Early Predictors to School Age Language: Individual and Interactional Child and Parent Factors", Letitia Naigles (PI)  
+2018-2019: AU Funding for Language as a Tool for Learning Center
+2013-2018: Interacting Minds small grants for projects: “Music, Voice, and Auditory Brainstem Response” “Hearing What You’re Thinking” “Clinical Voices” “How well do cloze tests really test reading comprehension in Danish higher-education students?”  
+
+
+#### Reviews for International Journals  
+Aphasiology; Dyslexia; Journal of Child Language; Journal of Neuroscience; Proc. Nat. Acad. Sci (PNAS); Psychology of Language and Communication; Journal of Neurolinguistics
+
