@@ -262,13 +262,13 @@ div.tocify {
 <!-- From https://stackoverflow.com/a/37839683/1297830 -->
 <link rel="stylesheet" type="text/css" href="hideOutput.css">
 <script src="hideOutput.js"></script>
-<div id="correlations" class="section level1">
-<h1>Correlations</h1>
+<div id="linear-relationships" class="section level1">
+<h1>Linear Relationships</h1>
 <p>One of the most basic things a researcher is interested in is seeing whether there is any relationship between variables. Here, we will look at data from Nettle (1998).</p>
 <p><img src="images/Nettle_1998_abstract.png" width="460" style="display: block; margin: auto;" /></p>
 <p>Nettle recorded the <em>number of languages</em>, the <em>area</em> (in km<sup>2</sup>), the <em>population</em>, the <em>mean growing season</em> (MGS, in months), the number of weather stations measuring MGS, and the standard deviation of the measurements of MGS from the different weather stations in each country.</p>
-<div id="correlations-1" class="section level2">
-<h2>Correlations</h2>
+<div id="plotting-correlations" class="section level2">
+<h2>Plotting Correlations</h2>
 <p>We can use ggplot to see if there is any clear relationship between these variables. We might expect that there would be a relationship between the area of a country and the population of that country. We can use the <code>geom_smooth</code> and the <code>geom_point</code> functions to take a quick look.</p>
 <div class="fold s">
 <pre class="r"><code>rm(list = ls())
@@ -296,6 +296,9 @@ p1 &lt;- ggplot(df, aes(Area_log, Languages_log)) +
 p1</code></pre>
 <p><img src="analyzing-linear-relationships_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
+</div>
+<div id="modelling-a-relationship-as-a-correlation" class="section level2">
+<h2>Modelling a Relationship as a Correlation</h2>
 <div class="fold s">
 <pre class="r"><code># load pander library to make a pretty output table
 library(pander)
@@ -341,6 +344,65 @@ pander(c)</code></pre>
 </table>
 </div>
 <p>The output tells us that there is a positive correlation between the number of languages and the area of the country. We can see this in the correlation coefficient (cor) which is 0.29. The correlation coefficient is a number between 1 and -1, with 1 indicating a perfect positive correlation, and -1 indicating a perfect negative correlation. The p-value of the correlation indicates how confident we can be in the fit of the model.</p>
+</div>
+<div id="correlation-matrix" class="section level2">
+<h2>Correlation Matrix</h2>
+<div class="fold s">
+<pre class="r"><code>df1 &lt;- data.frame(&quot;Languages&quot; = df$Languages, &quot;Area&quot; = df$Area, &quot;Population&quot; = df$Population, &quot;MGS&quot; = df$MGS)
+df1$Languages &lt;- as.numeric(df1$Languages)
+pander(cor(df1))</code></pre>
+<table style="width:86%;">
+<colgroup>
+<col width="23%" />
+<col width="16%" />
+<col width="13%" />
+<col width="18%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Languages</th>
+<th align="center">Area</th>
+<th align="center">Population</th>
+<th align="center">MGS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Languages</strong></td>
+<td align="center">1</td>
+<td align="center">0.2905</td>
+<td align="center">0.4088</td>
+<td align="center">0.2418</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Area</strong></td>
+<td align="center">0.2905</td>
+<td align="center">1</td>
+<td align="center">0.3331</td>
+<td align="center">-0.1277</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Population</strong></td>
+<td align="center">0.4088</td>
+<td align="center">0.3331</td>
+<td align="center">1</td>
+<td align="center">-0.01717</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>MGS</strong></td>
+<td align="center">0.2418</td>
+<td align="center">-0.1277</td>
+<td align="center">-0.01717</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="modelling-a-relationship-as-a-linear-regression" class="section level2">
+<h2>Modelling a Relationship as a Linear Regression</h2>
 <div class="fold s">
 <pre class="r"><code>mod &lt;- lm(data = df, Languages ~ Area)
 
@@ -406,6 +468,104 @@ pander(summary(mod))</code></pre>
 </tr>
 </tbody>
 </table>
+<pre class="r"><code># or you can just write: summary(mod)</code></pre>
+</div>
+</div>
+<div id="modelling-multiple-predictor-variables-in-a-linear-regression" class="section level2">
+<h2>Modelling Multiple Predictor Variables in a Linear Regression</h2>
+<div class="fold s">
+<pre class="r"><code>mod &lt;- lm(data = df, Languages ~ Area + Population)
+pander(summary(mod))</code></pre>
+<table style="width:86%;">
+<colgroup>
+<col width="25%" />
+<col width="15%" />
+<col width="18%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Estimate</th>
+<th align="center">Std. Error</th>
+<th align="center">t value</th>
+<th align="center">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>(Intercept)</strong></td>
+<td align="center">57.29</td>
+<td align="center">18.17</td>
+<td align="center">3.153</td>
+<td align="center">0.002366</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Area</strong></td>
+<td align="center">17.89</td>
+<td align="center">11.64</td>
+<td align="center">1.536</td>
+<td align="center">0.1289</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Population</strong></td>
+<td align="center">0.495</td>
+<td align="center">0.1594</td>
+<td align="center">3.105</td>
+<td align="center">0.002731</td>
+</tr>
+</tbody>
+</table>
+<table style="width:86%;">
+<caption>Fitting linear model: Languages ~ Area + Population</caption>
+<colgroup>
+<col width="20%" />
+<col width="30%" />
+<col width="12%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Observations</th>
+<th align="center">Residual Std. Error</th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">74</td>
+<td align="center">131.2</td>
+<td align="center">0.1939</td>
+<td align="center">0.1712</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># or you can just write: summary(mod)</code></pre>
+</div>
+<div class="fold s">
+<pre class="r"><code>library(ggpubr)
+
+p1 &lt;- ggplot(df, aes(Area_log, Languages_log)) + 
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;) +
+  theme_classic() +
+  labs(y = &quot;Number of languages (log)&quot;,
+       x = (bquote(&#39;Area ((log) million km&#39;^2*&#39;)&#39;)),
+       title = &quot;Languages vs. Area&quot;)
+
+
+p2 &lt;- ggplot(df, aes(Population_log, Languages_log)) + 
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;) +
+  theme_classic() +
+  labs(y = &quot;Number of languages (log)&quot;,
+       x = &quot;Population in Millions (log)&quot;,
+       title = &quot;Languages vs. Population&quot;)
+
+ggarrange(p1, p2, ncol = 2)</code></pre>
+<p><img src="analyzing-linear-relationships_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
