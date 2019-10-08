@@ -1,0 +1,114 @@
+---
+title: "Analyzing Linear Relationships"
+author: "Ethan Weed"
+output: 
+  html_document:
+    df_print: default
+    number_sections: no
+    self_contained: no
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+---
+
+<!-- From https://stackoverflow.com/a/37839683/1297830 -->
+<link rel="stylesheet" type="text/css" href="hideOutput.css">
+<script src="hideOutput.js"></script>
+
+```{r echo=FALSE}
+# Options for building this document
+knitr::opts_chunk$set(
+  fig.height = 4,
+  fig.width = 6,
+  fig.align = 'center',
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+# Correlations
+
+
+One of the most basic things a researcher is interested in is seeing whether there is any relationship between variables. Here, we will look at data from Nettle (1998).
+
+```{r echo=FALSE}
+knitr::include_graphics("images/Nettle_1998_abstract.png")
+```
+
+
+
+Nettle recorded the *number of languages*, the *area* (in km<sup>2</sup>), the *population*, the *mean growing season* (MGS, in months), the number of weather stations measuring MGS, and the standard deviation of the measurements of MGS from the different weather stations in each country.
+
+## Correlations
+We can use ggplot to see if there is any clear relationship between these variables. We might expect that there would be a relationship between the area of a country and the population of that country. We can use the ``geom_smooth`` and the ``geom_point`` functions to take a quick look.
+
+
+
+<div class="fold s">
+```{r echo = TRUE, results = 'false', message=FALSE, warning = F}
+rm(list = ls())
+
+library(tidyverse)
+
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1998.csv", sep = ";")
+
+# Nettle reports the population data in 1000's, probably to save room in the data table, but that is an unusual number to think about population in, so let's convert to millions. While we're at it, let's convert km2 to millions, so that the number doesn't appear in scientific notation on the x-axis
+df$Population <- df$Population*1000/1000000
+df$Area <- df$Area/1000000
+
+# For purposes of plotting, let's convert to a log scale
+df$Population_log <- log(df$Population)
+df$Area_log <- log(df$Area)
+df$Languages_log <- log(df$Languages)
+
+p1 <- ggplot(df, aes(Area_log, Languages_log)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic() +
+  labs(y = "Number of languages (log)",
+       x = (bquote('Area ((log) million km'^2*')')),
+       title = "Number of Languages vs. Area")
+p1
+```
+</div>
+
+
+
+
+<div class="fold s">
+```{r}
+# load pander library to make a pretty output table
+library(pander)
+
+# if you don't want to bother with the pander library, you can just write "print(c)" or even just "(c)". Pander just makes the table output look nicer.
+
+# do a correlation test to see how much the number of languages correlates with the area of the country
+# and store the result in "c"
+c <- cor.test(df$Languages, df$Area)
+
+# alter the contents of c$data.name so that it doesn't say e.g. "df$Languages" in the output table
+c$data.name <- "Languages and Area"
+
+# output the results in a table
+pander(c)
+
+
+
+
+```
+</div>
+
+The output tells us that there is a positive correlation between the number of languages and the area of the country. We can see this in the correlation coefficient (cor) which is 0.29. The correlation coefficient is a number between 1 and -1, with 1 indicating a perfect positive correlation, and -1 indicating a perfect negative correlation. The p-value of the correlation indicates how confident we can be in the fit of the model.
+
+<div class="fold s">
+```{r echo = TRUE, results = 'false', message=FALSE, warning = F}
+mod <- lm(data = df, Languages ~ Area)
+
+r2 <- summary(mod)$r.squared
+r2_adj <- summary(mod)$adj.r.squared
+pander(summary(mod))
+```
+</div>
+
+
