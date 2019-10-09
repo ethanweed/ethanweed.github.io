@@ -347,6 +347,7 @@ pander(c)</code></pre>
 </div>
 <div id="correlation-matrix" class="section level2">
 <h2>Correlation Matrix</h2>
+<p>Sometimes it can be useful to look at all the correlations between all of the variables in a dataset at once. This can be done with a correlation matrix. However, we should be careful about reading too much into a correlation matrix: it just tells us how much the variables correlate with each other. In order to be more rigorous about making predictions, we will need to build linear models.</p>
 <div class="fold s">
 <pre class="r"><code>df1 &lt;- data.frame(&quot;Languages&quot; = df$Languages, &quot;Area&quot; = df$Area, &quot;Population&quot; = df$Population, &quot;MGS&quot; = df$MGS)
 df1$Languages &lt;- as.numeric(df1$Languages)
@@ -403,11 +404,116 @@ pander(cor(df1))</code></pre>
 </div>
 <div id="modelling-a-relationship-as-a-linear-regression" class="section level2">
 <h2>Modelling a Relationship as a Linear Regression</h2>
+<p>In the plot above, we used a so-called linear model to draw the line between the points. The straight line in the plot is a linear model, that minimizes the distance between the line and every individual point. If we generate some random numbers to create white noise, then the line should be close to horizontal. Here we see a linear model of 1000 random numbers between 0 and 100 plotted against 1000 other random numbers between 0 and 100:</p>
 <div class="fold s">
-<pre class="r"><code>mod &lt;- lm(data = df, Languages ~ Area)
+<pre class="r"><code>set.seed(42)
 
-r2 &lt;- summary(mod)$r.squared
-r2_adj &lt;- summary(mod)$adj.r.squared
+x = runif(1000, min=0, max=100)
+y = runif(1000, min=0, max=100)
+
+df_random &lt;- data.frame(&quot;x&quot; = x, &quot;y&quot; = y)
+
+ggplot(data = df_random, aes(x,y)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;) +
+  theme_classic() +
+  labs(title = &quot;White Noise&quot;)</code></pre>
+<p><img src="analyzing-linear-relationships_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<p>If we were in doubt, our correlation matrix shows us that there is very little correlation between these two vectors of random numbers:</p>
+<pre class="r"><code>pander((cor(df_random)))</code></pre>
+<table style="width:49%;">
+<colgroup>
+<col width="12%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">x</th>
+<th align="center">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>x</strong></td>
+<td align="center">1</td>
+<td align="center">-0.0004327</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>y</strong></td>
+<td align="center">-0.0004327</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<p>If we want to go beyond simply observing the correlation and instead use our linear model to make predictions about new data that we have not yet seen, we need to get the equation for our model’s line. That will allow us to extend the line in either direction, and make predictions.</p>
+<p>The equation of a line is <span class="math inline">\(y=mx+y_0\)</span>, where <span class="math inline">\(y_0\)</span> is the point at which the line intercepts the y-axis. This is sometimes also written as <span class="math inline">\(y=mx+b\)</span>, or <span class="math inline">\(y=ax+b\)</span>. These equations are all equivalant. The important thing for our purposes is that they define the slope and intercept of a line which represents a <em>linear model</em> of the data.</p>
+<p>Linear models are <em>very</em> useful, and they are all over the place in statistics. In the case of our random, white-noise data, because the slope is nearly equal to zero, the intercept of the model is a very close approximation of the mean of y:</p>
+<pre class="r"><code>print(mean(y))</code></pre>
+<pre><code>## [1] 49.70157</code></pre>
+<pre class="r"><code>pander(summary(lm(data = df_random, y ~ x)))</code></pre>
+<table style="width:92%;">
+<colgroup>
+<col width="25%" />
+<col width="18%" />
+<col width="18%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Estimate</th>
+<th align="center">Std. Error</th>
+<th align="center">t value</th>
+<th align="center">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>(Intercept)</strong></td>
+<td align="center">49.72</td>
+<td align="center">1.829</td>
+<td align="center">27.19</td>
+<td align="center">2.86e-122</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>x</strong></td>
+<td align="center">-0.0004397</td>
+<td align="center">0.03217</td>
+<td align="center">-0.01367</td>
+<td align="center">0.9891</td>
+</tr>
+</tbody>
+</table>
+<table style="width:90%;">
+<caption>Fitting linear model: y ~ x</caption>
+<colgroup>
+<col width="20%" />
+<col width="30%" />
+<col width="16%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Observations</th>
+<th align="center">Residual Std. Error</th>
+<th align="center"><span class="math inline">\(R^2\)</span></th>
+<th align="center">Adjusted <span class="math inline">\(R^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1000</td>
+<td align="center">29.63</td>
+<td align="center">1.872e-07</td>
+<td align="center">-0.001002</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>mod &lt;- lm(data = df, Languages ~ Area)
 
 # if you don&#39;t want to use pander you can just write: summary(mod)
 pander(summary(mod))</code></pre>
@@ -470,7 +576,6 @@ pander(summary(mod))</code></pre>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 <div id="modelling-multiple-predictor-variables-in-a-linear-regression" class="section level2">
 <h2>Modelling Multiple Predictor Variables in a Linear Regression</h2>
@@ -566,7 +671,7 @@ p2 &lt;- ggplot(df, aes(Population_log, Languages_log)) +
        title = &quot;Languages vs. Population&quot;)
 
 ggarrange(p1, p2, ncol = 2)</code></pre>
-<p><img src="analyzing-linear-relationships_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="analyzing-linear-relationships_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>

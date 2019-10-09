@@ -103,6 +103,8 @@ The output tells us that there is a positive correlation between the number of l
 
 ## Correlation Matrix
 
+Sometimes it can be useful to look at all the correlations between all of the variables in a dataset at once. This can be done with a correlation matrix. However, we should be careful about reading too much into a correlation matrix: it just tells us how much the variables correlate with each other. In order to be more rigorous about making predictions, we will need to build linear models.
+
 <div class="fold s">
 ```{r echo = TRUE, results = 'false', message=FALSE, warning = F}
 
@@ -116,18 +118,54 @@ pander(cor(df1))
 
 ## Modelling a Relationship as a Linear Regression
 
+In the plot above, we used a so-called linear model to draw the line between the points. The straight line in the plot is a linear model, that minimizes the distance between the line and every individual point. If we generate some random numbers to create white noise, then the line should be close to horizontal. Here we see a linear model of 1000 random numbers between 0 and 100 plotted against 1000 other random numbers between 0 and 100:
+
 <div class="fold s">
+```{r}
+
+set.seed(42)
+
+x = runif(1000, min=0, max=100)
+y = runif(1000, min=0, max=100)
+
+df_random <- data.frame("x" = x, "y" = y)
+
+ggplot(data = df_random, aes(x,y)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic() +
+  labs(title = "White Noise")
+
+```
+</div>
+
+If we were in doubt, our correlation matrix shows us that there is very little correlation between these two vectors of random numbers:
+```{r}
+pander((cor(df_random)))
+```
+
+
+If we want to go beyond simply observing the correlation and instead use our linear model to make predictions about new data that we have not yet seen, we need to get the equation for our model's line. That will allow us to extend the line in either direction, and make predictions.
+
+The equation of a line is $y=mx+y_0$, where $y_0$ is the point at which the line intercepts the y-axis. This is sometimes also written as $y=mx+b$, or $y=ax+b$. These equations are all equivalant. The important thing for our purposes is that they define the slope and intercept of a line which represents a *linear model* of the data.
+
+Linear models are *very* useful, and they are all over the place in statistics. In the case of our random, white-noise data, because the slope is nearly equal to zero, the intercept of the model is a very close approximation of the mean of y:
+
+```{r}
+print(mean(y))
+pander(summary(lm(data = df_random, y ~ x)))
+
+```
+
+
 ```{r echo = TRUE, results = 'false', message=FALSE, warning = F}
 mod <- lm(data = df, Languages ~ Area)
-
-r2 <- summary(mod)$r.squared
-r2_adj <- summary(mod)$adj.r.squared
 
 # if you don't want to use pander you can just write: summary(mod)
 pander(summary(mod))
 
 ```
-</div>
+
 
 
 
