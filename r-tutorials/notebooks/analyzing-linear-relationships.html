@@ -408,6 +408,8 @@ pander(cor(df1))</code></pre>
 
 r2 &lt;- summary(mod)$r.squared
 r2_adj &lt;- summary(mod)$adj.r.squared
+
+# if you don&#39;t want to use pander you can just write: summary(mod)
 pander(summary(mod))</code></pre>
 <table style="width:86%;">
 <colgroup>
@@ -468,7 +470,6 @@ pander(summary(mod))</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># or you can just write: summary(mod)</code></pre>
 </div>
 </div>
 <div id="modelling-multiple-predictor-variables-in-a-linear-regression" class="section level2">

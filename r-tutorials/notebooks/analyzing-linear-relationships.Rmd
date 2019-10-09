@@ -122,8 +122,10 @@ mod <- lm(data = df, Languages ~ Area)
 
 r2 <- summary(mod)$r.squared
 r2_adj <- summary(mod)$adj.r.squared
+
+# if you don't want to use pander you can just write: summary(mod)
 pander(summary(mod))
-# or you can just write: summary(mod)
+
 ```
 </div>
 
