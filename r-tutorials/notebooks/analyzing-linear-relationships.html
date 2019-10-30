@@ -275,7 +275,9 @@ div.tocify {
 
 library(tidyverse)
 
-df &lt;- read.csv(&quot;/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1998.csv&quot;, sep = &quot;;&quot;)
+
+df &lt;- read.csv(url(&quot;https://raw.githubusercontent.com/ethanweed/ethanweed.github.io/master/r-tutorials/data/nettle_1998.csv&quot;), sep = &quot;;&quot;)
+
 
 # Nettle reports the population data in 1000&#39;s, probably to save room in the data table, but that is an unusual number to think about population in, so let&#39;s convert to millions. While we&#39;re at it, let&#39;s convert km2 to millions, so that the number doesn&#39;t appear in scientific notation on the x-axis
 df$Population &lt;- df$Population*1000/1000000

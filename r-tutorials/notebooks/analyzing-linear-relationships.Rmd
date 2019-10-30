@@ -51,7 +51,9 @@ rm(list = ls())
 
 library(tidyverse)
 
-df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/nettle_1998.csv", sep = ";")
+
+df <- read.csv(url("https://raw.githubusercontent.com/ethanweed/ethanweed.github.io/master/r-tutorials/data/nettle_1998.csv"), sep = ";")
+
 
 # Nettle reports the population data in 1000's, probably to save room in the data table, but that is an unusual number to think about population in, so let's convert to millions. While we're at it, let's convert km2 to millions, so that the number doesn't appear in scientific notation on the x-axis
 df$Population <- df$Population*1000/1000000
