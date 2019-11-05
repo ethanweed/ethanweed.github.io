@@ -1,0 +1,153 @@
+---
+title: "ANOVA + Mixed Effects"
+output: 
+  revealjs::revealjs_presentation:
+    theme: serif
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Animals
+
+<img src="https://pix1000.files.wordpress.com/2015/05/ang2.jpg">
+
+
+
+# Getting set up
+
+## Load packages for data handling and plotting
+
+```{r warning = FALSE}
+library(tidyverse)
+```
+
+## clear global environment
+```{r echo=TRUE}
+rm(list = ls())
+```
+
+## read in the data
+```{r}
+df <- read.csv(url("https://raw.githubusercontent.com/ethanweed/ethanweed.github.io/master/r-tutorials/data/Animals.csv"), sep = ";")
+#df <- read.csv("/Users/ethan/Desktop/Animals.csv", sep = ";")
+df$X <- NULL
+```
+
+## add a column to the dataframe with participant ID numbers
+```{r}
+df$ID <- seq(1:length(df$ReadWord1))
+```
+
+## make a new dataframe with the same data in the "long" format.
+```{r}
+df_long <- gather(df, key = "Condition", value = "Time", -"ID")
+df_long$Condition <- as.factor(df_long$Condition)
+head(df_long)
+```
+
+
+## plot the data
+```{r fig.height=3}
+p1 <- ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_jitter() +
+  coord_flip() +
+  theme_classic() +
+  labs(title = "Animals") +
+  theme(legend.position="none")
+plot(p1)
+```
+
+# test for statistical significance
+
+## load libraries
+```{r warning=FALSE}
+library(psycho)
+library(lmerTest)
+```
+
+## rearrange data
+```{r}
+# set up column with task categories
+df_long$Task <- ifelse(
+  df_long$Condition == 'ReadWord1' 
+  | df_long$Condition == 'ReadWord2', 
+  "Reading", "Naming")
+
+# set up column with interference categories
+df_long$Interference <- ifelse(
+  df_long$Condition == 'ReadWord2' 
+  | df_long$Condition == 'NameAnimal2', 
+  'Interference', 
+  'No_Interference')
+```
+
+## model the data as a Repeated Measures ANOVA
+```{r}
+#mod1 <- aov(Time ~  Task * Interference + Error(ID),  data = df_long)
+mod1 <- aov(Time ~ Task + Interference + Task*Interference + Error(ID), data = df_long)
+```
+
+## summarize the results of model 1
+```{r}
+summary(mod1)
+```
+
+
+## report the results of model 1
+```{r}
+res <- analyze(mod1)
+print(res)
+```
+
+
+## ok, since ANOVA's are bad, we'll do a mixed effects model then
+```{r}
+mod2 <- lmer(Time ~ Task + Interference + Task*Interference + (1|ID), data=df_long)
+```
+
+## summarize the results of mod 2
+```{r}
+anova(mod2)
+```
+
+## report the results of mod 2
+```{r warning=FALSE}
+res3 <- analyze(mod2)
+print(res3)
+```
+
+## or use pander
+```{r}
+library(pander)
+pander(anova(mod2))
+```
+
+## Display Estimates for Conditions
+```{r echo = T, results = 'false', message=FALSE, warning = F}
+# Display Estimates for Conditions
+library(psycho)
+library(pander)
+mod_means <- get_means(mod2)
+pander(mod_means)
+```
+
+## Set up traditional ANOVA-style plot
+```{r}
+p2 <- ggplot(mod_means, aes(x=Task, y=Mean, color=Interference, group=Interference)) +
+  geom_line(position = position_dodge(.3)) +
+  geom_pointrange(aes(ymin=CI_lower, ymax=CI_higher), 
+                  position = position_dodge(.3)) +
+  ylab("Response Time") +
+  xlab("Task") +
+  theme_classic()
+```
+
+## traditional ANOVA-style plot
+```{r fig.height=4, fig.width=4}
+plot(p2)
+```
+
