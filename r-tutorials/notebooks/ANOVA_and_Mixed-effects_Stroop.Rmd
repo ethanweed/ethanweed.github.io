@@ -151,3 +151,9 @@ p2 <- ggplot(mod_means, aes(x=Task, y=Mean, color=Interference, group=Interferen
 plot(p2)
 ```
 
+## two different ways to plot the same data
+```{r fig.height=4, fig.width=8, warning=FALSE}
+p3 <- ggpubr::ggarrange(p1, p2, ncol = 2)
+plot(p3)
+```
+
