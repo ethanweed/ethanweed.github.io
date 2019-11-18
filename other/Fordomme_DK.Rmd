@@ -1,0 +1,186 @@
+---
+output: 
+  revealjs::revealjs_presentation:
+    theme: black
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Fordomme i Danmark
+
+Et spørgeskema
+
+Leah Willow Weed Hansen
+
+```{r echo = FALSE, results = 'hide', message=FALSE, warning = F}
+rm(list = ls())
+library(tidyverse)
+df <- read.csv("/Users/ethan/Downloads/Fordomme (Responses) - Form Responses 1-2.csv")
+df <- dplyr::rename(df, Køn = Hvad.er.dit.køn.)
+df <- dplyr::rename(df, Alder = Hvor.gammel.er.du.)
+df <- dplyr::rename(df, Klassicisme = Klassicisme...Her.menes.der.fordomme.eller.diskrimination.pga..dit.økonomiske..eller.uddannelsesmæssige.status.)
+df$ID <- seq(1, nrow(df))
+
+df_you <- select(df, ID,
+                 Køn, 
+                 Alder, 
+                 Sexisme., 
+                 Racisme., 
+                 Klassicisme, 
+                 Homofobi., 
+                 Religiøse.fordomme., 
+                 Aldersdiskrimination., 
+                 Fordomme.mod.handicap.)
+
+
+
+df_know <- select(df, ID,
+                  Køn,
+                  Alder,
+                  Sexisme..1, 
+                  Racisme..1, 
+                  Klassicisme...Her.menes.der.fordomme.eller.diskrimination.pga..dit.økonomiske..eller.uddannelsesmæssige.status..1,
+                  Homofobi..1,
+                  Religiøse.fordomme..1,
+                  Aldersdiskrimination..1,
+                  Fordomme.mod.handicap..1)
+
+df_problem <- select(df, ID,
+                  Køn,
+                  Alder,
+                  Sexisme, 
+                  Racisme..2, 
+                  Klassicisme...Her.menes.der.fordomme.eller.diskrimination.pga..dit.økonomiske..eller.uddannelsesmæssige.status..2,
+                  Homofobi..2,
+                  Religiøse.fordomme..2,
+                  Aldersdiskrimination..2,
+                  Fordomme.mod.handicap..2)
+
+df_progress <- select(df, ID,
+                  Køn,
+                  Alder,
+                  Sexisme..2, 
+                  Racisme..3, 
+                  Klassicisme...Her.menes.der.fordomme.eller.diskrimination.pga..dit.økonomiske..eller.uddannelsesmæssige.status..3,
+                  Homofobi..3,
+                  Religiøse.fordomme..3,
+                  Aldersdiskrimination..3,
+                  Fordomme.mod.handicap..3)
+
+df_you$Perspektiv <- "Dig"
+df_know$Perspektiv <- "Kender"
+df_problem$Perspektiv <- "Problem"
+df_progress$Perspektiv <- "Forbedring"
+
+colnames(df_know) <- colnames(df_you)
+colnames(df_problem) <- colnames(df_you)
+colnames(df_progress) <- colnames(df_you)
+
+df_all <- rbind(df_you, df_know, df_problem, df_progress)
+
+df_all$Perspektiv <- as.factor(df_all$Perspektiv)
+```
+
+## Deltagere
+
+```{r echo = FALSE, results = 'hide', message=FALSE, warning = F}
+
+d <- ggplot(df_all, aes(x = Alder, fill = Køn)) +
+  geom_histogram(position = "dodge") +
+  theme_classic()
+plot(d) 
+```
+
+## Alle resultater
+```{r echo = FALSE, results = 'hide', message=FALSE, warning = F}
+p1 <- ggplot(df_all, aes(x = Alder, 
+                   y = Sexisme., 
+                   color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE) +
+  theme_classic() +
+  labs(title = "Sexisme")
+
+
+p2 <- ggplot(df_all, aes(x = Alder, 
+                   y = Racisme., 
+                   color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE) +
+  theme_classic() +
+  labs(title = "Racisme")
+
+p3 <- ggplot(df_all, aes(x = Alder, 
+                   y = Klassicisme, 
+                   color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE) +
+  theme_classic() +
+  labs(title = "Klassicisme")
+
+p4 <- ggplot(df_all, aes(x = Alder, 
+                   y = Homofobi., 
+                   color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE) +
+  theme_classic() +
+  labs(title = "Homofobi")
+
+
+p5 <- ggplot(df_all, aes(x = Alder, 
+                   y = Religiøse.fordomme., 
+                   color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE) +
+  theme_classic() +
+  labs(title = "Religion")
+
+
+p6 <- ggplot(df_all, aes(x = Alder, 
+                   y = Aldersdiskrimination., 
+                   color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE) +
+  theme_classic() +
+  labs(title = "Alder")
+
+p7 <- ggplot(df_all, aes(x = Alder, 
+                   y = Fordomme.mod.handicap., 
+                   color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE) +
+  theme_classic() +
+  labs(title = "Handicap")
+
+library(ggpubr)
+g1 <- ggarrange(p1, p2, p3, p4, p5, p6, p7, ncol = 3, nrow = 4)
+plot(g1)
+```
+
+
+## Sexisme (alle deltagere)
+
+```{r echo = FALSE, results = 'hide', message=FALSE, warning = F}
+ggplot(df_all, aes(Alder, Sexisme.,color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE) +
+  geom_jitter(height = 0) +
+  theme_classic() +
+  ylim(1,5) +
+  labs(title = "Alle deltagere")
+
+```
+
+## Sexisme (opdelt af køn)
+```{r echo = FALSE, results = 'hide', message=FALSE, warning = F}
+pk <- ggplot(subset(df_all, Køn == "Kvinde"), aes(Alder, Sexisme.,color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE)+
+  geom_jitter(height = 0) +
+  theme_classic() +
+  ylim(1,5) +
+  labs(title = "Kvinder")
+
+pm <- ggplot(subset(df_all, Køn == "Mand"), aes(Alder, Sexisme.,color = Perspektiv)) +
+  geom_smooth(method = lm, se = FALSE)+
+  geom_jitter(height = 0) +
+  theme_classic() +
+  ylim(1,5) +
+  labs(title = "Mænd")
+
+ggarrange(pk, pm, ncol = 2)
+```
+
