@@ -10,6 +10,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 ## Title
 1. Is there a title?
 1. Does the title adequately describe the contents of the paper?
