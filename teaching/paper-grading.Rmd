@@ -1,0 +1,67 @@
+---
+title: "Paper Grading"
+author: "Ethan Weed"
+output: 
+  revealjs::revealjs_presentation:
+    theme: serif
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Title
+1. Is there a title?
+1. Does the title adequately describe the contents of the paper?
+
+## Topic
+1. Is the topic appropriate to the course?
+1. Is the topic of appropriate size, given the page limit?
+1. Is the topic clear?
+
+## Focus
+1. Does every sentence in the paper contribute to a better understanding of the topic?
+1. Does the paper maintain focus on the topic?
+1. Do we get what we are promised in the introduction **and only** what we are promised in the introduction?
+
+## Writing (1/2)
+1. Are there any spelling errors? Grammatical errors? Things like verb agreement that should have been caught by spellcheck or by having a friend read the paper?
+1. Does the author take on an unnaturally authoritative style?
+1. Are the sentences clear and properly constructed?
+1. Are there any unclear referents?
+1. Are there any words or sentences that feel like filler?
+
+## Writing (2/2)
+1. Does the paper adopt an academic style?
+1. Is the language exaggerated? (e.g. "utrolig" or "incredibly")
+1. Does it feel as if the author has taken the time to read their own paper aloud?
+1. Is there a good flow to the paper at both the sentence and document levels?
+1. Is the paper easy to read?
+
+## Comprehension
+1. Does the author seem like they have read **and understood** the relevant literature?
+1. Has the author misunderstood a key element of the literature they are citing?
+1. Does the author explain the literature sufficiently?
+1. Does the author make use of technical language without any layman's explanation?
+1. Does the author use examples to illustrate their understanding of the topic / technical terminology?
+1. Do we feel like the author could have written much more on the topic, if more pages were available, but boiled the paper down to its most essential components?
+
+## Discussion
+1. Does the author draw together the strands of the paper into a cohesive whole?
+1. Do we arrive at where we expected to arrive?
+1. Does the author make explicit how the evidence presented in the paper informs the questions posed at the outset?
+1. Does the author synthesize information from the primary literature cited in the paper?
+1. Does the author make any critical observations, comments, questions, etc. on the basis of the literature presented?
+
+## References
+1. Does the author make any claims that are unsubstantiated?
+1. Are the references mostly primary literature?
+1. Are the references varied?
+1. Are the references sufficient (see first point)
+1. Do the references follow a consistent style guide (MLA, Chicago, APA, whatever..)
+
+## Mood
+1. Does the author seem interested in the topic?
+1. Was it enjoyable to read the paper?
+
+ 
