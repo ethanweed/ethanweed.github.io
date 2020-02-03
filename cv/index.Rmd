@@ -135,7 +135,8 @@ Journal of Child Language
 Journal of Neuroscience  
 Proc. Nat. Acad. Sci (PNAS)  
 Psychology of Language and Communication  
-Journal of Neurolinguistics
+Journal of Neurolinguistics  
+Cognitive Systems Research
 
 ## Peer-reviewed articles 
 Bønnerup, K., Pedersen, A.L., **Weed, E.**, & Parrila, R. (2019). Differences in the literacy skills of Danish dyslexic students in two types of higher education programs. Dyslexia, 25, 173–189. doi:10.1002/dys.1617  
