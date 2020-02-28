@@ -123,7 +123,7 @@ Use commas *wherever necessary* to prevent possible confusion or misreading.
 
 ## The "Oxford" or "Serial" comma
 
-- *According to some style guides, Use #3 can be optional* 
+- *According to some style guides, Use #2 can be optional* 
 
 - Three things Ethan likes are coding, biking, and drinking coffee. 
 - Three things Ethan likes are coding, biking and drinking coffee. 
