@@ -1,5 +1,5 @@
 ---
-title: "Paper Grading"
+title: "Paper Writing"
 author: "Ethan Weed"
 output: 
   revealjs::revealjs_presentation:
