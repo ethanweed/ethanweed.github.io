@@ -13,7 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# 10 Correct Commas Uses
+## 10 Correct Commas Uses
+
+Press \<space\> to advance, and \<shift\> + \<space\> to go back
 
 ## Use #1: 
 ### Combining two independent clauses joined with a coordinating conjunction.
