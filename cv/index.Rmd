@@ -46,7 +46,8 @@ Clinical Linguistics, Acoustic Phonetics, Clinical Pragmatics, Language Acquisit
 
 PhD Dissertation (2011): Getting the Message Right: Social Cognition, Pragmatic Impairment, and Right Hemisphere Damage
 
-## Other courses
+## Courses and workshops attended
+2020: Workshop on Online Experiments, Aarhus University
 2019: Workshop on Artificial Intelligence: Deep Learning and TensorFlow for Computer Vision and Natural Language Processing, University of Connecticut  
 2018: State of Danish Natural Language Processing, Aarhus University    
 2018: Advanced Bayesian Statistical Modeling, Interacting Minds Center, Aarhus University  
@@ -140,7 +141,7 @@ Cognitive Systems Research
 
 ## Peer-reviewed articles 
 
-**Weed, E.**, Fusaroli, R. (accepted). Acoustic Measures of Prosody in Right-Hemisphere Damage: A Systematic Review and Meta-Analysis. Journal of Speech, Language, and Hearing Research.
+**Weed, E.**, Fusaroli, R. (2020). Acoustic Measures of Prosody in Right-Hemisphere Damage: A Systematic Review and Meta-Analysis. Journal of Speech, Language, and Hearing Research.
 
 Bønnerup, K., Pedersen, A.L., **Weed, E.**, & Parrila, R. (2019). Differences in the literacy skills of Danish dyslexic students in two types of higher education programs. Dyslexia, 25, 173–189. doi:10.1002/dys.1617  
 

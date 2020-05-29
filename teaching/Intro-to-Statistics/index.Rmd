@@ -1,0 +1,6 @@
+---
+title: "A Very Gentle Introduction to Statistics"
+author: "Ethan Weed"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+bibliography: refs.bib
+---

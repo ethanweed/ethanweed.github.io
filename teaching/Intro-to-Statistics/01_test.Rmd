@@ -1,0 +1,31 @@
+# Getting Data Into R.
+
+
+
+One of the most useful variable types for data analysis in R is the dataframe. A dataframe is a little bit like a spreadsheet, in that it has rows and columns, but we interact with it a little differently than we do with a spreadsheet like Excel. In Excel, you can just go in and click on a cell and change whatever you want. You can add plots on top of your data, and mess around however you please. This can be great for taking a quick look at data, but it is no good for actual analysis, becasue there is too much room for human error. It is too easy to accidently change something and mess up all your data. Dataframes in R are a little more structured than a spreadsheet, and because we interact with them *programatically*, by writing code, even if we mess something up, we can always trace back our steps, and figure out what went wrong.
+
+The easiest way to get your data into R is by importing it from a .csv file. Here we look at data from students carrying out a version of the Stroop color-naming task. The command ``sep = ","`` tells R that the data uses commas to separate the columns. You could use other charaters to separate the columns. As an example, Excel sometimes uses semicolons instead of commas. In this case, we can just write ``sep = ";"``. If you don't use the ``sep =`` command, R will just assume it is a comma, so if your data is comma-separated you can just leave this command off.
+
+
+```{r}
+df <- read.csv("/Users/ethan/Documents/GitHub/ethanweed.github.io/r-tutorials/data/Stroop-raw-over-the-years.csv", sep = ",")
+```
+
+
+
+There are many rows of data, and maybe we only want to work with the data from 2015. We can easily make a new dataframe, with only the 2015 data:
+<div class="fold o">
+```{r}
+df_2015 <- subset(df, Year == 2015)
+df_2015
+```
+</div>
+
+You can use the ```$``` symbol to select a single column from the dataframe, using the column header:
+
+
+```{r}
+Reading_no_interference <- df_2015$Reading_NoInt
+Reading_no_interference
+```
+

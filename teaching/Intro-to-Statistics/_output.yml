@@ -1,0 +1,19 @@
+title: 'A Very Gentle Introduction to Statistics'  
+author: 'Ethan Weed'
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+bibliography: refs.bib
+book_filename: "LaCoBra"
+download: ["pdf", "epub"]
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default
+bookdown::html_book:
+css: toc.css
