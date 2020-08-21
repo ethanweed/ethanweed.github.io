@@ -1,0 +1,67 @@
+---
+title: "Recommendations"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Recommended textbooks (psycholinguistics)
+
+- Kemmerer, D. (2015) Cognitive Neuroscience of Language. New 
+York/East Sussex: Pyschology Press Link to this book on 
+Amazon UK
+- Gleason, J. B. R., Nan Bernstein (ed.). (1998). Psycholinguistics, 
+Second Edition. Harcourt Brace College Publishers. 
+- Harley, T. A. (2009). Talking the Talk: Language, Psychology and 
+Science (1 ed.). Psychology Press.
+- Harley, T. A. (2013). The Psychology of Language: From Data to 
+Theory (4 ed.). Psychology Press.
+- Spivey, M., Joanisse, M., & McRae, K. (2012). The Cambridge 
+handbook of psycholinguistics. Cambridge University Press.
+- Traxler, M. J. (2011). Introduction to Psycholinguistics: Understanding 
+Language Science (1 ed.). Wiley-Blackwell.
+
+## Recommended textbooks (cognitive neuroscience)
+- Bear, M. F., Connors, B. W., & Paradiso, M. A. (Eds.). (2007). 
+Neuroscience (Vol. 2). Lippincott Williams & Wilkins.
+- Bjarkam, C.A. (2007) Neuroanatomi. Munksgård Damark.
+- Gade, A. (2010). Hjerneprocesser: kognition og neurovidenskab. 
+Frydenlund Grafisk.
+- Gazzaniga, M. S. (2004). The cognitive neurosciences. MIT press.
+- Ward, J. (2015). The student’s guide to cognitive neuroscience. 
+Psychology Press.
+
+## Other recommended books (statistics and experimental design)
+
+- Dienes, Z. (2008) Understanding Psychology as a Science: An 
+Introduction to Scientific and Statistical Inference. Palgrave 
+Macmillian Great book for those looking for more on the philosophy of statistics than I provide in this course
+- Elbro, C. and Poulsen, M. (2015). Hold i virkeligheden. Hans Reitzel. 
+A good introduction (in Danish) to many of the basic statistical 
+models that you might want to use for your BA project or for your 
+MA thesis.
+- Field, A. and Hole, G. (2003). How to Design and Report Experiments. 
+SAGE. The title says it all. Or just pay a visit to Field's website 
+Discovering Statistics (formerly known as Statistics Hell).
+- McElreath, R. (2016) Statistical Rethinking: A Bayesian Course with 
+Examples in R and Stan. CRC Press. This is book is my own 
+Bible when it comes to stats. In addition to the book, check out McElreath’s lectures on YouTube, and his rethinking R package on GitHub.
+- Rasinger, S. (2008). Quantitative Research in Linguistics. Continuum. 
+Useful if you are totally new to statistics, but beware of the many, many typos and small errors.
+
+## Recommended Software
+
+Tools for doing experiments and statistics. All of these are free and cross-platform  
+
+### Statistical Software:
+
+- JASP is really good at quickly getting the job done, and will probably get you through most research you might do for your BA or MA thesis. It used to be quite simple, but it is expanding all the time, and can now do some pretty advanced stuff, as long as you are ok with using their default settings.
+- JAMOVI is similar to JASP, with less emphasis on Bayesian methods and more emphasis on flexible import of R packages
+- If you need something that you just can't do with JASP or JAMOVI, it's time to move on to R. Both JASP and JAMOVI run R under the hood anyway; they just take some of the pain (or pleasure, depending on what you like) out of coding. There are lots of ways to access R, but I like RStudio. Note that RStudio requires you to also have R itself installed. You can download R here.
+
+### Experiment Builders:
+- OpenSesame is point-and-click interface to building experimental paradigms. Also supports online experiments (with limitations).
+- PsychoPy also allows you to build experimental paradigms, either through a point-and-click GUI or by directly coding in Python. You can see my intro video here or look at the built-in demos. Also supports online experiments (with limitations).
+- PsyToolkit PsyToolkit allows you to build online experiments and surveys, and has lots of instructional material including tutorials, videos, and pre-made experiments to show you how to do it.
