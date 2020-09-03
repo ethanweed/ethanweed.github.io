@@ -49,7 +49,7 @@ Discovering Statistics (formerly known as Statistics Hell).
 Examples in R and Stan. CRC Press. This is book is my own 
 Bible when it comes to stats. In addition to the book, check out McElreath’s lectures on YouTube, and his rethinking R package on GitHub.
 - Rasinger, S. (2008). Quantitative Research in Linguistics. Continuum. 
-Useful if you are totally new to statistics, but beware of the many, many typos and small errors.
+Maybe useful if you are totally new to statistics, but beware of the many, many typos and small errors.
 
 ## Recommended Software
 
@@ -57,11 +57,12 @@ Tools for doing experiments and statistics. All of these are free and cross-plat
 
 ### Statistical Software:
 
-- JASP is really good at quickly getting the job done, and will probably get you through most research you might do for your BA or MA thesis. It used to be quite simple, but it is expanding all the time, and can now do some pretty advanced stuff, as long as you are ok with using their default settings.
-- JAMOVI is similar to JASP, with less emphasis on Bayesian methods and more emphasis on flexible import of R packages
-- If you need something that you just can't do with JASP or JAMOVI, it's time to move on to R. Both JASP and JAMOVI run R under the hood anyway; they just take some of the pain (or pleasure, depending on what you like) out of coding. There are lots of ways to access R, but I like RStudio. Note that RStudio requires you to also have R itself installed. You can download R here.
+- <a href="https://jasp-stats.org" target="_blank">JASP</a> is really good at quickly getting the job done, and will probably get you through most research you might do for your BA or MA thesis. It used to be quite simple, but it is expanding all the time, and can now do some pretty advanced stuff, as long as you are ok with using their default settings.
+- <a href="https://www.jamovi.org" target="_blank">JAMOVI</a> is similar to JASP, with less emphasis on Bayesian methods and more emphasis on flexible import of R packages
+- If you need something that you just can't do with JASP or JAMOVI, it's time to move on to R. Both JASP and JAMOVI run R under the hood anyway; they just take some of the pain (or pleasure, depending on what you like) out of coding. There are lots of ways to access R, but I like <a href="https://rstudio.com/products/rstudio/" target="_blank">RStudio</a>. Note that RStudio requires you to also have <a href="https://www.r-project.org" target="_blank">R</a> itself installed.
+- If can't or don't want to install RStudio on your computer, <a href="https://rstudio.cloud" target="_blank">RStudio Cloud</a> lets you use RStudio from a server, in your browser. In my opinion, it's not as good an experience for heavy use, but it is a good option if you just want to give R or RStudio a try.
 
 ### Experiment Builders:
-- OpenSesame is point-and-click interface to building experimental paradigms. Also supports online experiments (with limitations).
-- PsychoPy also allows you to build experimental paradigms, either through a point-and-click GUI or by directly coding in Python. You can see my intro video here or look at the built-in demos. Also supports online experiments (with limitations).
-- PsyToolkit PsyToolkit allows you to build online experiments and surveys, and has lots of instructional material including tutorials, videos, and pre-made experiments to show you how to do it.
+- <a href="https://osdoc.cogsci.nl" target="_blank">OpenSesame</a> is point-and-click interface to building experimental paradigms. Also supports online experiments (with limitations).
+- <a href="https://www.psychopy.org" target="_blank">PsychoPy</a> also allows you to build experimental paradigms, either through a point-and-click GUI or by directly coding in Python. You can see my intro video here or look at the built-in demos. Also supports online experiments (with limitations).
+- <a href="https://www.psytoolkit.org" target="_blank">PsyToolkit</a> allows you to build online experiments and surveys, and has lots of instructional material including tutorials, videos, and pre-made experiments to show you how to do it. One advantage of PsyToolkit is that it doesn't require you to set up your own server for online experiments.
