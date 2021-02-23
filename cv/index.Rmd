@@ -47,7 +47,7 @@ Clinical Linguistics, Acoustic Phonetics, Clinical Pragmatics, Language Acquisit
 PhD Dissertation (2011): Getting the Message Right: Social Cognition, Pragmatic Impairment, and Right Hemisphere Damage
 
 ## Courses and workshops attended
-2020: Workshop on Online Experiments, Aarhus University
+2020: Workshop on Online Experiments, Aarhus University  
 2019: Workshop on Artificial Intelligence: Deep Learning and TensorFlow for Computer Vision and Natural Language Processing, University of Connecticut  
 2018: State of Danish Natural Language Processing, Aarhus University    
 2018: Advanced Bayesian Statistical Modeling, Interacting Minds Center, Aarhus University  
@@ -60,7 +60,7 @@ PhD Dissertation (2011): Getting the Message Right: Social Cognition, Pragmatic 
 
 Peer-reviewed:  
 Articles: 13 (first/sole author: 5; last author: 2)  
-Refereed posters and abstracts: 27  
+Refereed posters and abstracts: 28  
 Book chapters: 2 (first/sole author: 1; last author: 1)  
 
 Without peer-review:  
@@ -105,12 +105,14 @@ Text Analysis: 2018
 Over 20 invited talks at e.g. DuPont Nutrition and Health, Novozymes A/S, the Danish Organization of Speech Language Pathologists (FTHF), and Chinese Academy of Sciences
 
 ## Management and Administration  
+2015: PhD application committee, Graduate program for Language, Linguistics and Cognition, AU  
 2018 - present: Center Leader, Language as a Tool for Learning Center, AU  
 2018 - present: Study Board Representative, Department of Language, Cognitive Science and Semitics, AU  
 2018 - present: Study Coordinator, Linguistics  
 2018 - 2019: Internship Coordinator, Linguistics
 
 ## Research Grants  
+2010-2022: Con-Investigator, Independent Research Fund Denmark: "Tonotopic and phonotopic brain function in the light of reading experience"  
 2019-2024: Co-Investigator, National Institute on Deafness and Other Communication Disorders: "Early Predictors to School Age Language: Individual and Interactional Child and Parent Factors", Letitia Naigles (PI)  
 2018: AU Funding for Language as a Tool for Learning Center
 2013-2018: Interacting Minds small grants for projects: “Music, Voice, and Auditory Brainstem Response” “Hearing What You’re Thinking” “Clinical Voices” “How well do cloze tests really test reading comprehension in Danish higher-education students?”  
@@ -126,8 +128,6 @@ Grant reviewing
 2018: Magnus Hamnn, Aarhus University (committee chairman)  
 2016: Jens Sand Østergaard, Aarhus University (committee chairman)  
 
-#### Positions  
-2015: PhD application committee, Graduate program for Language, Linguistics and Cognition, AU  
 
 #### Reviews for international journals  
 Aphasiology  
@@ -139,6 +139,7 @@ Psychology of Language and Communication
 Journal of Neurolinguistics  
 Cognitive Systems Research  
 Journal of Psycholinguistic Research
+Journal of Communication Disorders
 
 ## Peer-reviewed articles 
 
@@ -169,6 +170,8 @@ Wallentin, M., **Weed, E.**, Østergaard, L., Mouridsen, K., & Roepstorff, A. (2
 **Weed, E.** (2008). Looking for Beauty in the Brain. Estetika: The Central European Journal of Aesthetics, 45(1), 5-23.
 
 ## Refereed posters and abstracts
+
+Carmona, J., Fusaroli, R., **Weed, E.**, Nguyen, K., Naigles, L. (2021) Should we wave, ask, run, steal? Categorizing aliens by teens with typical development or ASD. SRCD 2021 Biennial Meeting.  
 
 Fusaroli, R., **Weed, E.**, Fein, D., Naigles, L. (2020) Intact but Atypical Lexical and Syntactic Alignment in Spontaneous Speech of Children with Autism Spectrum Disorder. MOLA 2020, Durham, North Carolina.
 
