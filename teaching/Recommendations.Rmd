@@ -35,10 +35,10 @@ Psychology Press.
 
 ## Other recommended books (statistics and experimental design)
 
-- Navarro, D., Foxcroft, D.R., and Faulkenberry, T.J. <a href="https://learnstatswithjasp.com target="_blank">Learning Statistics with JASP</a>. I **love** this book. Engaging writing style, covers the basics, and shows you how to analyze your data in JASP. See also the versions of the same book for doing analyses in <a href="https://learningstatisticswithr.com target="_blank">R</a> and in <a href="https://www.learnstatswithjamovi.com target="_blank">JAMOVI</a>.
+- Navarro, D., Foxcroft, D.R., and Faulkenberry, T.J. <a href="https://learnstatswithjasp.com" target="_blank">Learning Statistics with JASP</a>. I **love** this book. Engaging writing style, covers the basics, and shows you how to analyze your data in JASP. See also the versions of the same book for doing analyses in <a href="https://learningstatisticswithr.com" target="_blank">R</a> and in <a href="https://www.learnstatswithjamovi.com" target="_blank">JAMOVI</a>.
 - Dienes, Z. (2008) Understanding Psychology as a Science: An 
 Introduction to Scientific and Statistical Inference. Palgrave 
-Macmillian. Great book for those looking for more on the philosophy of statistics than I provide in this course
+Macmillian. Great book for those looking for more on the philosophy of statistics than I provide in my courses
 - Elbro, C. and Poulsen, M. (2015). Hold i virkeligheden. Hans Reitzel. 
 A good introduction (in Danish) to many of the basic statistical 
 models that you might want to use for your BA project or for your 
