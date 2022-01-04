@@ -59,7 +59,7 @@ PhD Dissertation (2011): Getting the Message Right: Social Cognition, Pragmatic 
 ## Publication Metrics
 
 Peer-reviewed:  
-Articles: 13 (first/sole author: 5; last author: 2)  
+Articles: 14 (first/sole author: 5; last author: 3)  
 Refereed posters and abstracts: 28  
 Book chapters: 2 (first/sole author: 1; last author: 1)  
 
@@ -144,6 +144,8 @@ Journal of Communication Disorders
 Journal of the International Neuropsychological Society
 
 ## Peer-reviewed articles 
+
+Fusaroli, R., Grossman, R., Bilenberg, N., Cantio, C., Jepsen, J. R. M., & **Weed, E.** (2021). Toward a cumulative science of vocal markers of autism: A cross‐linguistic meta‐analysis‐based investigation of acoustic markers in American and Danish autistic children. Autism Research.
 
 **Weed, E.**, Fusaroli, R. (2020). Acoustic Measures of Prosody in Right-Hemisphere Damage: A Systematic Review and Meta-Analysis. Journal of Speech, Language, and Hearing Research.
 
