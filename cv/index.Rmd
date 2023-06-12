@@ -90,6 +90,7 @@ Auditory Neuroscience and Speech Processing: 2014
 Research Workshop: Dyslexia: 2016  
 Research Workshop: Auditory Processing: 2017  
 Child Language Acquisition: 2016 - 2019
+Experimental Psycholinguistics 2020 - present
 
 #### BA level
 
@@ -126,9 +127,11 @@ Over 20 invited talks at e.g. DuPont Nutrition and Health, Novozymes A/S, the Da
 
 
 #### PhD thesis evaluation  
-2018: Aymeric Duval-Markussen, Aarhus University (committee chairman)  
-2018: Magnus Hamnn, Aarhus University (committee chairman)  
-2016: Jens Sand Østergaard, Aarhus University (committee chairman)  
+2023: Christina Dideriksen, Aarhus University (commitee chair)
+2023: Jessie Leigh Nielsen, Copenhagen Unverisity (external opponent)
+2018: Aymeric Duval-Markussen, Aarhus University (committee chair)  
+2018: Magnus Hamnn, Aarhus University (committee chair)  
+2016: Jens Sand Østergaard, Aarhus University (committee chair)  
 
 
 #### Reviews for international journals  
@@ -144,9 +147,14 @@ Journal of Psycholinguistic Research
 Journal of Communication Disorders  
 Journal of the International Neuropsychological Society  
 Journal of Speech Language and Hearing Research  
+First Language
 
 
 ## Peer-reviewed articles 
+
+**Weed, E.**, Fusaroli, R., Simmons, E.S., & Eigsti, I-M (2023). Different in different ways: A network-analysis approach to voice and prosody in Autism Spectrum Disorder. Language Learning and Development.
+
+Fusaroli, R., **Weed, E.**, Rocca, R., Fein, D., Naigles, L. (2023). Caregiver linguistic alignment to autistic and typically developing children: A natural language processing approach illuminates the interactive components of language development. Cognition, Vol. 236, 105422. 
 
 Fusaroli, R., Grossman, R., Bilenberg, N., Cantio, C., Jepsen, J. R. M., & **Weed, E.** (2021). Toward a cumulative science of vocal markers of autism: A cross‐linguistic meta‐analysis‐based investigation of acoustic markers in American and Danish autistic children. Autism Research.
 
