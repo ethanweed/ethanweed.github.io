@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <!-- Added viewport meta tag for proper mobile scaling -->
+    <!-- Fixed viewport tag with user-scalable=no to prevent zoom issues -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mouse Text Revelation Experiment</title>
     <style>
@@ -10,22 +10,24 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             text-align: center;
-            /* Prevent overscroll on mobile */
             overscroll-behavior: contain;
+            /* Prevent iOS elastic scrolling */
+            -webkit-overflow-scrolling: touch;
         }
         .canvas-container {
             position: relative;
             display: inline-block;
             margin: 20px auto;
-            /* Prevent scrolling while interacting with canvas */
             touch-action: none;
+            /* Explicitly set dimensions for iOS */
+            width: 100%;
+            max-width: 800px;
         }
         #canvas {
             border: 2px solid #333;
             cursor: crosshair;
             display: block;
-            /* Make canvas responsive */
-            max-width: 100%;
+            width: 100%;
             height: auto;
         }
         .instructions {
@@ -123,7 +125,7 @@
             min-width: 150px;
         }
 
-        /* Blur layer confined to canvas area */
+        /* Blur layer confined to canvas area - FIXED FOR IOS */
         .blur-layer {
             position: absolute;
             top: 0;
@@ -131,19 +133,12 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            backdrop-filter: blur(15px);
+            /* iOS requires -webkit-backdrop-filter for consistent blur */
             -webkit-backdrop-filter: blur(15px);
-            /* Increased radius for touch screens */
-            mask-image: radial-gradient(
-                circle 80px at var(--x, -1000px) var(--y, -1000px),
-                transparent 0%,
-                #000 100%
-            );
-            -webkit-mask-image: radial-gradient(
-                circle 80px at var(--x, -1000px) var(--y, -1000px),
-                transparent 0%,
-                #000 100%
-            );
+            backdrop-filter: blur(15px);
+            /* Using direct style updates instead of CSS variables for iOS */
+            mask-image: radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%);
+            -webkit-mask-image: radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%);
             transition: mask-size .12s;
             z-index: 1;
         }
@@ -157,6 +152,11 @@
             padding: 10px;
             margin: 10px;
             text-align: left;
+        }
+
+        /* iOS-specific fix for touch highlighting */
+        * {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
     </style>
 </head>
@@ -182,7 +182,7 @@
         <!-- Mobile done button -->
         <button id="mobile-done" style="display: none; position: absolute; bottom: 10px; right: 10px; 
                 background: #4285f4; color: white; border: none; padding: 8px 15px; 
-                border-radius: 4px; font-weight: bold;">DONE</button>
+                border-radius: 4px; font-weight: bold; z-index: 10;">DONE</button>
     </div>
 
     <div id="heatmap-container">
@@ -241,8 +241,11 @@
     </div>
 
     <script>
-        // Device detection
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        // Device detection - IMPROVED FOR IOS
+        const isTouchDevice = 'ontouchstart' in window || 
+                              navigator.maxTouchPoints > 0 || 
+                              navigator.msMaxTouchPoints > 0;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
         // Get canvas and context
         const canvas = document.getElementById('canvas');
@@ -271,6 +274,7 @@
         const startTime = Date.now();
         let isMouseInside = false;
         let experimentFinished = false;
+        let lastTouchTime = 0;
 
         // Text to reveal
         const experimentText = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it a was a hobbit-hole, and that means comfort. It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats- the hobbit was fond of visitors. The tunnel wound on and on - going fairly but not quite straight into the side of the hill – The Hill, as all the people for many miles around called it – and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining-rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left-hand side (going in), for these were the only ones to have windows, deep-set round windows looking over his garden, and meadows beyond, sloping down to the river."
@@ -320,16 +324,21 @@
             });
         }
 
-        // Initialize blur position outside canvas
+        // Initialize blur position outside canvas - FIXED FOR IOS
         function initBlurPosition() {
-            blurLayer.style.setProperty('--x', '-1000px');
-            blurLayer.style.setProperty('--y', '-1000px');
+            // iOS doesn't reliably update CSS variables in mask-image
+            // So we directly set the mask-image property
+            blurLayer.style.maskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
+            blurLayer.style.webkitMaskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
         }
 
-        // Update blur position
+        // Update blur position - CRITICAL FIX FOR IOS
         function updateBlurPosition(x, y) {
-            blurLayer.style.setProperty('--x', `${x}px`);
-            blurLayer.style.setProperty('--y', `${y}px`);
+            // iOS Safari has issues with CSS variables in mask-image
+            // Directly setting the mask-image property works more reliably
+            const gradient = `radial-gradient(circle 80px at ${x}px ${y}px, transparent 0%, #000 100%)`;
+            blurLayer.style.maskImage = gradient;
+            blurLayer.style.webkitMaskImage = gradient;
         }
 
         // Generate heatmap visualization
@@ -481,9 +490,6 @@
 
         // Handle both mouse and touch events
         function setupEventListeners() {
-            // Common setup for all devices
-            const containerRect = canvasContainer.getBoundingClientRect();
-
             // Mouse event handlers
             canvas.addEventListener('mouseenter', function() {
                 isMouseInside = true;
@@ -491,14 +497,13 @@
 
             canvas.addEventListener('mouseleave', function() {
                 isMouseInside = false;
-                // Reset blur position outside canvas when mouse leaves
-                blurLayer.style.setProperty('--x', '-1000px');
-                blurLayer.style.setProperty('--y', '-1000px');
+                resetBlurPosition();
             });
 
             canvas.addEventListener('mousemove', function(event) {
                 if (experimentFinished) return;
 
+                const containerRect = canvasContainer.getBoundingClientRect();
                 const x = event.clientX - containerRect.left;
                 const y = event.clientY - containerRect.top;
 
@@ -506,28 +511,33 @@
                 recordPosition(x, y);
             });
 
-            // Touch event handlers
+            // Touch event handlers - CRITICAL FIXES FOR IOS
             canvas.addEventListener('touchstart', function(event) {
-                event.preventDefault(); // Prevent default touch behavior
+                event.preventDefault();
                 isMouseInside = true;
                 handleTouchEvent(event);
             }, { passive: false });
 
             canvas.addEventListener('touchmove', function(event) {
-                event.preventDefault(); // Prevent scrolling
+                // Prevent default only if it's been less than 300ms since last touch
+                // This prevents scroll jank while still allowing scrolling when needed
+                const now = Date.now();
+                if (now - lastTouchTime < 300) {
+                    event.preventDefault();
+                }
+                lastTouchTime = now;
+
                 handleTouchEvent(event);
             }, { passive: false });
 
             canvas.addEventListener('touchend', function() {
                 isMouseInside = false;
-                blurLayer.style.setProperty('--x', '-1000px');
-                blurLayer.style.setProperty('--y', '-1000px');
+                resetBlurPosition();
             });
 
             canvas.addEventListener('touchcancel', function() {
                 isMouseInside = false;
-                blurLayer.style.setProperty('--x', '-1000px');
-                blurLayer.style.setProperty('--y', '-1000px');
+                resetBlurPosition();
             });
 
             // Handle touch events
@@ -535,11 +545,18 @@
                 if (experimentFinished) return;
 
                 const touch = event.touches[0];
+                const containerRect = canvasContainer.getBoundingClientRect();
                 const x = touch.clientX - containerRect.left;
                 const y = touch.clientY - containerRect.top;
 
                 updateBlurPosition(x, y);
                 recordPosition(x, y);
+            }
+
+            // Reset blur position - FIXED FOR IOS
+            function resetBlurPosition() {
+                blurLayer.style.maskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
+                blurLayer.style.webkitMaskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
             }
 
             // Record position with timestamp
@@ -608,22 +625,34 @@
             try {
                 // Handle responsive canvas sizing
                 function resizeCanvas() {
+                    // Get container width and set canvas dimensions
                     const containerWidth = canvasContainer.clientWidth;
-                    if (containerWidth < 800) {
-                        canvas.width = containerWidth;
-                        canvas.height = Math.round(containerWidth * 0.5); // Maintain aspect ratio
-                    }
+                    const aspectRatio = 2; // 800x400 = 2:1
+                    const canvasHeight = Math.round(containerWidth / aspectRatio);
+
+                    // Set canvas dimensions (important: use pixel values, not CSS)
+                    canvas.width = containerWidth;
+                    canvas.height = canvasHeight;
+
+                    // Redraw the canvas content
+                    drawCanvas();
 
                     // Update heatmap canvas size to match
-                    heatmapCanvas.width = canvas.width;
-                    heatmapCanvas.height = canvas.height;
+                    if (heatmapCanvas) {
+                        heatmapCanvas.width = containerWidth;
+                        heatmapCanvas.height = canvasHeight;
+                    }
                 }
 
                 // Initial resize
                 resizeCanvas();
 
-                // Handle window resize
-                window.addEventListener('resize', resizeCanvas);
+                // Handle window resize with debounce
+                let resizeTimeout;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(resizeCanvas, 100);
+                });
 
                 // Set up event listeners
                 setupEventListeners();
@@ -634,7 +663,7 @@
 
                 // Mobile-specific setup
                 if (isTouchDevice) {
-                    console.log('Touch device detected');
+                    console.log('Touch device detected:', isIOS ? 'iOS' : 'non-iOS');
 
                     // Show mobile instructions
                     if (mobileInstructions) {
@@ -650,6 +679,19 @@
                     const instructions = document.querySelector('.instructions p:first-child');
                     if (instructions) {
                         instructions.textContent = 'Drag your finger across the screen to reveal hidden text';
+                    }
+
+                    // iOS-specific fixes
+                    if (isIOS) {
+                        console.log('iOS-specific fixes applied');
+
+                        // Force repaint to fix potential rendering issues
+                        setTimeout(() => {
+                            canvasContainer.style.opacity = '0.99';
+                            setTimeout(() => {
+                                canvasContainer.style.opacity = '1';
+                            }, 10);
+                        }, 100);
                     }
                 }
 
