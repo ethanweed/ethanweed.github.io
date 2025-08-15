@@ -19,7 +19,6 @@
             touch-action: none;
             width: 100%;
             max-width: 800px;
-            /* Explicit border to visualize container bounds */
             border: 1px solid transparent;
         }
         #canvas {
@@ -149,6 +148,27 @@
             text-align: left;
         }
 
+        /* DONE button styles - moved outside canvas container */
+        #mobile-done-container {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: none;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        #mobile-done {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
         * {
             -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
@@ -165,15 +185,17 @@
         <p><strong>Touch Instructions:</strong></p>
         <p>• Drag your finger across the text box to reveal text</p>
         <p>• The clear area is larger to accommodate touch input</p>
-        <p>• Press the <strong>DONE</strong> button when finished</p>
+        <p>• Press the <strong>DONE</strong> button at the bottom when finished</p>
     </div>
 
     <div class="canvas-container">
         <div class="blur-layer"></div>
         <canvas id="canvas" width="800" height="400"></canvas>
-        <button id="mobile-done" style="display: none; position: absolute; bottom: 10px; right: 10px; 
-                background: #4285f4; color: white; border: none; padding: 8px 15px; 
-                border-radius: 4px; font-weight: bold; z-index: 10;">DONE</button>
+    </div>
+
+    <!-- DONE button moved outside canvas container -->
+    <div id="mobile-done-container">
+        <button id="mobile-done">DONE</button>
     </div>
 
     <div id="heatmap-container">
@@ -240,6 +262,9 @@
         const ctx = canvas.getContext('2d');
         const blurLayer = document.querySelector('.blur-layer');
         const canvasContainer = document.querySelector('.canvas-container');
+
+        // Fixed DONE button references
+        const mobileDoneContainer = document.getElementById('mobile-done-container');
         const mobileDoneButton = document.getElementById('mobile-done');
         const mobileInstructions = document.querySelector('.mobile-instructions');
 
@@ -260,9 +285,9 @@
         let isMouseInside = false;
         let experimentFinished = false;
         let lastTouchTime = 0;
-        let containerRect = null; // Will be updated on each resize
+        let containerRect = null;
 
-        const experimentText = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it a was a hobbit-hole, and that means comfort. It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats- the hobbit was fond of visitors. The tunnel wound on and on - going fairly but not quite straight into the side of the hill – The Hill, as all the people for many miles around called it – and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining-rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left-hand side (going in), for these were the only ones to have windows, deep-set round windows looking over his garden, and meadows beyond, sloping down to the river.";
+        const experimentText = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it a was a hobbit-hole, and that means comfort.";
 
         const fontSize = 18;
         const lineHeight = 25;
@@ -306,23 +331,19 @@
             blurLayer.style.webkitMaskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
         }
 
-        // CRITICAL FIX: Added boundary checking
         function updateBlurPosition(clientX, clientY) {
-            // Get updated container rectangle
             containerRect = canvasContainer.getBoundingClientRect();
 
-            // Calculate position relative to container
             const x = clientX - containerRect.left;
             const y = clientY - containerRect.top;
 
-            // BOUNDARY CHECK: Only update if within container bounds
             if (x >= 0 && y >= 0 && x <= containerRect.width && y <= containerRect.height) {
                 const gradient = `radial-gradient(circle 80px at ${x}px ${y}px, transparent 0%, #000 100%)`;
                 blurLayer.style.maskImage = gradient;
                 blurLayer.style.webkitMaskImage = gradient;
-                return true; // Position is valid
+                return true;
             }
-            return false; // Position is outside container
+            return false;
         }
 
         function resetBlurPosition() {
@@ -331,7 +352,6 @@
         }
 
         function generateHeatmap() {
-            // [Heatmap code remains unchanged]
             if (!heatmapCtx) return;
 
             try {
@@ -345,7 +365,6 @@
                     heatmapCtx.fillText(line, 20, 30 + (index * lineHeight));
                 });
 
-                // Heatmap grid code...
                 const gridResolution = 10;
                 const gridWidth = Math.ceil(heatmapCanvas.width / gridResolution);
                 const gridHeight = Math.ceil(heatmapCanvas.height / gridResolution);
@@ -408,7 +427,6 @@
         }
 
         function displayRawData() {
-            // [Raw data display code remains unchanged]
             const totalTime = Date.now() - startTime;
             const pointsCount = mouseData.length;
             const readingSpeed = pointsCount > 0 ? Math.round(pointsCount / (totalTime / 1000)) : 0;
@@ -454,7 +472,7 @@
                 recordPositionIfInside(event.clientX, event.clientY);
             });
 
-            // Touch event handlers with proper boundary checking
+            // Touch event handlers
             canvasContainer.addEventListener('touchstart', function(event) {
                 event.preventDefault();
                 isMouseInside = updateBlurPosition(event.touches[0].clientX, event.touches[0].clientY);
@@ -488,14 +506,11 @@
 
             // Record position only if inside container
             function recordPosition(clientX, clientY) {
-                // Get container rect
                 containerRect = canvasContainer.getBoundingClientRect();
 
-                // Calculate position relative to container
                 const x = clientX - containerRect.left;
                 const y = clientY - containerRect.top;
 
-                // Only record if inside container bounds
                 if (x >= 0 && y >= 0 && x <= containerRect.width && y <= containerRect.height) {
                     mouseData.push({
                         x: Math.round(x),
@@ -505,7 +520,6 @@
                 }
             }
 
-            // Helper function for mouse events
             function recordPositionIfInside(clientX, clientY) {
                 if (updateBlurPosition(clientX, clientY)) {
                     recordPosition(clientX, clientY);
@@ -519,19 +533,44 @@
                 }
             });
 
-            // Mobile done button
+            // FIXED DONE BUTTON HANDLER
             if (mobileDoneButton) {
-                mobileDoneButton.addEventListener('click', function() {
+                console.log('Setting up DONE button click handler');
+                mobileDoneButton.addEventListener('click', function(event) {
+                    console.log('DONE button clicked');
+                    event.stopPropagation();
+                    event.preventDefault();
                     completeExperiment();
+                    return false;
                 });
+
+                // Add touch event listeners with passive: false for iOS
+                mobileDoneButton.addEventListener('touchstart', function(event) {
+                    console.log('DONE button touchstart');
+                    event.stopPropagation();
+                }, { passive: false });
+
+                mobileDoneButton.addEventListener('touchend', function(event) {
+                    console.log('DONE button touchend');
+                    event.stopPropagation();
+                    event.preventDefault();
+                    completeExperiment();
+                    return false;
+                }, { passive: false });
             }
         }
 
         function completeExperiment() {
+            console.log('Completing experiment');
             experimentFinished = true;
 
             if (canvasContainer) {
                 canvasContainer.style.display = 'none';
+            }
+
+            // Hide mobile done button container
+            if (mobileDoneContainer) {
+                mobileDoneContainer.style.display = 'none';
             }
 
             const instructions = document.querySelector('.instructions');
@@ -598,8 +637,9 @@
                         mobileInstructions.style.display = 'block';
                     }
 
-                    if (mobileDoneButton) {
-                        mobileDoneButton.style.display = 'block';
+                    // Show mobile done button container (not the button itself)
+                    if (mobileDoneContainer) {
+                        mobileDoneContainer.style.display = 'flex';
                     }
 
                     const instructions = document.querySelector('.instructions p:first-child');
