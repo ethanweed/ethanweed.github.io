@@ -52,6 +52,12 @@
                 width: 100%;
                 margin-bottom: 8px;
             }
+            #desktop-done {
+                display: none;
+            }
+            #mobile-done-container {
+                display: flex !important;
+            }
         }
 
         #heatmap-container {
@@ -156,7 +162,28 @@
             text-align: left;
         }
 
-        /* DONE button styles - moved outside canvas container */
+        /* DONE button styles */
+        #desktop-done {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            z-index: 10;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #desktop-done:hover {
+            background: #3367d6;
+        }
+
         #mobile-done-container {
             position: fixed;
             bottom: 20px;
@@ -184,18 +211,26 @@
 </head>
 <body>
     <div class="instructions">
-        <h2>Reading Experiment</h2>
-    <div class="instructions">
-        <p><strong>Move your mouse or finger over the canvas to reveal hidden text</strong></p>
-        <p>Press <strong>SPACEBAR</strong> (computer) or <strong>DONE</strong> (mobile) when finished to see your reading pattern and data</p>
+        <h2>Mouse Text Revelation Experiment</h2>
+        <p><strong>Move your mouse over the canvas to reveal hidden text</strong></p>
+        <p>Click the <strong>DONE</strong> button when finished to see your reading pattern and data</p>
+    </div>
+
+    <div class="mobile-instructions">
+        <p><strong>Touch Instructions:</strong></p>
+        <p>• Drag your finger across the text box to reveal text</p>
+        <p>• The clear area is larger to accommodate touch input</p>
+        <p>• Press the <strong>DONE</strong> button at the bottom when finished</p>
     </div>
 
     <div class="canvas-container">
         <div class="blur-layer"></div>
         <canvas id="canvas" width="800" height="400"></canvas>
+        <!-- Desktop DONE button added inside canvas container -->
+        <button id="desktop-done">DONE</button>
     </div>
 
-    <!-- DONE button moved outside canvas container -->
+    <!-- Mobile DONE button container -->
     <div id="mobile-done-container">
         <button id="mobile-done">DONE</button>
     </div>
@@ -267,7 +302,8 @@
         const blurLayer = document.querySelector('.blur-layer');
         const canvasContainer = document.querySelector('.canvas-container');
 
-        // Fixed DONE button references
+        // DONE button references
+        const desktopDoneButton = document.getElementById('desktop-done');
         const mobileDoneContainer = document.getElementById('mobile-done-container');
         const mobileDoneButton = document.getElementById('mobile-done');
         const mobileInstructions = document.querySelector('.mobile-instructions');
@@ -292,13 +328,13 @@
         let lastTouchTime = 0;
         let containerRect = null;
 
-        const experimentText = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it a was a hobbit-hole, and that means comfort.";
+        const experimentText = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it a was a hobbit-hole, and that means comfort. It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats- the hobbit was fond of visitors. The tunnel wound on and on - going fairly but not quite straight into the side of the hill – The Hill, as all the people for many miles around called it – and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining-rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left-hand side (going in), for these were the only ones to have windows, deep-set round windows looking over his garden, and meadows beyond, sloping down to the river.";
 
         const fontSize = 18;
         const lineHeight = 25;
         const horizontalPadding = 40; // Left and right padding for text
 
-        // NEW: Calculate required height for text
+        // Calculate required height for text
         function calculateRequiredHeight(maxWidth) {
             const lines = getTextLines(experimentText, maxWidth);
             return (lines.length * lineHeight) + 40; // 40px padding (20 top, 20 bottom)
@@ -595,30 +631,30 @@
                 }
             }
 
-            // Spacebar handler
-            document.addEventListener('keydown', function(event) {
-                if (event.code === 'Space' && !experimentFinished) {
-                    completeExperiment();
-                }
-            });
+            // DONE button handlers - unified function
+            function handleDoneButton() {
+                if (experimentFinished) return;
+                completeExperiment();
+            }
 
-            // DONE button handler
-            if (mobileDoneButton) {
-                mobileDoneButton.addEventListener('click', function(event) {
+            // Desktop DONE button handler
+            if (desktopDoneButton) {
+                desktopDoneButton.addEventListener('click', handleDoneButton);
+                desktopDoneButton.addEventListener('touchend', function(event) {
                     event.stopPropagation();
                     event.preventDefault();
-                    completeExperiment();
+                    handleDoneButton();
                     return false;
-                });
-
-                mobileDoneButton.addEventListener('touchstart', function(event) {
-                    event.stopPropagation();
                 }, { passive: false });
+            }
 
+            // Mobile DONE button handler
+            if (mobileDoneButton) {
+                mobileDoneButton.addEventListener('click', handleDoneButton);
                 mobileDoneButton.addEventListener('touchend', function(event) {
                     event.stopPropagation();
                     event.preventDefault();
-                    completeExperiment();
+                    handleDoneButton();
                     return false;
                 }, { passive: false });
             }
@@ -628,6 +664,7 @@
             console.log('Completing experiment');
             experimentFinished = true;
 
+            // Hide canvas container
             if (canvasContainer) {
                 canvasContainer.style.display = 'none';
             }
@@ -637,6 +674,7 @@
                 mobileDoneContainer.style.display = 'none';
             }
 
+            // Update instructions
             const instructions = document.querySelector('.instructions');
             if (instructions) {
                 const firstParagraph = instructions.querySelector('p:first-child');
@@ -650,18 +688,14 @@
                 }
             }
 
-            // Generate heatmap first
+            // Generate and persist heatmap
             generateHeatmap();
-
-            // Convert to image for persistence
             convertHeatmapToImage();
 
-            // Show heatmap container
+            // Show results
             if (heatmapContainer) {
                 heatmapContainer.style.display = 'block';
             }
-
-            // Display raw data
             displayRawData();
             if (rawDataContainer) {
                 rawDataContainer.style.display = 'block';
@@ -672,28 +706,20 @@
 
         function init() {
             try {
-                // NEW: Calculate and set canvas dimensions based on text content
+                // Calculate and set canvas dimensions based on text content
                 function resizeCanvas() {
-                    // Get container width
                     const containerWidth = canvasContainer.clientWidth;
-                    // Keep width constrained but responsive
                     const canvasWidth = Math.min(800, containerWidth);
 
-                    // Calculate required height based on text content
-                    // First, we need to set a temporary width to measure text properly
                     canvas.width = canvasWidth;
                     const requiredHeight = calculateRequiredHeight(canvasWidth - horizontalPadding);
-                    // Set minimum height for aesthetics
                     const canvasHeight = Math.max(200, requiredHeight);
 
-                    // Set final dimensions
                     canvas.width = canvasWidth;
                     canvas.height = canvasHeight;
 
-                    // Redraw the canvas content
                     drawCanvas();
 
-                    // Update heatmap canvas size to match
                     if (heatmapCanvas) {
                         heatmapCanvas.width = canvasWidth;
                         heatmapCanvas.height = canvasHeight;
@@ -712,14 +738,11 @@
                 drawCanvas();
                 initBlurPosition();
 
+                // Mobile device setup
                 if (isTouchDevice) {
-                    console.log('Touch device detected:', isIOS ? 'iOS' : 'non-iOS');
-
                     if (mobileInstructions) {
                         mobileInstructions.style.display = 'block';
                     }
-
-                    // Show mobile done button container
                     if (mobileDoneContainer) {
                         mobileDoneContainer.style.display = 'flex';
                     }
@@ -737,6 +760,14 @@
                                 canvasContainer.style.opacity = '1';
                             }, 10);
                         }, 100);
+                    }
+                } else {
+                    // Desktop - hide mobile instructions and button container
+                    if (mobileInstructions) {
+                        mobileInstructions.style.display = 'none';
+                    }
+                    if (mobileDoneContainer) {
+                        mobileDoneContainer.style.display = 'none';
                     }
                 }
 
