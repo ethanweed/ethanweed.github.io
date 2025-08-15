@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Reading Experiment</title>
+    <title>Mouse Text Revelation Experiment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -184,10 +184,11 @@
 </head>
 <body>
     <div class="instructions">
+        <h2>Reading Experimentt</h2>
+    <div class="instructions">
         <p><strong>Move your mouse or finger over the canvas to reveal hidden text</strong></p>
-        <p>Press <strong>SPACEBAR</strong> (computer) or DONE (mobile) when finished to see your reading pattern and data</p>
+        <p>Press <strong>SPACEBAR</strong> (computer) or <strong>DONE</strong> (mobile) when finished to see your reading pattern and data</p>
     </div>
-
 
     <div class="canvas-container">
         <div class="blur-layer"></div>
@@ -295,6 +296,13 @@
 
         const fontSize = 18;
         const lineHeight = 25;
+        const horizontalPadding = 40; // Left and right padding for text
+
+        // NEW: Calculate required height for text
+        function calculateRequiredHeight(maxWidth) {
+            const lines = getTextLines(experimentText, maxWidth);
+            return (lines.length * lineHeight) + 40; // 40px padding (20 top, 20 bottom)
+        }
 
         function getTextLines(text, maxWidth) {
             const words = text.split(' ');
@@ -319,12 +327,17 @@
         }
 
         function drawCanvas() {
+            // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw background
             ctx.fillStyle = '#e0e0e0';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw text (will be blurred by CSS layer)
             ctx.fillStyle = 'black';
             ctx.font = `${fontSize}px Arial`;
-            const lines = getTextLines(experimentText, canvas.width - 40);
+            const lines = getTextLines(experimentText, canvas.width - horizontalPadding);
             lines.forEach((line, index) => {
                 ctx.fillText(line, 20, 30 + (index * lineHeight));
             });
@@ -359,21 +372,27 @@
             if (!heatmapCtx) return;
 
             try {
+                // Clear heatmap canvas
                 heatmapCtx.clearRect(0, 0, heatmapCanvas.width, heatmapCanvas.height);
+
+                // Draw original text on heatmap canvas
                 heatmapCtx.fillStyle = '#e0e0e0';
                 heatmapCtx.fillRect(0, 0, heatmapCanvas.width, heatmapCanvas.height);
+
                 heatmapCtx.fillStyle = 'black';
                 heatmapCtx.font = `${fontSize}px Arial`;
-                const lines = getTextLines(experimentText, heatmapCanvas.width - 40);
+                const lines = getTextLines(experimentText, heatmapCanvas.width - horizontalPadding);
                 lines.forEach((line, index) => {
                     heatmapCtx.fillText(line, 20, 30 + (index * lineHeight));
                 });
 
-                const gridResolution = 10;
+                // Create heatmap grid (lower resolution for performance)
+                const gridResolution = 10; // 10px grid cells
                 const gridWidth = Math.ceil(heatmapCanvas.width / gridResolution);
                 const gridHeight = Math.ceil(heatmapCanvas.height / gridResolution);
                 const heatmapGrid = Array(gridWidth).fill().map(() => Array(gridHeight).fill(0));
 
+                // Count mouse positions in each grid cell
                 for (const point of mouseData) {
                     const gridX = Math.floor(point.x / gridResolution);
                     const gridY = Math.floor(point.y / gridResolution);
@@ -383,6 +402,7 @@
                     }
                 }
 
+                // Find maximum count for normalization
                 let maxCount = 0;
                 for (let x = 0; x < gridWidth; x++) {
                     for (let y = 0; y < gridHeight; y++) {
@@ -390,30 +410,39 @@
                     }
                 }
 
+                // Draw heatmap with normalized values
                 if (maxCount > 0) {
                     for (let x = 0; x < gridWidth; x++) {
                         for (let y = 0; y < gridHeight; y++) {
                             if (heatmapGrid[x][y] > 0) {
+                                // Normalize value to 0-1 range
                                 const normalized = heatmapGrid[x][y] / maxCount;
+
+                                // Create color based on normalized value
                                 let r, g, b;
                                 if (normalized < 0.25) {
+                                    // Blue to cyan
                                     r = 0;
                                     g = Math.floor(normalized * 4 * 255);
                                     b = 255;
                                 } else if (normalized < 0.5) {
+                                    // Cyan to green
                                     r = 0;
                                     g = 255;
                                     b = Math.floor((0.5 - normalized) * 4 * 255);
                                 } else if (normalized < 0.75) {
+                                    // Green to yellow
                                     r = Math.floor((normalized - 0.5) * 4 * 255);
                                     g = 255;
                                     b = 0;
                                 } else {
+                                    // Yellow to red
                                     r = 255;
                                     g = Math.floor((1 - normalized) * 4 * 255);
                                     b = 0;
                                 }
 
+                                // Draw semi-transparent rectangle
                                 heatmapCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(0.7, normalized * 1.5)})`;
                                 heatmapCtx.fillRect(
                                     x * gridResolution,
@@ -424,13 +453,28 @@
                             }
                         }
                     }
+                } else {
+                    // No data case
+                    heatmapCtx.fillStyle = 'rgba(255, 0, 0, 0.7)';
+                    heatmapCtx.font = '24px Arial';
+                    heatmapCtx.textAlign = 'center';
+                    heatmapCtx.fillText('No movement detected', 
+                                       heatmapCanvas.width/2, 
+                                       heatmapCanvas.height/2);
                 }
             } catch (error) {
                 console.error('Error generating heatmap:', error);
+                // Fallback message
+                heatmapCtx.fillStyle = 'rgba(255, 0, 0, 0.7)';
+                heatmapCtx.font = '24px Arial';
+                heatmapCtx.textAlign = 'center';
+                heatmapCtx.fillText('Error generating heatmap', 
+                                   heatmapCanvas.width/2, 
+                                   heatmapCanvas.height/2);
             }
         }
 
-        // CRITICAL FIX: Convert canvas to image for persistence
+        // Convert canvas to image for persistence
         function convertHeatmapToImage() {
             if (!heatmapCanvas || !heatmapImage) return;
 
@@ -609,7 +653,7 @@
             // Generate heatmap first
             generateHeatmap();
 
-            // CRITICAL FIX: Convert to image for persistence
+            // Convert to image for persistence
             convertHeatmapToImage();
 
             // Show heatmap container
@@ -628,19 +672,30 @@
 
         function init() {
             try {
+                // NEW: Calculate and set canvas dimensions based on text content
                 function resizeCanvas() {
-                    containerRect = canvasContainer.getBoundingClientRect();
-                    const containerWidth = containerRect.width;
-                    const aspectRatio = 2;
-                    const canvasHeight = Math.round(containerWidth / aspectRatio);
+                    // Get container width
+                    const containerWidth = canvasContainer.clientWidth;
+                    // Keep width constrained but responsive
+                    const canvasWidth = Math.min(800, containerWidth);
 
-                    canvas.width = containerWidth;
+                    // Calculate required height based on text content
+                    // First, we need to set a temporary width to measure text properly
+                    canvas.width = canvasWidth;
+                    const requiredHeight = calculateRequiredHeight(canvasWidth - horizontalPadding);
+                    // Set minimum height for aesthetics
+                    const canvasHeight = Math.max(200, requiredHeight);
+
+                    // Set final dimensions
+                    canvas.width = canvasWidth;
                     canvas.height = canvasHeight;
 
+                    // Redraw the canvas content
                     drawCanvas();
 
+                    // Update heatmap canvas size to match
                     if (heatmapCanvas) {
-                        heatmapCanvas.width = containerWidth;
+                        heatmapCanvas.width = canvasWidth;
                         heatmapCanvas.height = canvasHeight;
                     }
                 }
