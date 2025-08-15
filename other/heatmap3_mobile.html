@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Added viewport meta tag for proper mobile scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mouse Text Revelation Experiment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            /* Prevent overscroll on mobile */
+            overscroll-behavior: contain;
+        }
+        .canvas-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px auto;
+            /* Prevent scrolling while interacting with canvas */
+            touch-action: none;
+        }
+        #canvas {
+            border: 2px solid #333;
+            cursor: crosshair;
+            display: block;
+            /* Make canvas responsive */
+            max-width: 100%;
+            height: auto;
+        }
+        .instructions {
+            margin: 20px;
+            font-size: 18px;
+        }
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .instructions {
+                font-size: 16px;
+                margin: 15px;
+            }
+            .instructions h2 {
+                font-size: 20px;
+            }
+            #canvas {
+                width: 100% !important;
+                height: auto !important;
+            }
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .stat-box {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+        }
+
+        #heatmap-container {
+            margin-top: 20px;
+            display: none;
+        }
+        #heatmap-canvas {
+            border: 2px solid #333;
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .heatmap-legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 0 5px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 15px;
+            margin-right: 3px;
+        }
+        #raw-data-container {
+            margin-top: 20px;
+            text-align: left;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+        }
+        #mouse-data {
+            background: white;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+            max-height: 300px;
+            font-family: monospace;
+            font-size: 12px;
+            border: 1px solid #ddd;
+        }
+        .data-section {
+            margin-top: 15px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .stat-box {
+            background: #f0f0f0;
+            border-radius: 4px;
+            padding: 8px 15px;
+            margin: 5px;
+            min-width: 150px;
+        }
+
+        /* Blur layer confined to canvas area */
+        .blur-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            /* Increased radius for touch screens */
+            mask-image: radial-gradient(
+                circle 80px at var(--x, -1000px) var(--y, -1000px),
+                transparent 0%,
+                #000 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 80px at var(--x, -1000px) var(--y, -1000px),
+                transparent 0%,
+                #000 100%
+            );
+            transition: mask-size .12s;
+            z-index: 1;
+        }
+
+        /* Mobile instruction adjustments */
+        .mobile-instructions {
+            display: none;
+            background: #e8f4fc;
+            border: 1px solid #b3e0ff;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h2>Mouse Text Revelation Experiment</h2>
+        <p><strong>Move your mouse over the canvas to reveal hidden text</strong></p>
+        <p>Press <strong>SPACEBAR</strong> when finished to see your reading pattern and data</p>
+    </div>
+
+    <!-- Mobile-specific instructions -->
+    <div class="mobile-instructions">
+        <p><strong>Touch Instructions:</strong></p>
+        <p>• Drag your finger across the screen to reveal text</p>
+        <p>• The clear area is larger to accommodate touch input</p>
+        <p>• Press the <strong>DONE</strong> button when finished</p>
+    </div>
+
+    <div class="canvas-container">
+        <!-- Blur overlay confined to canvas area -->
+        <div class="blur-layer"></div>
+        <canvas id="canvas" width="800" height="400"></canvas>
+        <!-- Mobile done button -->
+        <button id="mobile-done" style="display: none; position: absolute; bottom: 10px; right: 10px; 
+                background: #4285f4; color: white; border: none; padding: 8px 15px; 
+                border-radius: 4px; font-weight: bold;">DONE</button>
+    </div>
+
+    <div id="heatmap-container">
+        <h3>Reading Pattern Analysis:</h3>
+        <div class="stats-container">
+            <div class="stat-box">
+                <strong>Total Time:</strong> <span id="total-time">0</span> ms
+            </div>
+            <div class="stat-box">
+                <strong>Tracking Points:</strong> <span id="point-count">0</span>
+            </div>
+            <div class="stat-box">
+                <strong>Reading Speed:</strong> <span id="reading-speed">0</span> points/sec
+            </div>
+        </div>
+        <canvas id="heatmap-canvas" width="800" height="400"></canvas>
+        <div class="heatmap-legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(0, 0, 255, 0.7);"></div>
+                <span>Less time</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(0, 255, 255, 0.7);"></div>
+                <span></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(0, 255, 0, 0.7);"></div>
+                <span></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(255, 255, 0, 0.7);"></div>
+                <span></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(255, 0, 0, 0.7);"></div>
+                <span>More time</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Raw data display added below heatmap -->
+    <div id="raw-data-container">
+        <h3>Raw Experiment Data:</h3>
+        <div class="data-section">
+            <h4>Mouse Tracking Data:</h4>
+            <pre id="mouse-data"></pre>
+        </div>
+        <div class="data-section">
+            <h4>Reading Statistics:</h4>
+            <div id="statistics"></div>
+        </div>
+        <div class="data-section">
+            <h4>Text Content:</h4>
+            <div id="text-content" style="text-align: left; line-height: 1.5;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Device detection
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // Get canvas and context
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const blurLayer = document.querySelector('.blur-layer');
+        const canvasContainer = document.querySelector('.canvas-container');
+        const mobileDoneButton = document.getElementById('mobile-done');
+        const mobileInstructions = document.querySelector('.mobile-instructions');
+
+        // Heatmap elements
+        const heatmapContainer = document.getElementById('heatmap-container');
+        const heatmapCanvas = document.getElementById('heatmap-canvas');
+        const heatmapCtx = heatmapCanvas ? heatmapCanvas.getContext('2d') : null;
+
+        // Raw data elements
+        const rawDataContainer = document.getElementById('raw-data-container');
+        const mouseDataElement = document.getElementById('mouse-data');
+        const statisticsElement = document.getElementById('statistics');
+        const textContentElement = document.getElementById('text-content');
+        const totalTimeElement = document.getElementById('total-time');
+        const pointCountElement = document.getElementById('point-count');
+        const readingSpeedElement = document.getElementById('reading-speed');
+
+        // Experiment variables
+        const mouseData = [];
+        const startTime = Date.now();
+        let isMouseInside = false;
+        let experimentFinished = false;
+
+        // Text to reveal
+        const experimentText = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it a was a hobbit-hole, and that means comfort. It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats- the hobbit was fond of visitors. The tunnel wound on and on - going fairly but not quite straight into the side of the hill – The Hill, as all the people for many miles around called it – and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining-rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left-hand side (going in), for these were the only ones to have windows, deep-set round windows looking over his garden, and meadows beyond, sloping down to the river."
+
+        // Settings
+        const fontSize = 18;
+        const lineHeight = 25;
+
+        // Function to break text into lines
+        function getTextLines(text, maxWidth) {
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = '';
+
+            for (let word of words) {
+                const testLine = currentLine + (currentLine ? ' ' : '') + word;
+                const metrics = ctx.measureText(testLine);
+
+                if (metrics.width > maxWidth && currentLine) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = testLine;
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine);
+            }
+            return lines;
+        }
+
+        // Main drawing function
+        function drawCanvas() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw background
+            ctx.fillStyle = '#e0e0e0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw text (will be blurred by CSS layer)
+            ctx.fillStyle = 'black';
+            ctx.font = `${fontSize}px Arial`;
+            const lines = getTextLines(experimentText, canvas.width - 40);
+            lines.forEach((line, index) => {
+                ctx.fillText(line, 20, 30 + (index * lineHeight));
+            });
+        }
+
+        // Initialize blur position outside canvas
+        function initBlurPosition() {
+            blurLayer.style.setProperty('--x', '-1000px');
+            blurLayer.style.setProperty('--y', '-1000px');
+        }
+
+        // Update blur position
+        function updateBlurPosition(x, y) {
+            blurLayer.style.setProperty('--x', `${x}px`);
+            blurLayer.style.setProperty('--y', `${y}px`);
+        }
+
+        // Generate heatmap visualization
+        function generateHeatmap() {
+            if (!heatmapCtx) {
+                console.error('Heatmap context not available');
+                return;
+            }
+
+            try {
+                // Clear heatmap canvas
+                heatmapCtx.clearRect(0, 0, heatmapCanvas.width, heatmapCanvas.height);
+
+                // Draw original text on heatmap canvas
+                heatmapCtx.fillStyle = '#e0e0e0';
+                heatmapCtx.fillRect(0, 0, heatmapCanvas.width, heatmapCanvas.height);
+
+                heatmapCtx.fillStyle = 'black';
+                heatmapCtx.font = `${fontSize}px Arial`;
+                const lines = getTextLines(experimentText, heatmapCanvas.width - 40);
+                lines.forEach((line, index) => {
+                    heatmapCtx.fillText(line, 20, 30 + (index * lineHeight));
+                });
+
+                // Create heatmap grid (lower resolution for performance)
+                const gridResolution = 10; // 10px grid cells
+                const gridWidth = Math.ceil(heatmapCanvas.width / gridResolution);
+                const gridHeight = Math.ceil(heatmapCanvas.height / gridResolution);
+                const heatmapGrid = Array(gridWidth).fill().map(() => Array(gridHeight).fill(0));
+
+                // Count mouse positions in each grid cell
+                for (const point of mouseData) {
+                    const gridX = Math.floor(point.x / gridResolution);
+                    const gridY = Math.floor(point.y / gridResolution);
+
+                    if (gridX >= 0 && gridX < gridWidth && gridY >= 0 && gridY < gridHeight) {
+                        heatmapGrid[gridX][gridY]++;
+                    }
+                }
+
+                // Find maximum count for normalization
+                let maxCount = 0;
+                for (let x = 0; x < gridWidth; x++) {
+                    for (let y = 0; y < gridHeight; y++) {
+                        maxCount = Math.max(maxCount, heatmapGrid[x][y]);
+                    }
+                }
+
+                // Draw heatmap with normalized values
+                if (maxCount > 0) {
+                    for (let x = 0; x < gridWidth; x++) {
+                        for (let y = 0; y < gridHeight; y++) {
+                            if (heatmapGrid[x][y] > 0) {
+                                // Normalize value to 0-1 range
+                                const normalized = heatmapGrid[x][y] / maxCount;
+
+                                // Create color based on normalized value
+                                let r, g, b;
+                                if (normalized < 0.25) {
+                                    // Blue to cyan
+                                    r = 0;
+                                    g = Math.floor(normalized * 4 * 255);
+                                    b = 255;
+                                } else if (normalized < 0.5) {
+                                    // Cyan to green
+                                    r = 0;
+                                    g = 255;
+                                    b = Math.floor((0.5 - normalized) * 4 * 255);
+                                } else if (normalized < 0.75) {
+                                    // Green to yellow
+                                    r = Math.floor((normalized - 0.5) * 4 * 255);
+                                    g = 255;
+                                    b = 0;
+                                } else {
+                                    // Yellow to red
+                                    r = 255;
+                                    g = Math.floor((1 - normalized) * 4 * 255);
+                                    b = 0;
+                                }
+
+                                // Draw semi-transparent rectangle
+                                heatmapCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(0.7, normalized * 1.5)})`;
+                                heatmapCtx.fillRect(
+                                    x * gridResolution,
+                                    y * gridResolution,
+                                    gridResolution,
+                                    gridResolution
+                                );
+                            }
+                        }
+                    }
+                } else {
+                    // No data case
+                    heatmapCtx.fillStyle = 'rgba(255, 0, 0, 0.7)';
+                    heatmapCtx.font = '24px Arial';
+                    heatmapCtx.textAlign = 'center';
+                    heatmapCtx.fillText('No movement detected', 
+                                       heatmapCanvas.width/2, 
+                                       heatmapCanvas.height/2);
+                }
+
+                console.log('Heatmap generated successfully with', mouseData.length, 'data points');
+            } catch (error) {
+                console.error('Error generating heatmap:', error);
+                // Fallback message
+                heatmapCtx.fillStyle = 'rgba(255, 0, 0, 0.7)';
+                heatmapCtx.font = '24px Arial';
+                heatmapCtx.textAlign = 'center';
+                heatmapCtx.fillText('Error generating heatmap', 
+                                   heatmapCanvas.width/2, 
+                                   heatmapCanvas.height/2);
+            }
+        }
+
+        // Display raw data
+        function displayRawData() {
+            const totalTime = Date.now() - startTime;
+            const pointsCount = mouseData.length;
+            const readingSpeed = pointsCount > 0 ? Math.round(pointsCount / (totalTime / 1000)) : 0;
+
+            // Update statistics display
+            totalTimeElement.textContent = totalTime;
+            pointCountElement.textContent = pointsCount;
+            readingSpeedElement.textContent = readingSpeed;
+
+            // Create statistics summary
+            const statsHTML = `
+                <p><strong>Total experiment time:</strong> ${totalTime} milliseconds</p>
+                <p><strong>Total tracking points:</strong> ${pointsCount}</p>
+                <p><strong>Average tracking rate:</strong> ${readingSpeed} points per second</p>
+                <p><strong>First position:</strong> x: ${mouseData[0]?.x || 'N/A'}, y: ${mouseData[0]?.y || 'N/A'}</p>
+                <p><strong>Last position:</strong> x: ${mouseData[pointsCount-1]?.x || 'N/A'}, y: ${mouseData[pointsCount-1]?.y || 'N/A'}</p>
+            `;
+            statisticsElement.innerHTML = statsHTML;
+
+            // Display mouse data in formatted way
+            const formattedData = JSON.stringify({
+                total_time_ms: totalTime,
+                total_mouse_points: pointsCount,
+                mouse_positions: mouseData,
+                text_content: experimentText
+            }, null, 2);
+
+            mouseDataElement.textContent = formattedData;
+
+            // Display text content with line breaks preserved
+            textContentElement.textContent = experimentText;
+        }
+
+        // Handle both mouse and touch events
+        function setupEventListeners() {
+            // Common setup for all devices
+            const containerRect = canvasContainer.getBoundingClientRect();
+
+            // Mouse event handlers
+            canvas.addEventListener('mouseenter', function() {
+                isMouseInside = true;
+            });
+
+            canvas.addEventListener('mouseleave', function() {
+                isMouseInside = false;
+                // Reset blur position outside canvas when mouse leaves
+                blurLayer.style.setProperty('--x', '-1000px');
+                blurLayer.style.setProperty('--y', '-1000px');
+            });
+
+            canvas.addEventListener('mousemove', function(event) {
+                if (experimentFinished) return;
+
+                const x = event.clientX - containerRect.left;
+                const y = event.clientY - containerRect.top;
+
+                updateBlurPosition(x, y);
+                recordPosition(x, y);
+            });
+
+            // Touch event handlers
+            canvas.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // Prevent default touch behavior
+                isMouseInside = true;
+                handleTouchEvent(event);
+            }, { passive: false });
+
+            canvas.addEventListener('touchmove', function(event) {
+                event.preventDefault(); // Prevent scrolling
+                handleTouchEvent(event);
+            }, { passive: false });
+
+            canvas.addEventListener('touchend', function() {
+                isMouseInside = false;
+                blurLayer.style.setProperty('--x', '-1000px');
+                blurLayer.style.setProperty('--y', '-1000px');
+            });
+
+            canvas.addEventListener('touchcancel', function() {
+                isMouseInside = false;
+                blurLayer.style.setProperty('--x', '-1000px');
+                blurLayer.style.setProperty('--y', '-1000px');
+            });
+
+            // Handle touch events
+            function handleTouchEvent(event) {
+                if (experimentFinished) return;
+
+                const touch = event.touches[0];
+                const x = touch.clientX - containerRect.left;
+                const y = touch.clientY - containerRect.top;
+
+                updateBlurPosition(x, y);
+                recordPosition(x, y);
+            }
+
+            // Record position with timestamp
+            function recordPosition(x, y) {
+                mouseData.push({
+                    x: Math.round(x),
+                    y: Math.round(y),
+                    timestamp: Date.now() - startTime
+                });
+            }
+
+            // Spacebar handler
+            document.addEventListener('keydown', function(event) {
+                if (event.code === 'Space' && !experimentFinished) {
+                    completeExperiment();
+                }
+            });
+
+            // Mobile done button
+            if (mobileDoneButton) {
+                mobileDoneButton.addEventListener('click', function() {
+                    completeExperiment();
+                });
+            }
+        }
+
+        function completeExperiment() {
+            experimentFinished = true;
+
+            // Hide canvas and show results
+            if (canvasContainer) {
+                canvasContainer.style.display = 'none';
+            }
+
+            // Update instructions
+            const instructions = document.querySelector('.instructions');
+            if (instructions) {
+                const firstParagraph = instructions.querySelector('p:first-child');
+                const lastParagraph = instructions.querySelector('p:last-child');
+
+                if (firstParagraph) {
+                    firstParagraph.textContent = 'Your reading analysis:';
+                }
+                if (lastParagraph) {
+                    lastParagraph.style.display = 'none';
+                }
+            }
+
+            // Generate and display heatmap
+            generateHeatmap();
+            if (heatmapContainer) {
+                heatmapContainer.style.display = 'block';
+            }
+
+            // Display raw data
+            displayRawData();
+            if (rawDataContainer) {
+                rawDataContainer.style.display = 'block';
+            }
+
+            console.log('Results displayed successfully');
+        }
+
+        // Initialize
+        function init() {
+            try {
+                // Handle responsive canvas sizing
+                function resizeCanvas() {
+                    const containerWidth = canvasContainer.clientWidth;
+                    if (containerWidth < 800) {
+                        canvas.width = containerWidth;
+                        canvas.height = Math.round(containerWidth * 0.5); // Maintain aspect ratio
+                    }
+
+                    // Update heatmap canvas size to match
+                    heatmapCanvas.width = canvas.width;
+                    heatmapCanvas.height = canvas.height;
+                }
+
+                // Initial resize
+                resizeCanvas();
+
+                // Handle window resize
+                window.addEventListener('resize', resizeCanvas);
+
+                // Set up event listeners
+                setupEventListeners();
+
+                // Draw initial canvas
+                drawCanvas();
+                initBlurPosition();
+
+                // Mobile-specific setup
+                if (isTouchDevice) {
+                    console.log('Touch device detected');
+
+                    // Show mobile instructions
+                    if (mobileInstructions) {
+                        mobileInstructions.style.display = 'block';
+                    }
+
+                    // Show mobile done button
+                    if (mobileDoneButton) {
+                        mobileDoneButton.style.display = 'block';
+                    }
+
+                    // Update instructions for touch
+                    const instructions = document.querySelector('.instructions p:first-child');
+                    if (instructions) {
+                        instructions.textContent = 'Drag your finger across the screen to reveal hidden text';
+                    }
+                }
+
+                console.log('Experiment initialized successfully');
+            } catch (error) {
+                console.error('Initialization error:', error);
+            }
+        }
+
+        // Start when page is loaded
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            init();
+        } else {
+            document.addEventListener('DOMContentLoaded', init);
+        }
+    </script>
+</body>
+</html>
