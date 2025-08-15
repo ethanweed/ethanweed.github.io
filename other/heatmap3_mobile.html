@@ -11,6 +11,7 @@
             text-align: center;
             overscroll-behavior: contain;
             -webkit-overflow-scrolling: touch;
+            min-height: 100vh;
         }
         .canvas-container {
             position: relative;
@@ -26,7 +27,7 @@
             cursor: crosshair;
             display: block;
             width: 100%;
-            height: 650px; /* Fixed height for 1300 characters */
+            height: auto;
         }
         .instructions {
             margin: 20px;
@@ -42,7 +43,7 @@
             }
             #canvas {
                 width: 100% !important;
-                height: 650px !important;
+                height: auto !important;
             }
             .stats-container {
                 flex-direction: column;
@@ -69,7 +70,7 @@
             display: block;
             margin: 0 auto;
             max-width: 100%;
-            height: 650px; /* Match fixed height */
+            height: auto;
         }
         /* Added to ensure heatmap image persists */
         #heatmap-image {
@@ -212,20 +213,13 @@
 <body>
     <div class="instructions">
         <h2>Mouse Text Revelation Experiment</h2>
-        <p><strong>Move your mouse over the canvas to reveal hidden text</strong></p>
+        <p><strong>Move your mouse or finger over the canvas to reveal hidden text</strong></p>
         <p>Click the <strong>DONE</strong> button when finished to see your reading pattern and data</p>
-    </div>
-
-    <div class="mobile-instructions">
-        <p><strong>Touch Instructions:</strong></p>
-        <p>• Drag your finger across the text box to reveal text</p>
-        <p>• The clear area is larger to accommodate touch input</p>
-        <p>• Press the <strong>DONE</strong> button at the bottom when finished</p>
     </div>
 
     <div class="canvas-container">
         <div class="blur-layer"></div>
-        <canvas id="canvas" width="800" height="650"></canvas>
+        <canvas id="canvas" width="800" height="400"></canvas>
         <!-- Desktop DONE button added inside canvas container -->
         <button id="desktop-done">DONE</button>
     </div>
@@ -249,7 +243,7 @@
             </div>
         </div>
         <!-- Added persistent heatmap image -->
-        <canvas id="heatmap-canvas" width="800" height="650" style="display: none;"></canvas>
+        <canvas id="heatmap-canvas" width="800" height="400" style="display: none;"></canvas>
         <img id="heatmap-image" alt="Heatmap visualization">
         <div class="heatmap-legend">
             <div class="legend-item">
@@ -333,7 +327,48 @@
         const fontSize = 18;
         const lineHeight = 25;
         const horizontalPadding = 40; // Left and right padding for text
-        const fixedHeight = 650; // Fixed height to accommodate 1300+ characters
+        const verticalPadding = 30;   // Top and bottom padding for text
+
+        // Calculate EXACT height needed for text
+        function calculateRequiredHeight() {
+            // Create a temporary canvas to measure text
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.font = `${fontSize}px Arial`;
+
+            // Calculate how many lines we need
+            const words = experimentText.split(' ');
+            let currentLine = '';
+            let lineCount = 0;
+
+            for (let word of words) {
+                const testLine = currentLine + (currentLine ? ' ' : '') + word;
+                const metrics = tempCtx.measureText(testLine);
+
+                // Calculate available width (container width minus padding)
+                const containerWidth = canvasContainer.clientWidth;
+                const availableWidth = containerWidth - horizontalPadding;
+
+                if (metrics.width > availableWidth && currentLine) {
+                    lineCount++;
+                    currentLine = word;
+                } else {
+                    currentLine = testLine;
+                }
+            }
+            if (currentLine) {
+                lineCount++;
+            }
+
+            // Calculate total height needed (lines * line height + padding)
+            const requiredHeight = (lineCount * lineHeight) + (verticalPadding * 2);
+
+            // Calculate maximum available height (85% of viewport height)
+            const maxAvailableHeight = window.innerHeight * 0.85;
+
+            // Return the larger of the two (needed vs available)
+            return Math.max(requiredHeight, maxAvailableHeight * 0.6);
+        }
 
         function getTextLines(text, maxWidth) {
             const words = text.split(' ');
@@ -370,13 +405,9 @@
             ctx.font = `${fontSize}px Arial`;
             const lines = getTextLines(experimentText, canvas.width - horizontalPadding);
 
-            // Calculate vertical centering
-            const totalTextHeight = lines.length * lineHeight;
-            const startY = (canvas.height - totalTextHeight) / 2;
-
-            // Draw each line with vertical centering
+            // Draw each line with vertical padding
             lines.forEach((line, index) => {
-                ctx.fillText(line, 20, startY + 30 + (index * lineHeight));
+                ctx.fillText(line, 20, verticalPadding + 10 + (index * lineHeight));
             });
         }
 
@@ -421,13 +452,9 @@
                 heatmapCtx.font = `${fontSize}px Arial`;
                 const lines = getTextLines(experimentText, heatmapCanvas.width - horizontalPadding);
 
-                // Calculate vertical centering
-                const totalTextHeight = lines.length * lineHeight;
-                const startY = (heatmapCanvas.height - totalTextHeight) / 2;
-
-                // Draw each line with vertical centering
+                // Draw each line with vertical padding
                 lines.forEach((line, index) => {
-                    heatmapCtx.fillText(line, 20, startY + 30 + (index * lineHeight));
+                    heatmapCtx.fillText(line, 20, verticalPadding + 10 + (index * lineHeight));
                 });
 
                 // Create heatmap grid
@@ -679,33 +706,43 @@
 
         function init() {
             try {
-                // Set fixed dimensions for 1300+ character capacity
-                function setFixedDimensions() {
-                    // Set canvas dimensions
+                // Set dimensions based on EXACT text requirements
+                function resizeCanvas() {
+                    // Get container width
                     const containerWidth = canvasContainer.clientWidth;
                     const canvasWidth = Math.min(800, containerWidth);
 
-                    // Set fixed height to accommodate 1300+ characters
+                    // Calculate EXACT height needed for the text
+                    const requiredHeight = calculateRequiredHeight();
+
+                    // Set canvas dimensions
                     canvas.width = canvasWidth;
-                    canvas.height = fixedHeight;
+                    canvas.height = requiredHeight;
 
                     // Update heatmap canvas
                     if (heatmapCanvas) {
                         heatmapCanvas.width = canvasWidth;
-                        heatmapCanvas.height = fixedHeight;
+                        heatmapCanvas.height = requiredHeight;
                     }
 
+                    // Redraw the canvas
                     drawCanvas();
                 }
 
-                setFixedDimensions();
+                // Initial resize
+                resizeCanvas();
 
-                // Still handle window resize for width changes
+                // Handle window resize with a small delay to ensure accurate measurements
                 let resizeTimeout;
                 window.addEventListener('resize', function() {
                     clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(setFixedDimensions, 100);
+                    resizeTimeout = setTimeout(resizeCanvas, 50);
                 });
+
+                // Additional resize after a short delay for mobile browsers
+                // that might not have the correct viewport dimensions yet
+                setTimeout(resizeCanvas, 100);
+                setTimeout(resizeCanvas, 300);
 
                 setupEventListeners();
                 drawCanvas();
