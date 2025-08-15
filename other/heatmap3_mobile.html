@@ -26,7 +26,7 @@
             cursor: crosshair;
             display: block;
             width: 100%;
-            height: auto;
+            height: 650px; /* Fixed height for 1300 characters */
         }
         .instructions {
             margin: 20px;
@@ -42,7 +42,7 @@
             }
             #canvas {
                 width: 100% !important;
-                height: auto !important;
+                height: 650px !important;
             }
             .stats-container {
                 flex-direction: column;
@@ -69,7 +69,7 @@
             display: block;
             margin: 0 auto;
             max-width: 100%;
-            height: auto;
+            height: 650px; /* Match fixed height */
         }
         /* Added to ensure heatmap image persists */
         #heatmap-image {
@@ -225,7 +225,7 @@
 
     <div class="canvas-container">
         <div class="blur-layer"></div>
-        <canvas id="canvas" width="800" height="400"></canvas>
+        <canvas id="canvas" width="800" height="650"></canvas>
         <!-- Desktop DONE button added inside canvas container -->
         <button id="desktop-done">DONE</button>
     </div>
@@ -249,7 +249,7 @@
             </div>
         </div>
         <!-- Added persistent heatmap image -->
-        <canvas id="heatmap-canvas" width="800" height="400" style="display: none;"></canvas>
+        <canvas id="heatmap-canvas" width="800" height="650" style="display: none;"></canvas>
         <img id="heatmap-image" alt="Heatmap visualization">
         <div class="heatmap-legend">
             <div class="legend-item">
@@ -333,12 +333,7 @@
         const fontSize = 18;
         const lineHeight = 25;
         const horizontalPadding = 40; // Left and right padding for text
-
-        // Calculate required height for text
-        function calculateRequiredHeight(maxWidth) {
-            const lines = getTextLines(experimentText, maxWidth);
-            return (lines.length * lineHeight) + 40; // 40px padding (20 top, 20 bottom)
-        }
+        const fixedHeight = 650; // Fixed height to accommodate 1300+ characters
 
         function getTextLines(text, maxWidth) {
             const words = text.split(' ');
@@ -374,8 +369,14 @@
             ctx.fillStyle = 'black';
             ctx.font = `${fontSize}px Arial`;
             const lines = getTextLines(experimentText, canvas.width - horizontalPadding);
+
+            // Calculate vertical centering
+            const totalTextHeight = lines.length * lineHeight;
+            const startY = (canvas.height - totalTextHeight) / 2;
+
+            // Draw each line with vertical centering
             lines.forEach((line, index) => {
-                ctx.fillText(line, 20, 30 + (index * lineHeight));
+                ctx.fillText(line, 20, startY + 30 + (index * lineHeight));
             });
         }
 
@@ -411,19 +412,26 @@
                 // Clear heatmap canvas
                 heatmapCtx.clearRect(0, 0, heatmapCanvas.width, heatmapCanvas.height);
 
-                // Draw original text on heatmap canvas
+                // Draw background
                 heatmapCtx.fillStyle = '#e0e0e0';
                 heatmapCtx.fillRect(0, 0, heatmapCanvas.width, heatmapCanvas.height);
 
+                // Draw text
                 heatmapCtx.fillStyle = 'black';
                 heatmapCtx.font = `${fontSize}px Arial`;
                 const lines = getTextLines(experimentText, heatmapCanvas.width - horizontalPadding);
+
+                // Calculate vertical centering
+                const totalTextHeight = lines.length * lineHeight;
+                const startY = (heatmapCanvas.height - totalTextHeight) / 2;
+
+                // Draw each line with vertical centering
                 lines.forEach((line, index) => {
-                    heatmapCtx.fillText(line, 20, 30 + (index * lineHeight));
+                    heatmapCtx.fillText(line, 20, startY + 30 + (index * lineHeight));
                 });
 
-                // Create heatmap grid (lower resolution for performance)
-                const gridResolution = 10; // 10px grid cells
+                // Create heatmap grid
+                const gridResolution = 10;
                 const gridWidth = Math.ceil(heatmapCanvas.width / gridResolution);
                 const gridHeight = Math.ceil(heatmapCanvas.height / gridResolution);
                 const heatmapGrid = Array(gridWidth).fill().map(() => Array(gridHeight).fill(0));
@@ -451,34 +459,26 @@
                     for (let x = 0; x < gridWidth; x++) {
                         for (let y = 0; y < gridHeight; y++) {
                             if (heatmapGrid[x][y] > 0) {
-                                // Normalize value to 0-1 range
                                 const normalized = heatmapGrid[x][y] / maxCount;
-
-                                // Create color based on normalized value
                                 let r, g, b;
                                 if (normalized < 0.25) {
-                                    // Blue to cyan
                                     r = 0;
                                     g = Math.floor(normalized * 4 * 255);
                                     b = 255;
                                 } else if (normalized < 0.5) {
-                                    // Cyan to green
                                     r = 0;
                                     g = 255;
                                     b = Math.floor((0.5 - normalized) * 4 * 255);
                                 } else if (normalized < 0.75) {
-                                    // Green to yellow
                                     r = Math.floor((normalized - 0.5) * 4 * 255);
                                     g = 255;
                                     b = 0;
                                 } else {
-                                    // Yellow to red
                                     r = 255;
                                     g = Math.floor((1 - normalized) * 4 * 255);
                                     b = 0;
                                 }
 
-                                // Draw semi-transparent rectangle
                                 heatmapCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(0.7, normalized * 1.5)})`;
                                 heatmapCtx.fillRect(
                                     x * gridResolution,
@@ -489,43 +489,20 @@
                             }
                         }
                     }
-                } else {
-                    // No data case
-                    heatmapCtx.fillStyle = 'rgba(255, 0, 0, 0.7)';
-                    heatmapCtx.font = '24px Arial';
-                    heatmapCtx.textAlign = 'center';
-                    heatmapCtx.fillText('No movement detected', 
-                                       heatmapCanvas.width/2, 
-                                       heatmapCanvas.height/2);
                 }
             } catch (error) {
                 console.error('Error generating heatmap:', error);
-                // Fallback message
-                heatmapCtx.fillStyle = 'rgba(255, 0, 0, 0.7)';
-                heatmapCtx.font = '24px Arial';
-                heatmapCtx.textAlign = 'center';
-                heatmapCtx.fillText('Error generating heatmap', 
-                                   heatmapCanvas.width/2, 
-                                   heatmapCanvas.height/2);
             }
         }
 
-        // Convert canvas to image for persistence
         function convertHeatmapToImage() {
             if (!heatmapCanvas || !heatmapImage) return;
 
             try {
-                // Get canvas data URL
                 const dataURL = heatmapCanvas.toDataURL('image/png');
-
-                // Set image source and display it
                 heatmapImage.src = dataURL;
                 heatmapImage.style.display = 'block';
-
-                // Hide the canvas now that we have a persistent image
                 heatmapCanvas.style.display = 'none';
-
-                console.log('Heatmap converted to persistent image');
             } catch (error) {
                 console.error('Error converting heatmap to image:', error);
             }
@@ -631,7 +608,7 @@
                 }
             }
 
-            // DONE button handlers - unified function
+            // DONE button handlers
             function handleDoneButton() {
                 if (experimentFinished) return;
                 completeExperiment();
@@ -664,17 +641,14 @@
             console.log('Completing experiment');
             experimentFinished = true;
 
-            // Hide canvas container
             if (canvasContainer) {
                 canvasContainer.style.display = 'none';
             }
 
-            // Hide mobile done button container
             if (mobileDoneContainer) {
                 mobileDoneContainer.style.display = 'none';
             }
 
-            // Update instructions
             const instructions = document.querySelector('.instructions');
             if (instructions) {
                 const firstParagraph = instructions.querySelector('p:first-child');
@@ -692,7 +666,6 @@
             generateHeatmap();
             convertHeatmapToImage();
 
-            // Show results
             if (heatmapContainer) {
                 heatmapContainer.style.display = 'block';
             }
@@ -706,39 +679,38 @@
 
         function init() {
             try {
-                // Calculate and set canvas dimensions based on text content
-                function resizeCanvas() {
+                // Set fixed dimensions for 1300+ character capacity
+                function setFixedDimensions() {
+                    // Set canvas dimensions
                     const containerWidth = canvasContainer.clientWidth;
                     const canvasWidth = Math.min(800, containerWidth);
 
+                    // Set fixed height to accommodate 1300+ characters
                     canvas.width = canvasWidth;
-                    const requiredHeight = calculateRequiredHeight(canvasWidth - horizontalPadding);
-                    const canvasHeight = Math.max(200, requiredHeight);
+                    canvas.height = fixedHeight;
 
-                    canvas.width = canvasWidth;
-                    canvas.height = canvasHeight;
-
-                    drawCanvas();
-
+                    // Update heatmap canvas
                     if (heatmapCanvas) {
                         heatmapCanvas.width = canvasWidth;
-                        heatmapCanvas.height = canvasHeight;
+                        heatmapCanvas.height = fixedHeight;
                     }
+
+                    drawCanvas();
                 }
 
-                resizeCanvas();
+                setFixedDimensions();
 
+                // Still handle window resize for width changes
                 let resizeTimeout;
                 window.addEventListener('resize', function() {
                     clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(resizeCanvas, 100);
+                    resizeTimeout = setTimeout(setFixedDimensions, 100);
                 });
 
                 setupEventListeners();
                 drawCanvas();
                 initBlurPosition();
 
-                // Mobile device setup
                 if (isTouchDevice) {
                     if (mobileInstructions) {
                         mobileInstructions.style.display = 'block';
@@ -762,7 +734,6 @@
                         }, 100);
                     }
                 } else {
-                    // Desktop - hide mobile instructions and button container
                     if (mobileInstructions) {
                         mobileInstructions.style.display = 'none';
                     }
