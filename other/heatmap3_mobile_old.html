@@ -165,8 +165,9 @@
 
         /* DONE button styles */
         #desktop-done {
-            display: inline-block;
-            margin: 20px auto;
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
             background: #4285f4;
             color: white;
             border: none;
@@ -175,6 +176,7 @@
             font-weight: bold;
             font-size: 16px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            z-index: 10;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -218,10 +220,11 @@
     <div class="canvas-container">
         <div class="blur-layer"></div>
         <canvas id="canvas" width="800" height="400"></canvas>
+        <!-- Desktop DONE button added inside canvas container -->
+        <button id="desktop-done">DONE</button>
     </div>
 
-    <button id="desktop-done">DONE</button>
-
+    <!-- Mobile DONE button container -->
     <div id="mobile-done-container">
         <button id="mobile-done">DONE</button>
     </div>
@@ -733,7 +736,7 @@
                 let resizeTimeout;
                 window.addEventListener('resize', function() {
                     clearTimeout(resizeTimeout);
-                    resizeTimeout.setTimeout(resizeCanvas, 50);
+                    resizeTimeout = setTimeout(resizeCanvas, 50);
                 });
 
                 // Additional resize after a short delay for mobile browsers
