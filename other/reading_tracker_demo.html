@@ -272,6 +272,26 @@
     <div id="heatmap-container">
         <h3>Reading Pattern Analysis:</h3>
 
+        <!-- Heatmap image -->
+        <canvas id="heatmap-canvas" width="800" height="400" style="display: none;"></canvas>
+        <img id="heatmap-image" alt="Heatmap visualization">
+
+        <div class="heatmap-legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(0, 0, 255, 0.7);"></div>
+                <span>Less time</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(255, 255, 0, 0.7);"></div>
+                <span></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(255, 0, 0, 0.7);"></div>
+                <span>More time</span>
+            </div>
+        </div>
+
+
         <!-- Stat boxes -->
         <div class="stats-container">
             <div class="stat-box">
@@ -308,24 +328,7 @@
             </div>
         </div>
 
-        <!-- Heatmap image -->
-        <canvas id="heatmap-canvas" width="800" height="400" style="display: none;"></canvas>
-        <img id="heatmap-image" alt="Heatmap visualization">
 
-        <div class="heatmap-legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: rgba(0, 0, 255, 0.7);"></div>
-                <span>Less time</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: rgba(255, 255, 0, 0.7);"></div>
-                <span></span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: rgba(255, 0, 0, 0.7);"></div>
-                <span>More time</span>
-            </div>
-        </div>
 
         <!-- Raw data section, now inside heatmap-container -->
         <div id="raw-data-container" style="margin-top: 20px;">
@@ -837,7 +840,8 @@ function completeExperiment() {
     experimentFinished = true;
 
     if (canvasContainer) canvasContainer.style.display = 'none';
-    if (mobileDoneContainer) mobileDoneContainer.style.display = 'none';
+    if (mobileDoneContainer) mobileDoneContainer.style.setProperty('display', 'none', 'important');
+
 
     // Hide the desktop Done button and its container
     const desktopDoneBtn = document.getElementById('desktop-done');
