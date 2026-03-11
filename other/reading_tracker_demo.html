@@ -688,11 +688,10 @@ for (let i = 1; i < mouseData.length; i++) {
                 <p><strong>Total experiment time:</strong> ${totalTime} ms</p>
                 <p><strong>Word count:</strong> ${wordCount} words</p>
                 <p><strong>Reading speed:</strong> ${wordsPerSecond} words/sec (${wordsPerMinute} WPM)</p>
-                <p><strong>Re-reading rate:</strong> ${rereadingRate}% of forward movements were backward</p>
-                <p><strong>Return sweeps (new lines):</strong> ${returnSweeps}</p>
+                
                 <p><strong>Pauses (&gt;500ms):</strong> ${pauses.length} detected</p>
-                <p><strong>Total mouse distance:</strong> ${Math.round(totalDistance)} px</p>
-                <p><strong>Text coverage:</strong> ${coveragePct}%</p>
+                
+                
                 <p><strong>Time per line:</strong><br>
                     ${timePerLine.map(l => `Line ${l.line}: ${l.ms} ms`).join('<br>')}
                 </p>
