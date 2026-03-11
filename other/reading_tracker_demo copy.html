@@ -833,34 +833,26 @@ for (let i = 1; i < mouseData.length; i++) {
             }
         }
 
-function completeExperiment() {
-    experimentFinished = true;
+        function completeExperiment() {
+            experimentFinished = true;
 
-    if (canvasContainer) canvasContainer.style.display = 'none';
-    if (mobileDoneContainer) mobileDoneContainer.style.display = 'none';
+            if (canvasContainer) canvasContainer.style.display = 'none';
+            if (mobileDoneContainer) mobileDoneContainer.style.display = 'none';
 
-    // Hide the desktop Done button and its container
-    const desktopDoneBtn = document.getElementById('desktop-done');
-    if (desktopDoneBtn) desktopDoneBtn.style.display = 'none';
+            const instructions = document.querySelector('.instructions');
+            if (instructions) {
+                const firstParagraph = instructions.querySelector('p:first-child');
+                const lastParagraph  = instructions.querySelector('p:last-child');
+                if (firstParagraph) firstParagraph.textContent = 'Your reading analysis:';
+                if (lastParagraph)  lastParagraph.style.display = 'none';
+            }
 
-    const desktopDoneContainer = document.getElementById('desktop-done-container');
-    if (desktopDoneContainer) desktopDoneContainer.style.display = 'none';
+            generateHeatmap();
+            convertHeatmapToImage();
 
-    const instructions = document.querySelector('.instructions');
-    if (instructions) {
-        const firstParagraph = instructions.querySelector('p:first-child');
-        const lastParagraph  = instructions.querySelector('p:last-child');
-        if (firstParagraph) firstParagraph.textContent = 'Your reading analysis:';
-        if (lastParagraph)  lastParagraph.style.display = 'none';
-    }
-
-    generateHeatmap();
-    convertHeatmapToImage();
-
-    if (heatmapContainer) heatmapContainer.style.display = 'block';
-    displayRawData();
-}
-
+            if (heatmapContainer) heatmapContainer.style.display = 'block';
+            displayRawData();
+        }
 
         function init() {
             try {
