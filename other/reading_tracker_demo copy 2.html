@@ -35,7 +35,6 @@
             margin: 20px;
             font-size: 18px;
         }
-
         @media (max-width: 768px) {
             html, body {
                 overscroll-behavior: auto;
@@ -47,8 +46,6 @@
             }
             #canvas {
                 touch-action: none;
-                width: 100% !important;
-                height: auto !important;
             }
             .instructions {
                 font-size: 16px;
@@ -56,6 +53,10 @@
             }
             .instructions h2 {
                 font-size: 20px;
+            }
+            #canvas {
+                width: 100% !important;
+                height: auto !important;
             }
             .stats-container {
                 flex-direction: column;
@@ -71,7 +72,6 @@
             #mobile-done-container {
                 display: flex !important;
             }
-            /* Right scroll area styles live only here — no JS duplication */
             #right-scroll-area {
                 position: fixed;
                 top: 0;
@@ -129,6 +129,8 @@
             height: 15px;
             margin-right: 3px;
         }
+
+        /* Stats and data now live inside heatmap-container */
         .stats-container {
             display: flex;
             justify-content: space-around;
@@ -168,6 +170,8 @@
             border-top: 1px solid #ddd;
             padding-top: 15px;
         }
+
+        /* Blur layer */
         .blur-layer {
             position: absolute;
             top: 0;
@@ -182,6 +186,17 @@
             transition: mask-size .12s;
             z-index: 1;
         }
+
+        .mobile-instructions {
+            display: none;
+            background: #e8f4fc;
+            border: 1px solid #b3e0ff;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            text-align: left;
+        }
+
         #desktop-done {
             display: inline-block;
             margin: 20px auto;
@@ -221,6 +236,8 @@
             -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
     </style>
+    <script src="https://unpkg.com/jspsych@7.3.3/dist/jspsych.js"></script>
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet">
 </head>
 <body>
     <div class="instructions">
@@ -229,6 +246,12 @@
         <p>Click the <strong>DONE</strong> button to reveal your reading pattern and data</p>
         <p>If you are on a phone, <strong>start by scrolling up</strong>, so you can see the entire text box.</p>
     </div>
+
+ <!--   <div class="mobile-instructions" style="display:none;">
+        <strong>Mobile instruktioner:</strong><br>
+        • Brug en finger til at afsløre teksten.<br>
+        • Scroll på siden ved at swipe i højre side.<br>
+    </div> -->
 
     <div class="canvas-container">
         <div class="blur-layer"></div>
@@ -244,7 +267,12 @@
         <button id="mobile-done">DONE</button>
     </div>
 
+
+    <!-- Single container for heatmap AND all data -->
     <div id="heatmap-container">
+        <h3>Reading Pattern Analysis:</h3>
+
+        <!-- Heatmap image -->
         <canvas id="heatmap-canvas" width="800" height="400" style="display: none;"></canvas>
         <img id="heatmap-image" alt="Heatmap visualization">
 
@@ -263,10 +291,50 @@
             </div>
         </div>
 
+
+        <!-- Stat boxes -->
+<!--		   <div class="stats-container">
+            <div class="stat-box">
+                <strong>Total Time</strong><br>
+                <span id="total-time">0</span> ms
+            </div>
+            <div class="stat-box">
+                <strong>Reading Speed</strong><br>
+                <span id="reading-speed">0</span>
+            </div>
+            <div class="stat-box">
+                <strong>Word Count</strong><br>
+                <span id="word-count">0</span> words
+            </div>
+            <div class="stat-box">
+                <strong>Re-reading Rate</strong><br>
+                <span id="rereading-rate">0</span>%
+            </div>
+            <div class="stat-box">
+                <strong>Return Sweeps</strong><br>
+                <span id="return-sweeps">0</span>
+            </div>
+            <div class="stat-box">
+                <strong>Pauses (&gt;500ms)</strong><br>
+                <span id="pause-count">0</span>
+            </div>
+            <div class="stat-box">
+                <strong>Mouse Distance</strong><br>
+                <span id="mouse-distance">0</span> px
+            </div>
+            <div class="stat-box">
+                <strong>Text Coverage</strong><br>
+                <span id="coverage">0</span>%
+            </div>
+        </div>
+-->
+
+
+        <!-- Raw data display -->
         <div id="raw-data-container" style="margin-top: 20px;">
             <h3>Raw Experiment Data:</h3>
             <div class="data-section">
-                <h4>Here are some basic stats...</h4>
+                <h4>Detailed Statistics:</h4>
                 <div id="statistics"></div>
             </div>
             <div class="data-section">
@@ -286,53 +354,58 @@
                               navigator.msMaxTouchPoints > 0;
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-        // Cached DOM references
-        const canvas              = document.getElementById('canvas');
-        const ctx                 = canvas.getContext('2d');
-        const blurLayer           = document.querySelector('.blur-layer');
-        const canvasContainer     = document.querySelector('.canvas-container');
-        const desktopDoneButton   = document.getElementById('desktop-done');
-        const desktopDoneContainer = document.getElementById('desktop-done-container');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const blurLayer = document.querySelector('.blur-layer');
+        const canvasContainer = document.querySelector('.canvas-container');
+
+        const desktopDoneButton = document.getElementById('desktop-done');
         const mobileDoneContainer = document.getElementById('mobile-done-container');
-        const mobileDoneButton    = document.getElementById('mobile-done');
-        const heatmapContainer    = document.getElementById('heatmap-container');
-        const heatmapCanvas       = document.getElementById('heatmap-canvas');
-        const heatmapImage        = document.getElementById('heatmap-image');
-        const heatmapCtx          = heatmapCanvas ? heatmapCanvas.getContext('2d') : null;
-        const mouseDataElement    = document.getElementById('mouse-data');
-        const statisticsElement   = document.getElementById('statistics');
-        const textContentElement  = document.getElementById('text-content');
+        const mobileDoneButton = document.getElementById('mobile-done');
+        const mobileInstructions = document.querySelector('.mobile-instructions');
+
+        const heatmapContainer = document.getElementById('heatmap-container');
+        const heatmapCanvas = document.getElementById('heatmap-canvas');
+        const heatmapImage = document.getElementById('heatmap-image');
+        const heatmapCtx = heatmapCanvas ? heatmapCanvas.getContext('2d') : null;
+
+        const mouseDataElement = document.getElementById('mouse-data');
+        const statisticsElement = document.getElementById('statistics');
+        const textContentElement = document.getElementById('text-content');
+        const totalTimeElement = document.getElementById('total-time');
+        const readingSpeedElement = document.getElementById('reading-speed');
 
         const mouseData = [];
         const startTime = Date.now();
-        let isMouseInside    = false;
+        let isMouseInside = false;
         let experimentFinished = false;
-        let containerRect    = null;
-        let cachedLines      = [];
+        let containerRect = null;
 
         const experimentText = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it a was a hobbit-hole, and that means comfort. It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats- the hobbit was fond of visitors.";
 
-        const fontSize            = 18;
-        const lineHeight          = 25;
-        const horizontalPadding   = 30;
-        const verticalPaddingTop  = 20;
-        const verticalPaddingBottom = 60;
 
-        // ─── Canvas sizing ────────────────────────────────────────────────────────
+        const fontSize = 18;
+        const lineHeight = 25;
+        const horizontalPadding = 30;
+        const verticalPaddingTop = 20;
+        const verticalPaddingBottom = 60;
 
         function calculateRequiredHeight() {
             const tempCanvas = document.createElement('canvas');
-            const tempCtx    = tempCanvas.getContext('2d');
-            tempCtx.font     = `${fontSize}px Arial`;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.font = `${fontSize}px Arial`;
 
             const words = experimentText.split(' ');
             let currentLine = '';
-            let lineCount   = 0;
-            const availableWidth = canvasContainer.clientWidth - horizontalPadding;
+            let lineCount = 0;
 
-            for (const word of words) {
+            for (let word of words) {
                 const testLine = currentLine + (currentLine ? ' ' : '') + word;
-                if (tempCtx.measureText(testLine).width > availableWidth && currentLine) {
+                const metrics = tempCtx.measureText(testLine);
+                const containerWidth = canvasContainer.clientWidth;
+                const availableWidth = containerWidth - horizontalPadding;
+
+                if (metrics.width > availableWidth && currentLine) {
                     lineCount++;
                     currentLine = word;
                 } else {
@@ -341,7 +414,7 @@
             }
             if (currentLine) lineCount++;
 
-            const requiredHeight   = (lineCount * lineHeight) + verticalPaddingTop + verticalPaddingBottom;
+            const requiredHeight = (lineCount * lineHeight) + verticalPaddingTop + verticalPaddingBottom;
             const maxAvailableHeight = window.innerHeight * 0.85;
             return Math.max(requiredHeight, maxAvailableHeight * 0.6);
         }
@@ -351,9 +424,10 @@
             const lines = [];
             let currentLine = '';
 
-            for (const word of words) {
+            for (let word of words) {
                 const testLine = currentLine + (currentLine ? ' ' : '') + word;
-                if (ctx.measureText(testLine).width > maxWidth && currentLine) {
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > maxWidth && currentLine) {
                     lines.push(currentLine);
                     currentLine = word;
                 } else {
@@ -364,51 +438,28 @@
             return lines;
         }
 
-        function resizeCanvas() {
-            const containerWidth  = canvasContainer.clientWidth;
-            const canvasWidth     = Math.min(800, containerWidth);
-            const requiredHeight  = calculateRequiredHeight();
-
-            canvas.width  = canvasWidth;
-            canvas.height = requiredHeight;
-
-            if (heatmapCanvas) {
-                heatmapCanvas.width  = canvasWidth;
-                heatmapCanvas.height = requiredHeight;
-            }
-
-            // Cache lines once after resize so drawCanvas and generateHeatmap reuse them
-            ctx.font  = `${fontSize}px Arial`;
-            cachedLines = getTextLines(experimentText, canvas.width - horizontalPadding);
-
-            drawCanvas();
-        }
-
-        // ─── Drawing ──────────────────────────────────────────────────────────────
-
         function drawCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#e0e0e0';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = 'black';
             ctx.font = `${fontSize}px Arial`;
-            cachedLines.forEach((line, index) => {
+            const lines = getTextLines(experimentText, canvas.width - horizontalPadding);
+            lines.forEach((line, index) => {
                 ctx.fillText(line, horizontalPadding / 2, verticalPaddingTop + 10 + (index * lineHeight));
             });
         }
 
-        // ─── Blur layer ───────────────────────────────────────────────────────────
-
         function initBlurPosition() {
             blurLayer.style.maskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
-            blurLayer.style.webkitMaskImage = blurLayer.style.maskImage;
+            blurLayer.style.webkitMaskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
         }
 
         function updateBlurPosition(clientX, clientY) {
             containerRect = canvasContainer.getBoundingClientRect();
-            const x       = clientX - containerRect.left;
+            const x = clientX - containerRect.left;
             const yOffset = 40;
-            const y       = clientY - containerRect.top - yOffset;
+            const y = clientY - containerRect.top - yOffset;
 
             if (x >= 0 && y + yOffset >= 0 && x <= containerRect.width && y + yOffset <= containerRect.height) {
                 const gradient = `radial-gradient(ellipse 60px 30px at ${x}px ${y}px, transparent 0%, #000 100%)`;
@@ -421,50 +472,38 @@
 
         function resetBlurPosition() {
             blurLayer.style.maskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
-            blurLayer.style.webkitMaskImage = blurLayer.style.maskImage;
+            blurLayer.style.webkitMaskImage = 'radial-gradient(circle 80px at -1000px -1000px, transparent 0%, #000 100%)';
         }
-
-        // ─── Position recording (single unified function) ─────────────────────────
-
-        function recordPosition(clientX, clientY) {
-            containerRect     = canvasContainer.getBoundingClientRect();
-            const x           = clientX - containerRect.left;
-            const yOffset     = 40;
-            const y           = clientY - containerRect.top - yOffset;
-            if (x >= 0 && y + yOffset >= 0 && x <= containerRect.width && y + yOffset <= containerRect.height) {
-                mouseData.push({
-                    x: Math.round(x),
-                    y: Math.round(y),
-                    timestamp: Date.now() - startTime
-                });
-            }
-        }
-
-        // ─── Heatmap ──────────────────────────────────────────────────────────────
 
         function generateHeatmap() {
             if (!heatmapCtx) return;
+
             try {
                 const w = heatmapCanvas.width;
                 const h = heatmapCanvas.height;
 
+                // Step 1: Build a density grid
                 const gridResolution = 5;
-                const gridWidth      = Math.ceil(w / gridResolution);
-                const gridHeight     = Math.ceil(h / gridResolution);
-                const heatmapGrid    = Array(gridWidth).fill(null).map(() => Array(gridHeight).fill(0));
-                const blurRadius     = 40;
+                const gridWidth  = Math.ceil(w / gridResolution);
+                const gridHeight = Math.ceil(h / gridResolution);
+                const heatmapGrid = Array(gridWidth).fill(null).map(() => Array(gridHeight).fill(0));
+
+                const blurRadius = 40;
 
                 for (const point of mouseData) {
                     const cx = Math.floor(point.x / gridResolution);
                     const cy = Math.floor(point.y / gridResolution);
                     const r  = Math.ceil(blurRadius / gridResolution);
+
                     for (let dx = -r; dx <= r; dx++) {
                         for (let dy = -r; dy <= r; dy++) {
                             const gx = cx + dx;
                             const gy = cy + dy;
                             if (gx < 0 || gx >= gridWidth || gy < 0 || gy >= gridHeight) continue;
                             const dist = Math.sqrt(dx * dx + dy * dy) / r;
-                            if (dist <= 1) heatmapGrid[gx][gy] += Math.exp(-dist * dist * 3);
+                            if (dist <= 1) {
+                                heatmapGrid[gx][gy] += Math.exp(-dist * dist * 3);
+                            }
                         }
                     }
                 }
@@ -474,21 +513,24 @@
                     for (let y = 0; y < gridHeight; y++)
                         maxCount = Math.max(maxCount, heatmapGrid[x][y]);
 
+                // Step 2: Blue/purple base background
                 heatmapCtx.clearRect(0, 0, w, h);
                 heatmapCtx.fillStyle = 'rgb(100, 100, 200)';
                 heatmapCtx.fillRect(0, 0, w, h);
 
+                // Step 3: Gaussian blobs
                 if (maxCount > 0) {
-                    const tempCanvas  = document.createElement('canvas');
+                    const tempCanvas = document.createElement('canvas');
                     tempCanvas.width  = w;
                     tempCanvas.height = h;
-                    const tempCtx     = tempCanvas.getContext('2d');
+                    const tempCtx = tempCanvas.getContext('2d');
 
                     for (const point of mouseData) {
-                        const gx      = Math.floor(point.x / gridResolution);
-                        const gy      = Math.floor(point.y / gridResolution);
+                        const gx = Math.floor(point.x / gridResolution);
+                        const gy = Math.floor(point.y / gridResolution);
                         const density = (gx >= 0 && gx < gridWidth && gy >= 0 && gy < gridHeight)
-                            ? heatmapGrid[gx][gy] / maxCount : 0;
+                            ? heatmapGrid[gx][gy] / maxCount
+                            : 0;
 
                         let r, g, b;
                         if (density < 0.25) {
@@ -502,20 +544,29 @@
                         }
 
                         const blobRadius = blurRadius * 1.5;
-                        const gradient   = tempCtx.createRadialGradient(point.x, point.y, 0, point.x, point.y, blobRadius);
+                        const gradient = tempCtx.createRadialGradient(
+                            point.x, point.y, 0,
+                            point.x, point.y, blobRadius
+                        );
                         gradient.addColorStop(0,   `rgba(${r},${g},${b},0.25)`);
                         gradient.addColorStop(0.5, `rgba(${r},${g},${b},0.08)`);
                         gradient.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+
                         tempCtx.fillStyle = gradient;
-                        tempCtx.fillRect(point.x - blobRadius, point.y - blobRadius, blobRadius * 2, blobRadius * 2);
+                        tempCtx.fillRect(
+                            point.x - blobRadius, point.y - blobRadius,
+                            blobRadius * 2,       blobRadius * 2
+                        );
                     }
+
                     heatmapCtx.drawImage(tempCanvas, 0, 0);
                 }
 
-                // Draw text on top using cached lines
+                // Step 4: Text on top
                 heatmapCtx.fillStyle = 'rgba(30, 20, 60, 0.85)';
-                heatmapCtx.font      = `${fontSize}px Arial`;
-                cachedLines.forEach((line, index) => {
+                heatmapCtx.font = `${fontSize}px Arial`;
+                const lines = getTextLines(experimentText, heatmapCanvas.width - horizontalPadding);
+                lines.forEach((line, index) => {
                     heatmapCtx.fillText(line, horizontalPadding / 2, verticalPaddingTop + 10 + (index * lineHeight));
                 });
 
@@ -527,7 +578,8 @@
         function convertHeatmapToImage() {
             if (!heatmapCanvas || !heatmapImage) return;
             try {
-                heatmapImage.src          = heatmapCanvas.toDataURL('image/png');
+                const dataURL = heatmapCanvas.toDataURL('image/png');
+                heatmapImage.src = dataURL;
                 heatmapImage.style.display = 'block';
                 heatmapCanvas.style.display = 'none';
             } catch (error) {
@@ -535,160 +587,179 @@
             }
         }
 
-        // ─── Raw data display ─────────────────────────────────────────────────────
-
         function displayRawData() {
-            const totalTime      = Date.now() - startTime;
-            const wordCount      = experimentText.split(' ').length;
-            const wordsPerSecond = (wordCount / (totalTime / 1000)).toFixed(2);
-            const wordsPerMinute = Math.round(wordCount / (totalTime / 60000));
-            const pointsCount    = mouseData.length;
 
-            // Forward / backward / return sweep detection
+// Update stat boxes (safely, in case they are commented out)
+if (totalTimeElement) totalTimeElement.textContent = totalTime;
+if (readingSpeedElement) readingSpeedElement.textContent = `${wordsPerSecond} w/s (${wordsPerMinute} WPM)`;
+
+const wordCountEl = document.getElementById('word-count');
+const rereadingRateEl = document.getElementById('rereading-rate');
+const returnSweepsEl = document.getElementById('return-sweeps');
+const pauseCountEl = document.getElementById('pause-count');
+const mouseDistanceEl = document.getElementById('mouse-distance');
+const coverageEl = document.getElementById('coverage');
+
+if (wordCountEl) wordCountEl.textContent = wordCount;
+if (rereadingRateEl) rereadingRateEl.textContent = rereadingRate;
+if (returnSweepsEl) returnSweepsEl.textContent = returnSweeps;
+if (pauseCountEl) pauseCountEl.textContent = pauses.length;
+if (mouseDistanceEl) mouseDistanceEl.textContent = Math.round(totalDistance);
+if (coverageEl) coverageEl.textContent = coveragePct;
+            // Forward, backward, and return sweep detection
             let backwardMoves = 0;
-            let forwardMoves  = 0;
-            let returnSweeps  = 0;
+            let forwardMoves = 0;
+            let returnSweeps = 0;
+const lineHeightTolerance = lineHeight * 0.75;
 
-            for (let i = 1; i < mouseData.length; i++) {
-                const dx = mouseData[i].x - mouseData[i - 1].x;
-                const dy = mouseData[i].y - mouseData[i - 1].y;
+for (let i = 1; i < mouseData.length; i++) {
+    const dx = mouseData[i].x - mouseData[i-1].x;
+    const dy = mouseData[i].y - mouseData[i-1].y;
 
-                const movingLeft  = dx < -5;
-                const movingDown  = dy > (lineHeight * 0.3) && dy < lineHeight * 3;
-                const bigLeftJump = dx < -(heatmapCanvas.width * 0.1);
-                const stableY     = Math.abs(dy) < lineHeight * 0.3;
+    const movingLeft = dx < -5;
 
-                if (movingLeft) {
-                    if (movingDown && bigLeftJump) returnSweeps++;
-                    else if (stableY) backwardMoves++;
-                } else if (dx > 5) {
-                    forwardMoves++;
-                }
-            }
+    // More generous: any downward movement within 3 lines
+    const movingDown = dy > (lineHeight * 0.3) && dy < lineHeight * 3;
+
+    // More generous: any leftward jump > 10% of canvas width
+    const bigLeftJump = dx < -(heatmapCanvas.width * 0.1);
+
+    // Stricter: Y must be very stable to count as re-reading
+    const stableY = Math.abs(dy) < lineHeight * 0.3;
+
+    if (movingLeft) {
+        if (movingDown && bigLeftJump) {
+            returnSweeps++;
+        } else if (stableY) {
+            backwardMoves++;
+        }
+        // movements that are neither are ignored (diagonal drift etc.)
+    } else if (dx > 5) {
+        forwardMoves++;
+    }
+}
 
             const rereadingRate = forwardMoves > 0
-                ? ((backwardMoves / forwardMoves) * 100).toFixed(1) : 0;
+                ? ((backwardMoves / forwardMoves) * 100).toFixed(1)
+                : 0;
 
             // Pauses
             const pauseThreshold = 500;
             const pauses = [];
             for (let i = 1; i < mouseData.length; i++) {
-                const gap = mouseData[i].timestamp - mouseData[i - 1].timestamp;
+                const gap = mouseData[i].timestamp - mouseData[i-1].timestamp;
                 if (gap > pauseThreshold) {
-                    pauses.push({ x: mouseData[i - 1].x, y: mouseData[i - 1].y, duration: gap });
+                    pauses.push({ x: mouseData[i-1].x, y: mouseData[i-1].y, duration: gap });
                 }
             }
 
             // Total distance
             let totalDistance = 0;
             for (let i = 1; i < mouseData.length; i++) {
-                const dx = mouseData[i].x - mouseData[i - 1].x;
-                const dy = mouseData[i].y - mouseData[i - 1].y;
-                totalDistance += Math.sqrt(dx * dx + dy * dy);
+                const dx = mouseData[i].x - mouseData[i-1].x;
+                const dy = mouseData[i].y - mouseData[i-1].y;
+                totalDistance += Math.sqrt(dx*dx + dy*dy);
             }
 
             // Coverage
-            const cellSize    = 20;
+            const cellSize = 20;
             const visitedCells = new Set(
                 mouseData.map(p => `${Math.floor(p.x / cellSize)},${Math.floor(p.y / cellSize)}`)
             );
-            const totalCells   = Math.ceil(heatmapCanvas.width / cellSize) * Math.ceil(heatmapCanvas.height / cellSize);
-            const coveragePct  = ((visitedCells.size / totalCells) * 100).toFixed(1);
+            const totalCells = Math.ceil(heatmapCanvas.width / cellSize) * Math.ceil(heatmapCanvas.height / cellSize);
+            const coveragePct = ((visitedCells.size / totalCells) * 100).toFixed(1);
 
             // Time per line
             const lineGroups = {};
             mouseData.forEach((p, i) => {
                 const lineIndex = Math.floor((p.y - verticalPaddingTop) / lineHeight);
                 if (!lineGroups[lineIndex]) lineGroups[lineIndex] = [];
-                if (i > 0) lineGroups[lineIndex].push(mouseData[i].timestamp - mouseData[i - 1].timestamp);
+                if (i > 0) {
+                    lineGroups[lineIndex].push(mouseData[i].timestamp - mouseData[i-1].timestamp);
+                }
             });
             const timePerLine = Object.entries(lineGroups)
-                .map(([line, times]) => ({ line: parseInt(line) + 1, ms: times.reduce((a, b) => a + b, 0) }))
+                .map(([line, times]) => ({
+                    line: parseInt(line) + 1,
+                    ms: times.reduce((a, b) => a + b, 0)
+                }))
                 .filter(l => l.line > 0)
                 .sort((a, b) => a.line - b.line);
 
+            // Update stat boxes
+            totalTimeElement.textContent = totalTime;
+            readingSpeedElement.textContent = `${wordsPerSecond} w/s (${wordsPerMinute} WPM)`;
+            document.getElementById('word-count').textContent = wordCount;
+            document.getElementById('rereading-rate').textContent = rereadingRate;
+            document.getElementById('return-sweeps').textContent = returnSweeps;
+            document.getElementById('pause-count').textContent = pauses.length;
+            document.getElementById('mouse-distance').textContent = Math.round(totalDistance);
+            document.getElementById('coverage').textContent = coveragePct;
+
             // Detailed statistics panel
-            statisticsElement.innerHTML = `
+            const statsHTML = `
                 <p><strong>Total experiment time:</strong> ${totalTime} ms</p>
                 <p><strong>Word count:</strong> ${wordCount} words</p>
                 <p><strong>Reading speed:</strong> ${wordsPerSecond} words/sec (${wordsPerMinute} WPM)</p>
+                
                 <p><strong>Pauses (&gt;500ms):</strong> ${pauses.length} detected</p>
+                
+                
                 <p><strong>Time per line:</strong><br>
                     ${timePerLine.map(l => `Line ${l.line}: ${l.ms} ms`).join('<br>')}
                 </p>
-                <p><strong>First position:</strong> x: ${mouseData[0]?.x ?? 'N/A'}, y: ${mouseData[0]?.y ?? 'N/A'}</p>
-                <p><strong>Last position:</strong> x: ${mouseData[pointsCount - 1]?.x ?? 'N/A'}, y: ${mouseData[pointsCount - 1]?.y ?? 'N/A'}</p>
+                <p><strong>First position:</strong> x: ${mouseData[0]?.x || 'N/A'}, y: ${mouseData[0]?.y || 'N/A'}</p>
+                <p><strong>Last position:</strong> x: ${mouseData[pointsCount-1]?.x || 'N/A'}, y: ${mouseData[pointsCount-1]?.y || 'N/A'}</p>
             `;
+            statisticsElement.innerHTML = statsHTML;
 
             // JSON output
-            mouseDataElement.textContent = JSON.stringify({
-                total_time_ms:      totalTime,
-                word_count:         wordCount,
-                words_per_second:   parseFloat(wordsPerSecond),
-                words_per_minute:   wordsPerMinute,
+            const formattedData = JSON.stringify({
+                total_time_ms: totalTime,
+                word_count: wordCount,
+                words_per_second: parseFloat(wordsPerSecond),
+                words_per_minute: wordsPerMinute,
                 rereading_rate_pct: parseFloat(rereadingRate),
-                return_sweeps:      returnSweeps,
-                pauses,
-                total_distance_px:  Math.round(totalDistance),
-                coverage_pct:       parseFloat(coveragePct),
-                time_per_line_ms:   timePerLine,
-                mouse_positions:    mouseData,
-                text_content:       experimentText
+                return_sweeps: returnSweeps,
+                pauses: pauses,
+                total_distance_px: Math.round(totalDistance),
+                coverage_pct: parseFloat(coveragePct),
+                time_per_line_ms: timePerLine,
+                mouse_positions: mouseData,
+                text_content: experimentText
             }, null, 2);
 
+            mouseDataElement.textContent = formattedData;
             textContentElement.textContent = experimentText;
         }
 
-        // ─── Complete experiment ──────────────────────────────────────────────────
-
-        function completeExperiment() {
-            if (experimentFinished) return;
-            experimentFinished = true;
-
-            canvasContainer.style.display = 'none';
-            mobileDoneContainer.style.setProperty('display', 'none', 'important');
-            desktopDoneButton.style.display   = 'none';
-            desktopDoneContainer.style.display = 'none';
-
-            const instructions = document.querySelector('.instructions');
-            if (instructions) {
-                const firstP = instructions.querySelector('p:first-child');
-                const lastP  = instructions.querySelector('p:last-child');
-                if (firstP) firstP.textContent    = 'Your reading analysis:';
-                if (lastP)  lastP.style.display   = 'none';
-            }
-
-            generateHeatmap();
-            convertHeatmapToImage();
-            heatmapContainer.style.display = 'block';
-            displayRawData();
-        }
-
-        // ─── Event listeners ──────────────────────────────────────────────────────
-
         function setupEventListeners() {
-            canvas.addEventListener('mouseenter', () => { isMouseInside = true; });
-            canvas.addEventListener('mouseleave', () => {
+            canvas.addEventListener('mouseenter', function() { isMouseInside = true; });
+            canvas.addEventListener('mouseleave', function() {
                 isMouseInside = false;
                 resetBlurPosition();
             });
-            canvas.addEventListener('mousemove', (event) => {
+            canvas.addEventListener('mousemove', function(event) {
                 if (experimentFinished) return;
                 updateBlurPosition(event.clientX, event.clientY);
-                recordPosition(event.clientX, event.clientY);
+                recordPositionIfInside(event.clientX, event.clientY);
             });
 
             let isTouchActive = false;
+            let lastTouchX = null;
+            let lastTouchY = null;
 
-            canvasContainer.addEventListener('touchstart', (event) => {
+            canvasContainer.addEventListener('touchstart', function(event) {
                 if (event.touches.length === 1) {
                     const touch = event.touches[0];
-                    const rect  = canvasContainer.getBoundingClientRect();
+                    const rect = canvasContainer.getBoundingClientRect();
                     if (touch.clientX < rect.right - (rect.width * 0.3)) {
                         event.preventDefault();
                         isMouseInside = updateBlurPosition(touch.clientX, touch.clientY);
                         if (isMouseInside) recordPosition(touch.clientX, touch.clientY);
                         isTouchActive = true;
+                        lastTouchX = touch.clientX;
+                        lastTouchY = touch.clientY;
                     } else {
                         isMouseInside = false;
                         isTouchActive = false;
@@ -699,64 +770,149 @@
                 }
             }, { passive: false });
 
-            canvasContainer.addEventListener('touchmove', (event) => {
+            canvasContainer.addEventListener('touchmove', function(event) {
                 if (event.touches.length === 1 && isTouchActive) {
                     const touch = event.touches[0];
                     event.preventDefault();
                     updateBlurPosition(touch.clientX, touch.clientY);
                     recordPosition(touch.clientX, touch.clientY);
+                    lastTouchX = touch.clientX;
+                    lastTouchY = touch.clientY;
                 } else {
                     isMouseInside = false;
                     isTouchActive = false;
                 }
             }, { passive: false });
 
-            canvasContainer.addEventListener('touchend', () => {
+            canvasContainer.addEventListener('touchend', function() {
                 isMouseInside = false;
                 isTouchActive = false;
                 resetBlurPosition();
             });
 
-            canvasContainer.addEventListener('touchcancel', () => {
+            canvasContainer.addEventListener('touchcancel', function() {
                 isMouseInside = false;
                 isTouchActive = false;
                 resetBlurPosition();
             });
 
-            // Done buttons — both point directly to completeExperiment
-            [desktopDoneButton, mobileDoneButton].forEach(btn => {
-                if (!btn) return;
-                btn.addEventListener('click', completeExperiment);
-                btn.addEventListener('touchend', (event) => {
+            function recordPosition(clientX, clientY) {
+                containerRect = canvasContainer.getBoundingClientRect();
+                const x = clientX - containerRect.left;
+                const yOffset = 40;
+                const y = clientY - containerRect.top - yOffset;
+                if (x >= 0 && y + yOffset >= 0 && x <= containerRect.width && y + yOffset <= containerRect.height) {
+                    mouseData.push({
+                        x: Math.round(x),
+                        y: Math.round(y),
+                        timestamp: Date.now() - startTime
+                    });
+                }
+            }
+
+            function recordPositionIfInside(clientX, clientY) {
+                const yOffset = 40;
+                containerRect = canvasContainer.getBoundingClientRect();
+                const x = clientX - containerRect.left;
+                const y = clientY - containerRect.top - yOffset;
+                if (x >= 0 && y + yOffset >= 0 && x <= containerRect.width && y + yOffset <= containerRect.height) {
+                    recordPosition(clientX, clientY);
+                }
+            }
+
+            function handleDoneButton() {
+                if (experimentFinished) return;
+                completeExperiment();
+            }
+
+            if (desktopDoneButton) {
+                desktopDoneButton.addEventListener('click', handleDoneButton);
+                desktopDoneButton.addEventListener('touchend', function(event) {
                     event.stopPropagation();
                     event.preventDefault();
-                    completeExperiment();
+                    handleDoneButton();
+                    return false;
                 }, { passive: false });
-            });
+            }
+
+            if (mobileDoneButton) {
+                mobileDoneButton.addEventListener('click', handleDoneButton);
+                mobileDoneButton.addEventListener('touchend', function(event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    handleDoneButton();
+                    return false;
+                }, { passive: false });
+            }
         }
 
-        // ─── Init ─────────────────────────────────────────────────────────────────
+function completeExperiment() {
+    experimentFinished = true;
+
+    if (canvasContainer) canvasContainer.style.display = 'none';
+    if (mobileDoneContainer) mobileDoneContainer.style.setProperty('display', 'none', 'important');
+
+
+    // Hide the desktop Done button and its container
+    const desktopDoneBtn = document.getElementById('desktop-done');
+    if (desktopDoneBtn) desktopDoneBtn.style.display = 'none';
+
+    const desktopDoneContainer = document.getElementById('desktop-done-container');
+    if (desktopDoneContainer) desktopDoneContainer.style.display = 'none';
+
+    const instructions = document.querySelector('.instructions');
+    if (instructions) {
+        const firstParagraph = instructions.querySelector('p:first-child');
+        const lastParagraph  = instructions.querySelector('p:last-child');
+        if (firstParagraph) firstParagraph.textContent = 'Your reading analysis:';
+        if (lastParagraph)  lastParagraph.style.display = 'none';
+    }
+
+    generateHeatmap();
+    convertHeatmapToImage();
+
+    if (heatmapContainer) heatmapContainer.style.display = 'block';
+    displayRawData();
+}
+
 
         function init() {
             try {
+                function resizeCanvas() {
+                    const containerWidth = canvasContainer.clientWidth;
+                    const canvasWidth = Math.min(800, containerWidth);
+                    const requiredHeight = calculateRequiredHeight();
+
+                    canvas.width = canvasWidth;
+                    canvas.height = requiredHeight;
+
+                    if (heatmapCanvas) {
+                        heatmapCanvas.width = canvasWidth;
+                        heatmapCanvas.height = requiredHeight;
+                    }
+                    drawCanvas();
+                }
+
                 resizeCanvas();
 
-                // Use ResizeObserver for reliable sizing instead of multiple setTimeout calls
-                new ResizeObserver(() => resizeCanvas()).observe(canvasContainer);
-
                 let resizeTimeout;
-                window.addEventListener('resize', () => {
+                window.addEventListener('resize', function() {
                     clearTimeout(resizeTimeout);
                     resizeTimeout = setTimeout(resizeCanvas, 50);
                 });
 
+                setTimeout(resizeCanvas, 100);
+                setTimeout(resizeCanvas, 300);
+
                 setupEventListeners();
+                drawCanvas();
                 initBlurPosition();
 
                 if (isTouchDevice) {
-                    mobileDoneContainer.style.display = 'flex';
-                    const instrP = document.querySelector('.instructions p:first-child');
-                    if (instrP) instrP.textContent = 'Drag your finger across the text box to reveal hidden text';
+                    if (mobileInstructions) mobileInstructions.style.display = 'block';
+                    if (mobileDoneContainer) mobileDoneContainer.style.display = 'flex';
+                    const instructions = document.querySelector('.instructions p:first-child');
+                    if (instructions) instructions.textContent = 'Drag your finger across the text box to reveal hidden text';
                     if (isIOS) {
                         setTimeout(() => {
                             canvasContainer.style.opacity = '0.99';
@@ -764,28 +920,43 @@
                         }, 100);
                     }
                 } else {
-                    mobileDoneContainer.style.display = 'none';
+                    if (mobileInstructions) mobileInstructions.style.display = 'none';
+                    if (mobileDoneContainer) mobileDoneContainer.style.display = 'none';
                 }
 
-                // Right scroll area touch handling (mobile only)
                 if (window.innerWidth <= 768) {
-                    document.body.addEventListener('touchmove', (e) => {
+                    var scrollArea = document.getElementById('right-scroll-area');
+                    if (!scrollArea) {
+                        scrollArea = document.createElement('div');
+                        scrollArea.id = 'right-scroll-area';
+                        document.body.appendChild(scrollArea);
+                    }
+                    scrollArea.style.position = 'fixed';
+                    scrollArea.style.top = '0';
+                    scrollArea.style.right = '0';
+                    scrollArea.style.width = '30vw';
+                    scrollArea.style.minWidth = '80px';
+                    scrollArea.style.height = '100vh';
+                    scrollArea.style.zIndex = '9999';
+                    scrollArea.style.touchAction = 'pan-y';
+                    scrollArea.style.background = 'transparent';
+
+                    document.body.addEventListener('touchmove', function(e) {
                         if (!e.target.closest('#right-scroll-area')) e.preventDefault();
                     }, { passive: false });
 
-                    const scrollArea = document.getElementById('right-scroll-area');
                     let lastY = null;
-                    scrollArea.addEventListener('touchstart', (e) => {
+                    scrollArea.addEventListener('touchstart', function(e) {
                         if (e.touches.length === 1) lastY = e.touches[0].clientY;
                     }, { passive: true });
-                    scrollArea.addEventListener('touchmove', (e) => {
+                    scrollArea.addEventListener('touchmove', function(e) {
                         if (e.touches.length === 1 && lastY !== null) {
                             const currentY = e.touches[0].clientY;
                             window.scrollBy(0, lastY - currentY);
                             lastY = currentY;
                         }
                     }, { passive: false });
-                    scrollArea.addEventListener('touchend', () => { lastY = null; }, { passive: true });
+                    scrollArea.addEventListener('touchend', function() { lastY = null; }, { passive: true });
                 }
 
             } catch (error) {
