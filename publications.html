@@ -1,0 +1,88 @@
+---
+layout: null
+title: Publications
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publications — Ethan Weed</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.social/@yourusername" />
+  <link rel="me" href="https://scholar.social/@yourusername" />
+</head>
+<body>
+
+  <header>
+    <h1><a href="/">Ethan Weed</a></h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/research">Research</a>
+      <a href="/teaching">Teaching</a>
+      <a href="/publications" class="active">Publications</a>
+      <a href="/cv">CV</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Publications</h2>
+
+<ul class="pub-list">
+  {% assign sorted = site.data.citations | sort: "Year" | reverse %}
+  {% assign current_year = "" %}
+
+  {% for pub in sorted %}
+
+    {% if pub.Year != current_year %}
+      {% unless forloop.first %}</ul>{% endunless %}
+      <h3>{{ pub.Year }}</h3>
+      <ul class="pub-list">
+      {% assign current_year = pub.Year %}
+    {% endif %}
+
+    <li>
+      <span class="pub-title">{{ pub.Title }}</span><br />
+      <span class="pub-authors">
+        {{ pub.Authors | remove: " ;" | remove: ";" | strip }}
+      </span>
+
+      {% if pub.Publication != "" %}
+        · <em>{{ pub.Publication }}</em>
+      {% endif %}
+
+      {% comment %} Only show volume/pages block if something is there {% endcomment %}
+      {% assign has_volume = false %}
+      {% assign has_pages = false %}
+      {% if pub.Volume and pub.Volume != "" %}{% assign has_volume = true %}{% endif %}
+      {% if pub.Pages and pub.Pages != "" %}{% assign has_pages = true %}{% endif %}
+
+      {% if has_volume %}
+        {% if pub.Number and pub.Number != "" %}
+          · {{ pub.Volume }}({{ pub.Number }})
+        {% else %}
+          · {{ pub.Volume }}
+        {% endif %}
+        {% if has_pages %}: {{ pub.Pages }}{% endif %}
+      {% elsif has_pages %}
+        · pp. {{ pub.Pages }}
+      {% endif %}
+
+    </li>
+
+  {% endfor %}
+</ul>
+
+
+
+  </main>
+
+  <footer>
+    <p>Ethan Weed · Aarhus University · Last updated March 2026</p>
+  </footer>
+
+</body>
+</html>

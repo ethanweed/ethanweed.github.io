@@ -217,3 +217,101 @@ footer {
     gap: 0.25rem 1rem;
   }
 }
+
+/* --- Carousel of Research Figures --- */
+.carousel-section {
+  margin-top: 2.5rem;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.carousel-track-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transition: transform 0.4s ease;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.carousel-slide a {
+  display: block;
+  border-bottom: none;
+  text-decoration: none;
+}
+
+.carousel-slide img {
+  max-width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.carousel-slide a:hover img {
+  opacity: 0.85;
+}
+
+.carousel-caption {
+  margin-top: 0.6rem;
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+.carousel-btn {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--color-muted);
+  flex-shrink: 0;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.carousel-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* Carousel dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+
+.carousel-dot.active {
+  background: var(--color-accent);
+}
