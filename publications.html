@@ -3,63 +3,57 @@ layout: default
 title: Publications
 ---
 
+<h2>Publications</h2>
 
+{% assign sorted = site.data.citations | sort: "Year" | reverse %}
+{% assign years = sorted | map: "Year" | uniq %}
 
-  <main class="container">
-    <h2>Publications</h2>
+{% for year in years %}
+  <h3>{{ year }}</h3>
+  <ul class="pub-list">
 
-<ul class="pub-list">
-  {% assign sorted = site.data.citations | sort: "Year" | reverse %}
-  {% assign current_year = "" %}
+    {% assign pubs_this_year = sorted | where: "Year", year %}
+    {% for pub in pubs_this_year %}
+      <li class="pub-item">
 
-  {% for pub in sorted %}
-
-    {% if pub.Year != current_year %}
-      {% unless forloop.first %}</ul>{% endunless %}
-      <h3>{{ pub.Year }}</h3>
-      <ul class="pub-list">
-      {% assign current_year = pub.Year %}
+	{% assign author_list = pub.Authors | split: "; " %}
+	{% assign clean_authors = "" %}
+	{% for author in author_list %}
+	  {% assign trimmed = author | remove: ";" | strip %}
+	  {% if trimmed != "" %}
+    {% if forloop.first %}
+      {% assign clean_authors = trimmed %}
+    {% else %}
+      {% assign clean_authors = clean_authors | append: "; " | append: trimmed %}
     {% endif %}
+  {% endif %}
+{% endfor %}
+{% assign highlighted_authors = clean_authors | replace: "Weed, Ethan", "<strong>Weed, Ethan</strong>" %}
+{{ highlighted_authors }}
 
-    <li>
-      <span class="pub-title">{{ pub.Title }}</span><br />
-      <span class="pub-authors">
-        {{ pub.Authors | remove: " ;" | remove: ";" | strip }}
-      </span>
 
-      {% if pub.Publication != "" %}
-        · <em>{{ pub.Publication }}</em>
-      {% endif %}
 
-      {% comment %} Only show volume/pages block if something is there {% endcomment %}
-      {% assign has_volume = false %}
-      {% assign has_pages = false %}
-      {% if pub.Volume and pub.Volume != "" %}{% assign has_volume = true %}{% endif %}
-      {% if pub.Pages and pub.Pages != "" %}{% assign has_pages = true %}{% endif %}
+        ({{ pub.Year }}).
 
-      {% if has_volume %}
-        {% if pub.Number and pub.Number != "" %}
-          · {{ pub.Volume }}({{ pub.Number }})
-        {% else %}
-          · {{ pub.Volume }}
+        {{ pub.Title }}.
+
+        {% if pub.Publication != "" %}
+          <em>{{ pub.Publication }}</em>
         {% endif %}
-        {% if has_pages %}: {{ pub.Pages }}{% endif %}
-      {% elsif has_pages %}
-        · pp. {{ pub.Pages }}
-      {% endif %}
 
-    </li>
+        {% if pub.Volume != "" and pub.Volume != nil %}
+          , <em>{{ pub.Volume }}</em>
+          {% if pub.Number != "" and pub.Number != nil %}({{ pub.Number }}){% endif %}
+          {% if pub.Pages != "" and pub.Pages != nil %}, {{ pub.Pages }}{% endif %}.
+        {% elsif pub.Pages != "" and pub.Pages != nil %}
+          , {{ pub.Pages }}.
+        {% else %}
+          .
+        {% endif %}
 
-  {% endfor %}
-</ul>
+      </li>
+    {% endfor %}
 
+  </ul>
+{% endfor %}
 
-
-  </main>
-
-  <footer>
-    <p>Ethan Weed · Aarhus University · Last updated March 2026</p>
-  </footer>
-
-</body>
-</html>

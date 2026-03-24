@@ -325,3 +325,28 @@ footer {
   gap: 1.5rem;
   margin-top: 1rem;
 }
+
+/* Publications */
+.pub-list {
+  list-style: none;
+  padding: 0;
+}
+
+.pub-item {
+  padding-left: 2rem;
+  text-indent: -2rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.pub-authors {
+  /* no special style needed */
+}
+
+.pub-year {
+  /* no special style needed */
+}
+
+.pub-title {
+  /* sentence case is handled in the CSV — no italic for article titles in APA */
+}
