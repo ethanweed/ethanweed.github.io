@@ -16,7 +16,7 @@
   --color-border:    #e2e2de;
   --font-body:       'Source Sans 3', system-ui, sans-serif;
   --font-serif:      'Source Serif 4', Georgia, serif;
-  --max-width:       700px;
+  --max-width:       860px;
   --line-height:     1.75;
 }
 
@@ -39,7 +39,9 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   padding: 0 1.5rem;
+  scrollbar-gutter: stable; 
 }
+
 
 /* --- Layout Container --- */
 .container {
@@ -314,4 +316,12 @@ footer {
 
 .carousel-dot.active {
   background: var(--color-accent);
+}
+
+/* Videos */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
 }

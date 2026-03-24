@@ -1,0 +1,36 @@
+---
+layout: default
+title: Videos
+---
+
+  <main class="container">
+    <h2>Videos</h2>
+
+    <div class="video-grid">
+      {% assign sorted_videos = site.data.videos | sort: "sort" | reverse %}
+      {% for video in sorted_videos %}
+      <div class="video-item">
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/{{ video.video_id }}"
+            title="{{ video.title }}"
+            frameborder="0"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="video-caption">
+          <strong>{{ video.title }}</strong><br />
+          {{ video.description }}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Ethan Weed · Aarhus University · Last updated March 2026</p>
+  </footer>
+
+</body>
+</html>
