@@ -186,21 +186,83 @@ DSM-V (2013): A more dimensional approach - subtypes are out
 
 ---
 
+- semantics
+- morphology and syntax
+- pragmatics (including prosody)
+
+---
+
+## Prosody 🎶
+
+:::::: {.two-col}
+
+::: {}
+Three types of prosodic feature:
+
+1. pitch
+1. rhythm
+1. timbre
+
+:::
+
+::: {}
+Two types of acoustic feature:
+
+1. source features (e.g. pitch, jitter)
+2. temporal features (pauses, articulation rate, etc.)
+
+:::
+
+::::::
+
+---
+
 # Autism and Language
 
 ---
 
-## 
+## Pronoun Reversal
 
 ![[@baltaxePragmaticDeficitsLanguage1977b]](images/Baltaxe_1977a.png)
 
 ---
 
+## Foregrounding and Backgrounding of Information
+
 ![[@baltaxePragmaticDeficitsLanguage1977b]](images/Baltaxe_1977b.png)
 
 ---
 
+### Atypical prosody
+
+---
+
+## Re-introducing context and nuance
+
+---
+
+## CONNECT project
+
+:::::: {.two-col}
+
+::: {}
+
+![[@jonesItsImportantFrequency]](images/Jones_etal_2022.png)
+
+:::
+
+::: {}
+
 ![[@schillingerQuickHelloExploring]](images/Schillinger%20et%20al_2026.png)
+
+:::
+
+::::::
+
+
+---
+
+
 
 ---
 
