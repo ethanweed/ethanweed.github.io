@@ -221,33 +221,45 @@ Two types of acoustic feature:
 
 ---
 
-## Pronoun Reversal
+## Discourse
 
+
+:::::: {.two-col}
+
+::: {}
 ![[@baltaxePragmaticDeficitsLanguage1977b]](images/Baltaxe_1977a.png)
+:::
 
----
-
-## Foregrounding and Backgrounding of Information
-
+::: {}
 ![[@baltaxePragmaticDeficitsLanguage1977b]](images/Baltaxe_1977b.png)
+:::
+
+::::::
+
+
 
 ---
 
-### Atypical prosody
+## Atypical prosody
+
+
+![[@baltaxeSimmonsProsodicDevelopment1985]](images/Baltaxe_Simmons_1985.png){height=400px}
 
 ---
 
-## Re-introducing context and nuance
+## Re-introducing context
+
+![[@Vorletcontext]](images/Vorlet-context.jpg)
 
 ---
 
-## CONNECT project
+## Discourse in context
 
 :::::: {.two-col}
 
 ::: {}
 
-![[@jonesItsImportantFrequency]](images/Jones_etal_2022.png)
+![[@jonesItsImportantFrequency2022]](images/Jones_etal_2022.png)
 
 :::
 
@@ -262,21 +274,63 @@ Two types of acoustic feature:
 
 ---
 
+## Normal but different
+
+:::::: {.two-col}
+
+::: {}
+![[@zaneNormalDifferentAutistic2024]](images/Zane_Grossman_eggs_2024_1.png)
+:::
+
+::: {}
+![[@zaneNormalDifferentAutistic2024]](images/Zane_Grossman_eggs_2024_2.png)
+:::
+
+::::::
+
+---
+
+## Prosody in context
+
+
+:::::: {.two-col}
+
+::: {}
+![[@weedDifferentDifferentWays2023]](images/Weed_etal_2023.png)
+:::
+
+::: {}
+![[@liuRethinkingProsodyProduction2026]](images/Liu_etal_2026.png)
+:::
+
+::::::
 
 
 ---
+
+## Prosody in context
 
 ![[@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_1.png)
 
 ---
 
+## Prosody in context
 
+:::::: {.two-col}
+
+::: {}
 ![[@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_2.png)
+:::
 
----
-
-
+::: {}
 ![[@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_3.png)
+:::
+
+::::::
+
+
+
+
 
 ---
 
