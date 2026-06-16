@@ -93,6 +93,7 @@ DSM-III (1980) Introduces three domains:
 2. impairments in **communication**,
 3. restricted interests/resistance to change and repetitive movements.
 
+[@americanpsychiatricassociationDiagnosticStatisticalManual1980]
 
 ---
 
@@ -108,6 +109,7 @@ DSM-IV (1994)
     - Childhood disintegrative disorder
     - Pervasive Developmental Disorder not otherwise specified (PDD-NOS)
 
+[@americanpsychiatricassociationDiagnosticStatisticalManual1994]
 
 ---
 
@@ -129,8 +131,9 @@ Problems with the DSM-IV
 DSM-V (2013): A more dimensional approach - subtypes are out
 
 
-![[@lordAnnualResearchReview2012]](images/Lord_Jones_2012.png){height=400px} 
+![[@lordAnnualResearchReview2012]](images/Lord_Jones_2012.png){height=350px} 
 
+[@americanpsychiatricassociationDiagnosticStatisticalManual2022]
 
 ---
 
@@ -293,7 +296,7 @@ Two types of acoustic feature:
 
 ## Re-introducing context
 
-![[@Vorletcontext]](images/Vorlet-context.jpg)
+![[@Vorletcontext]](images/Vorlet-context.jpg){height=400px}
 
 ---
 
@@ -385,17 +388,9 @@ Acoustic features
 
 ## Prosody in context
 
-:::::: {.two-col}
 
-::: {}
-![Narrative [@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_2.png)
-:::
+![Narrative [@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_2.png){height=400px}
 
-::: {}
-![Narrative [@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_3.png)
-:::
-
-::::::
 
 ---
 
@@ -405,6 +400,8 @@ Acoustic features
 
 
 ---
+
+## Context, context, context...
 
 :::::: {.two-col}
 
