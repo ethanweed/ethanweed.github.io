@@ -26,6 +26,8 @@ progress: true
 :::
 
 ::: {}
+_Autistic Disturbances of Affective Contact_ (1943)
+
 8 boys and 3 girls
 
 Two essential features:
@@ -35,6 +37,8 @@ Two essential features:
 :::
 
 ::::::
+
+[@Kanner1943]
 
 ---
 
@@ -56,6 +60,7 @@ Also: **language** features such as
 
 ::::::
 
+[@Kanner1943]
 
 ---
 
@@ -68,19 +73,21 @@ Also: **language** features such as
 :::
 
 ::: {}
-Described boys with marked social difficulties, unusual and particular interests, and **good verbal skills** 
+_"Autistic psychopathy" in childhood_ (1944)
+
+Described four boys with marked social difficulties, unusual and particular interests, and **good verbal skills** 
 :::
 
 ::::::
+
+[@aspergerAutisticPsychopathyChildhood1991]
 
 ---
 
 ## Formal diagnosis 
 
 
-DSM-III (1980) 
-
-- Introduces three domains:
+DSM-III (1980) Introduces three domains:
 
 1. qualitative impairments in reciprocal social interaction
 2. impairments in **communication**,
@@ -95,10 +102,10 @@ DSM-IV (1994)
 
 - Sticks with the main three domains
 - Many subcategories of Pervasive Developmental Disorders:
-    - autistic disorder
+    - Autistic disorder
     - Asperger’s disorder
     - Rett’s disorder
-    - childhood disintegrative disorder
+    - Childhood disintegrative disorder
     - Pervasive Developmental Disorder not otherwise specified (PDD-NOS)
 
 
@@ -134,15 +141,15 @@ DSM-V (2013): A more dimensional approach - subtypes are out
 
 ---
 
-## Prevalance
+## Prevalence
 
-- 1970: 3 in 10,000 children (Treffert 1970) [.3 in 1000 children]
-- 1999: 7 in 10,000 children (Fombonne 1999) [.7 in 1000 children]
+- 1970: 3 in 10,000 children [.3 in 1000 children] [@treffertEpidemiologyInfantileAutism1970]
+- 1999: 7 in 10,000 children [.7 in 1000 children] [@fombonneEpidemiologyAutismReview1999]
 
 
 ---
 
-## Prevalance
+## Prevalence
 
 ![[@chiarottiEpidemiologyAutismSpectrum2020]](images/Chiarottie_Venerosi_2020_1.png){height=400px}
 
@@ -151,7 +158,7 @@ DSM-V (2013): A more dimensional approach - subtypes are out
 ---
 
 
-## Prevalance
+## Prevalence
 
 ![[@chiarottiEpidemiologyAutismSpectrum2020]](images/Chiarottie_Venerosi_2020_2.png){height=400px}
 
@@ -160,7 +167,7 @@ DSM-V (2013): A more dimensional approach - subtypes are out
 ---
 
 
-## Prevalance
+## Prevalence
 
 ![[@jensendelopezPrevalenceAutismScandinavian2024]](images/Jensen_de_Lopez_Møller_2024.png){height=400px}
 
@@ -178,21 +185,56 @@ DSM-V (2013): A more dimensional approach - subtypes are out
 
 ---
 
-![[@ballyCourseGeneralLinguistics]](images/Saussure_01.png)
+![[@ballyCourseGeneralLinguistics]](images/Saussure_01.png){height=400px}
 
 ---
 
-![[@ballyCourseGeneralLinguistics]](images/Saussure_07.png)
+![[@ballyCourseGeneralLinguistics]](images/Saussure_07.png){height=400px}
 
 ---
+
+## Language in Use
+
+:::::: {.two-col}
+
+::: {}
+Aspects of Language
 
 - semantics
 - morphology and syntax
 - pragmatics (including prosody)
+:::
+
+::: {}
+
+:::
+
+::::::
+
 
 ---
 
-## Prosody 🎶
+## Discourse
+
+:::::: {.two-col}
+
+::: {}
+![](images/Saussure_10.png){height=400px}
+
+
+:::
+
+::: {}
+![](images/Saussure_01.png){height=400px}
+:::
+
+::::::
+
+[@Gill_discourse_analysis2000; @ballyCourseGeneralLinguistics]
+
+---
+
+## Prosody 
 
 :::::: {.two-col}
 
@@ -215,13 +257,15 @@ Two types of acoustic feature:
 
 ::::::
 
+[@coleProsodyContextReview2015]
+
 ---
 
 # Autism and Language
 
 ---
 
-## Discourse
+## Atypical Discourse
 
 
 :::::: {.two-col}
@@ -259,13 +303,13 @@ Two types of acoustic feature:
 
 ::: {}
 
-![[@jonesItsImportantFrequency2022]](images/Jones_etal_2022.png)
+![Narrative [@jonesItsImportantFrequency2022]](images/Jones_etal_2022.png)
 
 :::
 
 ::: {}
 
-![[@schillingerQuickHelloExploring]](images/Schillinger%20et%20al_2026.png)
+![Get-to-know-you [@schillingerQuickHelloExploring]](images/Schillinger%20et%20al_2026.png)
 
 :::
 
@@ -279,14 +323,15 @@ Two types of acoustic feature:
 :::::: {.two-col}
 
 ::: {}
-![[@zaneNormalDifferentAutistic2024]](images/Zane_Grossman_eggs_2024_1.png)
+![Narrative [@zaneNormalDifferentAutistic2024]](images/Zane_Grossman_eggs_2024_1.png)
 :::
 
 ::: {}
-![[@zaneNormalDifferentAutistic2024]](images/Zane_Grossman_eggs_2024_2.png)
+![Narrative [@zaneNormalDifferentAutistic2024]](images/Zane_Grossman_eggs_2024_2.png)
 :::
 
 ::::::
+
 
 ---
 
@@ -296,11 +341,11 @@ Two types of acoustic feature:
 :::::: {.two-col}
 
 ::: {}
-![[@weedDifferentDifferentWays2023]](images/Weed_etal_2023.png)
+![Sentence repetition [@weedDifferentDifferentWays2023]](images/Weed_etal_2023.png)
 :::
 
 ::: {}
-![[@liuRethinkingProsodyProduction2026]](images/Liu_etal_2026.png)
+![Narrative [@liuRethinkingProsodyProduction2026]](images/Liu_etal_2026.png)
 :::
 
 ::::::
@@ -310,7 +355,8 @@ Two types of acoustic feature:
 
 ## Prosody in context
 
-![[@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_1.png)
+![Narrative [@weedPerceptualConsensusNeurotypes2026]](images/Italy.png){height=400px}
+
 
 ---
 
@@ -319,11 +365,55 @@ Two types of acoustic feature:
 :::::: {.two-col}
 
 ::: {}
-![[@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_2.png)
+Acoustic features
+
+- IQR pitch
+- % Pause
+- Wiggliness
+- Spaciousness
 :::
 
 ::: {}
-![[@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_3.png)
+![Narrative [@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_0.png){height=400px}
+:::
+
+::::::
+
+
+
+---
+
+## Prosody in context
+
+:::::: {.two-col}
+
+::: {}
+![Narrative [@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_2.png)
+:::
+
+::: {}
+![Narrative [@weedPerceptualConsensusNeurotypes2026]](images/Weed_etal_2026_3.png)
+:::
+
+::::::
+
+---
+
+## Prosody in context
+
+![@weedPerceptualConsensusNeurotypes2026](images/Weed_etal_2026_1.png)
+
+
+---
+
+:::::: {.two-col}
+
+::: {}
+![@caldwell-harrisWhenAutisticWriting2024](images/Caldwell_Posner_2024.png){height=400px}
+:::
+
+::: {}
+![@kissineVoicePitchGender2024](images/Kissine_Clin_2024.png){height=400px}
 :::
 
 ::::::
@@ -331,8 +421,26 @@ Two types of acoustic feature:
 
 
 
+---
+
+## Rethinking language in autism
+
+- Communication is a collaboration
+- "Double-empathy"
+- Not all language is for communication
+- Language can also be about itself
+- Meaning can be idiosyncratic
+
+[@sterponiRethinkingLanguageAutism2015; @miltonOntologicalStatusAutism2012]
 
 ---
+
+## Summer reading
+
+![@haddonCuriousIncidentDog2024](images/Curiousincidentofdoginnighttime.jpg){height=400px}
+
+---
+
 
 # References
 
